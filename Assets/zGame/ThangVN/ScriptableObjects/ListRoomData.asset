@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f3e3c706d97ae49831d0ef0a50a763, type: 3}
+  m_Name: ListRoomData
+  m_EditorClassIdentifier: 
+  listRoom:
+  - idRoom: 0
+    listObjectPainted:
+    - idObject: 0
+      isPainted: 0
+      colorNeed: 300
+      sprite:
+      - {fileID: 21300000, guid: ea592ae973968cc49a5e852f82b4da26, type: 3}
+      - {fileID: 21300000, guid: 971277540a58ee14fafe04a4aa39fbcb, type: 3}
+      - {fileID: 21300000, guid: b0ab9fdd4d13dc44ea3973c18ffc276a, type: 3}
+      - {fileID: 21300000, guid: 62dd37a6e38682545a97348e17006ede, type: 3}
