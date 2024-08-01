@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/zGame/ThangVN/Scenes/SceneGame.unity
     guid: 52e50a5144eba8747a86b8926ae32e5a
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 9b5d2afb506ad3a4fb2af348f79c1899,
+      type: 2}

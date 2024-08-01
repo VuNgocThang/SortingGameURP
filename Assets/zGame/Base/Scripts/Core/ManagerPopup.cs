@@ -7,8 +7,8 @@ namespace ntDev
 {
     public class ManagerPopup : MonoBehaviour
     {
-        static ManagerPopup Instance;
-        [SerializeField] Transform nShadow;
+        public static ManagerPopup Instance;
+        public Transform nShadow;
         [SerializeField] List<Popup> listPopup;
 
         void Awake()

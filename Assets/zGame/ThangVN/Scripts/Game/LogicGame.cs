@@ -408,7 +408,7 @@ public class LogicGame : MonoBehaviour
             isHadSpawnSpecial = true;
         }
 
-        Debug.Log("isHadSpawnSpecial: " + isHadSpawnSpecial);
+        //Debug.Log("isHadSpawnSpecial: " + isHadSpawnSpecial);
 
         //if (Input.GetKeyDown(KeyCode.L))
         //{

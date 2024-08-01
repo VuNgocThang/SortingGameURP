@@ -42,6 +42,8 @@ public static class GameConfig
 
     public static int COIN_REFRESH = 200;
 
+    public static int ROW_COUNT = 5;
+
     public static bool EnoughCoinBuyHammer
     {
         get

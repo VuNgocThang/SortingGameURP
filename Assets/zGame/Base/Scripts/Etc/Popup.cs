@@ -28,8 +28,8 @@ namespace ntDev
             //canvasGroup.alpha = 0;
             //canvasGroup.DOFade(1, 0.3f);
 
-            transform.localScale = Vector3.zero;
-            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+            //transform.localScale = Vector3.zero;
+            //transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
         }
 
         public virtual void Hide()
@@ -39,7 +39,7 @@ namespace ntDev
             //canvasGroup.DOFade(0, 0.3f);
             transform.localScale = Vector3.one;
 
-            transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
+            transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
             {
                 gameObject.SetActive(false);
                 ManagerEvent.RaiseEvent(EventCMD.EVENT_POPUP_CLOSE, this);
