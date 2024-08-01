@@ -606,7 +606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &497948141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,17 +735,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b0aff5e201aaa1749a79108f97607831,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.35
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0aff5e201aaa1749a79108f97607831,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.69
+      value: -1.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0aff5e201aaa1749a79108f97607831,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.84
+      value: 7.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0aff5e201aaa1749a79108f97607831,
         type: 3}
@@ -885,8 +885,39 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1188256223936568184, guid: b0aff5e201aaa1749a79108f97607831,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1111104034}
   m_SourcePrefab: {fileID: 100100000, guid: b0aff5e201aaa1749a79108f97607831, type: 3}
+--- !u!1 &1111104033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1188256223936568184, guid: b0aff5e201aaa1749a79108f97607831,
+    type: 3}
+  m_PrefabInstance: {fileID: 1111104032}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1111104034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111104033}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.474267, y: 1.3305264, z: 4.099632}
+  m_Center: {x: -8.992753, y: 0.8859707, z: -3.5955474}
 --- !u!224 &1412953696 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1074321055091735992, guid: 3011edc843ec15e49874b8707a1709ff,
