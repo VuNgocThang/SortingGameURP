@@ -35,6 +35,8 @@ public class EmptyData
     public int type;
 }
 
+
+
 [Serializable]
 public class ColorPlateData
 {

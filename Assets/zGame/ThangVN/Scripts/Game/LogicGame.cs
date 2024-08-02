@@ -163,8 +163,9 @@ public class LogicGame : MonoBehaviour
         {
             LoadLevelNormal();
         }
+        DataLevel dataLevel = DataLevel.GetData(SaveGame.currentLevel + 1);
 
-
+        Debug.Log(dataLevel.ID + " Level ");
     }
 
     void LoadLevelChallenges()
