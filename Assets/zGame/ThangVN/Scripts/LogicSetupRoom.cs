@@ -78,9 +78,7 @@ public class LogicSetupRoom : MonoBehaviour
     //    if (ray.direction != Vector3.zero) 
     //    {
     //        Gizmos.color = Color.red;
-
     //        Gizmos.DrawRay(ray.origin, ray.direction * 50f);
-
     //        if (hit.collider != null)
     //        {
     //            Gizmos.color = Color.green;
