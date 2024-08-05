@@ -17,6 +17,7 @@ public class RoomObject : MonoBehaviour
 
     public void SetUpMaterial(int index)
     {
+        mesh.enabled = true;
         foreach (Material mat in mesh.materials)
         {
             mat.SetFloat("_Index", index + 1);

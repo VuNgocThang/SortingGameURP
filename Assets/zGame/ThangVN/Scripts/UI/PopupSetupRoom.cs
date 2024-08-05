@@ -38,7 +38,19 @@ public class PopupSetupRoom : Popup
             {
                 //Todo Chua co room thi ad data room moi vao
                 AddNewRoom();
-                SaveGame.CurrentObject++;
+
+                if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
+                {
+                    if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;
+                    else SaveGame.CurrentObject++;
+
+                    if (LogicSetupRoom.instance.listGameObject.Count < SaveGame.CurrentObject - 1)
+                    {
+                        if (LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject] != null)
+                            LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
+                    }
+                }
+
                 Hide();
             }
             else
@@ -84,8 +96,12 @@ public class PopupSetupRoom : Popup
         currentSprite = (int)e;
         Debug.Log(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT + 1 + " index");
         //LogicSetupRoom.instance.listRoomObject[idObjectToAdd].SetUpMaterial(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT);
-        RoomObject roomObj = LogicSetupRoom.instance.SelectedRoom(idObjectToAdd);
-        roomObj.SetUpMaterial(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT);
+
+        List<RoomObject> listRoom = LogicSetupRoom.instance.SelectedRoomObject(idObjectToAdd);
+        foreach (RoomObject roomObject in listRoom)
+        {
+            roomObject.SetUpMaterial(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT);
+        }
         Debug.Log($"show room {e}");
     }
 

@@ -39,9 +39,13 @@ public class PopupDecor : Popup
         {
             listSelect[i].SetActive(false);
         }
-        listSelect[SaveGame.CurrentObject].SetActive(true);
+        if (LogicSetupRoom.instance.listGameObject.Count > SaveGame.CurrentObject)
+        {
+            listSelect[SaveGame.CurrentObject].SetActive(true);
+            LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
+            SaveGame.CanShow = true;
+        }
 
-        SaveGame.CanShow = true;
     }
 
     public override void Hide()
