@@ -11,12 +11,13 @@ using System;
 
 public class PopupHome : MonoBehaviour
 {
+    [SerializeField] Camera cam;
     public EasyButton btnSetting, btnCloseItem;
-    public TextMeshProUGUI txtPoint, txtLevel, txtCount, txtCurrentScore, txtBestScore;
+    public TextMeshProUGUI txtPoint, txtLevel, txtCount, txtCurrentScore, txtBestScore, txtTargetPigment, txtLevelInTarget;
     public Image imgFill;
     [SerializeField] Animator animBtnSwitch;
     [SerializeField] GameObject imgSpecial, top, bot;
-    [SerializeField] GameObject itemObj, nLevel, nBar, nScoreChallenges;
+    [SerializeField] GameObject itemObj, nLevel, nBar, nScoreChallenges, nTargetPigment;
     bool canClick = true;
 
     [SerializeField] Image iconItem, imgTextName;
@@ -26,6 +27,9 @@ public class PopupHome : MonoBehaviour
     [SerializeField] ButtonBoosterRefresh btnRefresh;
     [SerializeField] ButtonBoosterSwap btnSwap;
     [SerializeField] BoosterData boosterData;
+    [SerializeField] Animator animPigment;
+    [SerializeField] RectTransform rectTransformTarget;
+    [SerializeField] Transform test, iconTargetPigment;
 
     private void Awake()
     {
@@ -95,9 +99,9 @@ public class PopupHome : MonoBehaviour
         if (!SaveGame.Challenges)
         {
             nLevel.SetActive(true);
-            nBar.SetActive(true);
             nScoreChallenges.SetActive(false);
-            TutorialManager.ShowPopup(SaveGame.Level);
+            StartCoroutine(ShowTarget());
+            //TutorialManager.ShowPopup(SaveGame.Level);
         }
         else
         {
@@ -106,6 +110,7 @@ public class PopupHome : MonoBehaviour
             nScoreChallenges.SetActive(true);
         }
 
+        test.DOMove(rectTransformTarget.position, 1f);
         // Reach Level Show Popup UnlockBooster
         //PopupUnlockBooster.Show(index);
     }
@@ -266,6 +271,32 @@ public class PopupHome : MonoBehaviour
                 txtExplain.text = boosterData.listBooster[i].textExplain;
             }
         }
+    }
+
+    IEnumerator ShowTarget()
+    {
+        LogicGame.Instance.isPauseGame = true;
+        nTargetPigment.SetActive(true);
+        txtLevelInTarget.text = $"Level {SaveGame.Level + 1}";
+        txtTargetPigment.text = LogicGame.Instance.colorPlateData.pigment.ToString();
+        animPigment.Play("Show");
+        yield return new WaitForSeconds(1f);
+
+        Vector3 targetWorldPosition = cam.ScreenToWorldPoint(rectTransformTarget.position);
+        targetWorldPosition.z = 0;
+
+        test.gameObject.SetActive(true);
+        test.position = iconTargetPigment.position;
+        iconTargetPigment.gameObject.SetActive(false);
+
+        test.transform.DOMove(rectTransformTarget.position, 0.3f)
+            .OnComplete(() =>
+            {
+                test.gameObject.SetActive(false);
+                nBar.SetActive(true);
+                nTargetPigment.SetActive(false);
+                TutorialManager.ShowPopup(SaveGame.Level);
+            });
     }
 
 }

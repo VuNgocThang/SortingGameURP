@@ -24,7 +24,7 @@ public class LogicGame : MonoBehaviour
     [SerializeField] Transform holder;
     [SerializeField] public Transform targetUIPosition;
 
-    [SerializeField] ColorPlateData colorPlateData;
+    [SerializeField] public ColorPlateData colorPlateData;
     [SerializeField] ColorPlate colorPLatePrefab;
 
     [SerializeField] public List<ColorPlate> listNextPlate;

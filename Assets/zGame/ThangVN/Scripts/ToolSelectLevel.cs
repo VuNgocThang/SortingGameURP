@@ -16,6 +16,7 @@ public class ToolSelectLevel : MonoBehaviour
     void MoveToLevel()
     {
         Debug.Log(inputField.text);
+        ManagerEvent.ClearEvent();
         SaveGame.Level = int.Parse(inputField.text) - 1;
         SceneManager.LoadScene("SceneGame");
     }

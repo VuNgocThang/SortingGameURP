@@ -15,7 +15,6 @@ namespace ThangVN
 
         public static void ShowPopup(int indexCurrentLevel)
         {
-
             if (indexCurrentLevel == GameConfig.LEVEL_REFRESH && !SaveGame.IsShowRefresh)
             {
                 SaveGame.IsShowRefresh = true;
@@ -52,6 +51,11 @@ namespace ThangVN
             else if (indexCurrentLevel == GameConfig.LEVEL_ORANGE)
             {
                 PopupUnlockColor.Show((int)NewColorEnum.ColorOrange);
+            }
+
+            else
+            {
+                LogicGame.Instance.isPauseGame = false;
             }
         }
     }
