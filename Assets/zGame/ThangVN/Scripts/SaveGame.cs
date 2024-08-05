@@ -300,20 +300,20 @@ public static class SaveGame
         }
     }
 
-    const string ISSHOW = "ISSHOW";
-    static int isShow = -1;
+    const string CANSHOW = "CANSHOW";
+    static int canShow = -1;
 
-    public static bool IsShow
+    public static bool CanShow
     {
         set
         {
-            ES3.Save(ISSHOW, value ? 1 : 0);
-            isShow = value ? 1 : 0;
+            ES3.Save(CANSHOW, value ? 1 : 0);
+            canShow = value ? 1 : 0;
         }
         get
         {
-            if (isShow == -1) isShow = ES3.Load(ISSHOW, 0);
-            return isShow == 1;
+            if (canShow == -1) canShow = ES3.Load(CANSHOW, 0);
+            return canShow == 1;
         }
     }
 
@@ -404,4 +404,22 @@ public static class SaveGame
         }
     }
 
+
+    const string CURRENTOBJECT = "CURRENTOBJECT";
+    static int currentObject = -1;
+
+    public static int CurrentObject
+    {
+        set
+        {
+            ES3.Save(CURRENTOBJECT, value);
+            currentObject = value;
+        }
+
+        get
+        {
+            if (currentObject == -1) currentObject = ES3.Load(CURRENTOBJECT, 0);
+            return currentObject;
+        }
+    }
 }

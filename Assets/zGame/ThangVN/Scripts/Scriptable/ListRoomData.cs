@@ -11,7 +11,7 @@ public class ObjectRoom
     public int idObject;
     public bool isPainted;
     public int colorNeed;
-    //public List<Sprite> sprite;
+    public List<Sprite> sprite;
 }
 
 
@@ -19,7 +19,7 @@ public class ObjectRoom
 public class ListObjectRoom
 {
     public int idRoom;
-    public List<ObjectRoom> listObjectPainted;
+    public List<ObjectRoom> listObjectRoom;
 }
 
 // data save load

@@ -19,7 +19,10 @@ public class ButtonSelectRoom : MonoBehaviour
     public void Init(int idRoom, int idObject, int indexSprite)
     {
         Debug.Log("Init At: " + idObject);
-        //icon.sprite = listRoomData.listRoom[idRoom].listObjectPainted[idObject].sprite[indexSprite];
+        Debug.Log("currentRoom: " + SaveGame.CurrentRoom);
+        Debug.Log("idRoom: " + idRoom);
+
+        icon.sprite = listRoomData.listRoom[idRoom].listObjectRoom[idObject].sprite[indexSprite];
     }
 
     void SetCurrentIndex()

@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Color = UnityEngine.Color;
 
 public class LogicSetupRoom : MonoBehaviour
@@ -16,12 +16,14 @@ public class LogicSetupRoom : MonoBehaviour
     [SerializeField] LayerMask layerRoom;
     [SerializeField] Camera cam;
     [SerializeField] List<ListObjetRoomPainted> listRoomPainted;
+    [SerializeField] EventSystem currentEvent;
+
 
     private void Start()
     {
         //Application.targetFrameRate = 60;
 
-        SaveGame.IsShow = false;
+        SaveGame.CanShow = false;
         listRoomPainted = SaveGame.ListRoomPainted.listRoomPainted;
 
         //for (int i = 0; i < SaveGame.ListRoomPainted.listRoomPainted.Count; i++)
@@ -63,13 +65,15 @@ public class LogicSetupRoom : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 50f, layerRoom) && !SaveGame.IsShow)
+            if (Physics.Raycast(ray, out hit, 50f, layerRoom) && SaveGame.CanShow && !IsPointerOverUIObject())
             {
                 RoomObject objRoom = hit.collider.GetComponent<RoomObject>();
-                //if (!objRoom.isPainted)
-                //{
-                PopupSetupRoom.Show(SaveGame.CurrentRoom, objRoom.id);
-                //}
+                if (SaveGame.CurrentObject != objRoom.id) return;
+
+                if (!objRoom.isPainted)
+                {
+                    PopupSetupRoom.Show(SaveGame.CurrentRoom, objRoom.id);
+                }
             }
         }
     }
@@ -99,5 +103,14 @@ public class LogicSetupRoom : MonoBehaviour
             }
         }
         return roomObject;
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(currentEvent);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        currentEvent.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }

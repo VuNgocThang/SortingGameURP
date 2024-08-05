@@ -110,7 +110,6 @@ public class LogicGame : MonoBehaviour
         isPauseGame = false;
         listColors.Refresh();
         countDiff = 2;
-        countDiffMax = 5;
         countMove = 2;
         point = 0;
         ManagerEvent.RaiseEvent(EventCMD.EVENT_COUNT, countMove);
@@ -164,6 +163,7 @@ public class LogicGame : MonoBehaviour
             LoadLevelNormal();
         }
         DataLevel dataLevel = DataLevel.GetData(SaveGame.currentLevel + 1);
+        countDiffMax = dataLevel.CountDiff;
 
         Debug.Log(dataLevel.ID + " Level ");
     }
@@ -618,10 +618,10 @@ public class LogicGame : MonoBehaviour
         //colorPlate.Init(GetColorNew);
         //colorPlate.InitColor();
 
-        foreach (LogicColor c in colorPlate.ListColor)
-        {
-            c.transform.DOLocalJump(c.transform.localPosition, 2, 1, 0.3f);
-        }
+        //foreach (LogicColor c in colorPlate.ListColor)
+        //{
+        //    c.transform.DOLocalJump(c.transform.localPosition, 2, 1, 0.3f);
+        //}
     }
     void SetColor(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
@@ -924,6 +924,8 @@ public class LogicGame : MonoBehaviour
 
     public void SpawnSpecialColor()
     {
+        if (SaveGame.Level < 12) return;
+
         if (point >= pointSpawnSpecial)
         {
             Debug.Log("spawn special color");

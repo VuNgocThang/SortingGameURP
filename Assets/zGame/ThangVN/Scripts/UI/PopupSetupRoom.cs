@@ -38,6 +38,8 @@ public class PopupSetupRoom : Popup
             {
                 //Todo Chua co room thi ad data room moi vao
                 AddNewRoom();
+                SaveGame.CurrentObject++;
+                Hide();
             }
             else
             {
@@ -56,18 +58,23 @@ public class PopupSetupRoom : Popup
     public override void Hide()
     {
         base.Hide();
-        SaveGame.IsShow = false;
+        SaveGame.CanShow = true;
+        ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
+        PopupDecor.Show();
     }
 
     public void Initialized(int idRoom, int idObj)
     {
+        ManagerPopup.HidePopup<PopupDecor>();
         idObjectToAdd = idObj;
+        //ManagerPopup.Instance.nShadow.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = false;
+
         btnSelectRoom1.Init(idRoom, idObj, 0);
         btnSelectRoom2.Init(idRoom, idObj, 1);
         btnSelectRoom3.Init(idRoom, idObj, 2);
         btnSelectRoom4.Init(idRoom, idObj, 3);
-        SaveGame.IsShow = true;
+        SaveGame.CanShow = false;
         //LoadExistedData();
         base.Init();
     }
@@ -100,6 +107,7 @@ public class PopupSetupRoom : Popup
         dataCache.listRoomPainted.Add(listObjectRoom);
         SaveGame.ListRoomPainted = dataCache;
         Debug.Log("Save Data: " + idObjectToAdd);
+
     }
 
     void UpdateExistedRoom()

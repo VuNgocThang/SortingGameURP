@@ -129,6 +129,7 @@ public class LogicVisualPlate : MonoBehaviour
             case Status.LockCoin:
                 lockCoin.SetActive(false);
                 arrow.SetActive(false);
+                normal.SetActive(true);
                 break;
 
             default:
