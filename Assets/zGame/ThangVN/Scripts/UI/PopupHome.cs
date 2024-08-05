@@ -17,7 +17,7 @@ public class PopupHome : MonoBehaviour
     public Image imgFill;
     [SerializeField] Animator animBtnSwitch;
     [SerializeField] GameObject imgSpecial, top, bot;
-    [SerializeField] GameObject itemObj, nLevel, nBar, nScoreChallenges, nTargetPigment;
+    [SerializeField] GameObject itemObj, nLevel, nBar, nScoreChallenges, nTargetPigment, nChallenges;
     bool canClick = true;
 
     [SerializeField] Image iconItem, imgTextName;
@@ -27,9 +27,9 @@ public class PopupHome : MonoBehaviour
     [SerializeField] ButtonBoosterRefresh btnRefresh;
     [SerializeField] ButtonBoosterSwap btnSwap;
     [SerializeField] BoosterData boosterData;
-    [SerializeField] Animator animPigment;
-    [SerializeField] RectTransform rectTransformTarget;
-    [SerializeField] Transform test, iconTargetPigment;
+    [SerializeField] Animator animPigment, animChallenges;
+    [SerializeField] RectTransform rectTransformTarget, rectTransformChallenges;
+    [SerializeField] Transform iconFake, iconTargetPigment, txtFake, txtChallengesObj;
 
     private void Awake()
     {
@@ -101,16 +101,16 @@ public class PopupHome : MonoBehaviour
             nLevel.SetActive(true);
             nScoreChallenges.SetActive(false);
             StartCoroutine(ShowTarget());
-            //TutorialManager.ShowPopup(SaveGame.Level);
         }
         else
         {
             nLevel.SetActive(false);
             nBar.SetActive(false);
-            nScoreChallenges.SetActive(true);
+            //nScoreChallenges.SetActive(true);
+            StartCoroutine(ShowText());
         }
 
-        test.DOMove(rectTransformTarget.position, 1f);
+        iconFake.DOMove(rectTransformTarget.position, 1f);
         // Reach Level Show Popup UnlockBooster
         //PopupUnlockBooster.Show(index);
     }
@@ -280,23 +280,49 @@ public class PopupHome : MonoBehaviour
         txtLevelInTarget.text = $"Level {SaveGame.Level + 1}";
         txtTargetPigment.text = LogicGame.Instance.colorPlateData.pigment.ToString();
         animPigment.Play("Show");
+
         yield return new WaitForSeconds(1f);
 
         Vector3 targetWorldPosition = cam.ScreenToWorldPoint(rectTransformTarget.position);
         targetWorldPosition.z = 0;
 
-        test.gameObject.SetActive(true);
-        test.position = iconTargetPigment.position;
+        iconFake.gameObject.SetActive(true);
+        iconFake.position = iconTargetPigment.position;
         iconTargetPigment.gameObject.SetActive(false);
 
-        test.transform.DOMove(rectTransformTarget.position, 0.3f)
+        iconFake.transform.DOMove(rectTransformTarget.position, 0.3f)
             .OnComplete(() =>
             {
-                test.gameObject.SetActive(false);
+                iconFake.gameObject.SetActive(false);
                 nBar.SetActive(true);
                 nTargetPigment.SetActive(false);
                 TutorialManager.ShowPopup(SaveGame.Level);
             });
     }
 
+
+    IEnumerator ShowText()
+    {
+        LogicGame.Instance.isPauseGame = true;
+        nChallenges.SetActive(true);
+        animChallenges.Play("Show");
+
+        yield return new WaitForSeconds(1f);
+
+        Vector3 targetWorldPosition = cam.ScreenToWorldPoint(rectTransformChallenges.position);
+        targetWorldPosition.z = 0;
+
+        txtFake.gameObject.SetActive(true);
+        txtFake.position = txtChallengesObj.position;
+        txtChallengesObj.gameObject.SetActive(false);
+
+        txtFake.transform.DOMove(rectTransformChallenges.position, 0.3f)
+           .OnComplete(() =>
+           {
+               txtFake.gameObject.SetActive(false);
+               nScoreChallenges.SetActive(true);
+               nChallenges.SetActive(false);
+           });
+
+    }
 }
