@@ -1707,12 +1707,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 483575038}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &549030422 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6671978586985360290, guid: 03610f6fcac981c4f9b49d02e5eb0567,
-    type: 3}
-  m_PrefabInstance: {fileID: 2071237745}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &603901193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1718,7 @@ GameObject:
   - component: {fileID: 603901195}
   - component: {fileID: 603901194}
   m_Layer: 0
-  m_Name: nWorldNew
+  m_Name: nWorld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4074,21 +4068,6 @@ PrefabInstance:
       propertyPath: handDrag
       value: 
       objectReference: {fileID: 124753109}
-    - target: {fileID: 8947584224785460609, guid: 03610f6fcac981c4f9b49d02e5eb0567,
-        type: 3}
-      propertyPath: nChallenges
-      value: 
-      objectReference: {fileID: 2071237749}
-    - target: {fileID: 8947584224785460609, guid: 03610f6fcac981c4f9b49d02e5eb0567,
-        type: 3}
-      propertyPath: animChallenges
-      value: 
-      objectReference: {fileID: 2071237750}
-    - target: {fileID: 8947584224785460609, guid: 03610f6fcac981c4f9b49d02e5eb0567,
-        type: 3}
-      propertyPath: rectTransformChallenges
-      value: 
-      objectReference: {fileID: 549030422}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4118,18 +4097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c6f254637605e408d04481b2591ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2071237749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4858386452689204058, guid: 03610f6fcac981c4f9b49d02e5eb0567,
-    type: 3}
-  m_PrefabInstance: {fileID: 2071237745}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2071237750 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8255421896198762474, guid: 03610f6fcac981c4f9b49d02e5eb0567,
-    type: 3}
-  m_PrefabInstance: {fileID: 2071237745}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2105361546 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6920463332271939842, guid: 03610f6fcac981c4f9b49d02e5eb0567,

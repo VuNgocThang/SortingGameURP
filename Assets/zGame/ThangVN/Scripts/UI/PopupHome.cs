@@ -27,7 +27,7 @@ public class PopupHome : MonoBehaviour
     [SerializeField] ButtonBoosterRefresh btnRefresh;
     [SerializeField] ButtonBoosterSwap btnSwap;
     [SerializeField] BoosterData boosterData;
-    [SerializeField] Animator animPigment, animChallenges;
+    [SerializeField] Animator animBar, animPigment, animChallenges;
     [SerializeField] RectTransform rectTransformTarget, rectTransformChallenges;
     [SerializeField] Transform iconFake, iconTargetPigment, txtFake, txtChallengesObj;
 
@@ -139,6 +139,7 @@ public class PopupHome : MonoBehaviour
 
     void UpdatePoint(object e)
     {
+        animBar.Play("AnimBar", 0, 0);
         LogicGame.Instance.point += (int)e;
 
         if (!SaveGame.Challenges)
