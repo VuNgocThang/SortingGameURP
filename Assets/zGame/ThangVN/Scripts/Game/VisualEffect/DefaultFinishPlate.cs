@@ -7,7 +7,7 @@ using ntDev;
 
 public class DefaultFinishPlate : IVisualPlate
 {
-    public void Execute(ColorPlate colorPlate, int count, ColorEnum colorEnum)
+    public void Execute(ColorPlate colorPlate, int count, ColorEnum colorEnum, bool plusPoint)
     {
         Sequence sq = DOTween.Sequence();
         float delay = 0f;
@@ -52,7 +52,8 @@ public class DefaultFinishPlate : IVisualPlate
 
                     color.transform.DOMove(targetPos, 0.5f).OnComplete(() =>
                     {
-                        ManagerEvent.RaiseEvent(EventCMD.EVENT_POINT, count);
+                        if (plusPoint)
+                            ManagerEvent.RaiseEvent(EventCMD.EVENT_POINT, count);
 
                         Debug.Log(LogicGame.Instance.point + " ____POINT");
                         LogicGame.Instance.ExecuteLockCoin(LogicGame.Instance.point);

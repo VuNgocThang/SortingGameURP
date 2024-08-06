@@ -5,8 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using Utilities.Common;
+using static UnityEngine.Rendering.VolumeComponent;
 using Color = UnityEngine.Color;
 public enum GameMode
 {
@@ -261,6 +263,40 @@ public class LogicGame : MonoBehaviour
     }
 
     #region InitNextPlate
+
+    //void SpawnObjectsWithDOTween()
+    //{
+    //    Sequence sequence = DOTween.Sequence();
+
+    //    for (int i = 0; i < listObj.Count; i++)
+    //    {
+    //        int index = i;
+    //        sequence.AppendCallback(() => SpawnObject(index));
+    //        sequence.AppendInterval(spawnInterval);
+    //    }
+    //}
+
+    public void ShufflePlateSpawn()
+    {
+        for (int i = 0; i < listSpawnNew.Count; i++)
+        {
+            listSpawnNew[i].Init(GetColorNew);
+        }
+
+        Sequence sequence = DOTween.Sequence();
+
+        for (int i = 0; i < listSpawnNew.Count; i++)
+        {
+            int index = i;
+            sequence.AppendCallback(() =>
+            {
+                listSpawnNew[index].Init(GetColorNew);
+                listSpawnNew[index].InitColor();
+            });
+            sequence.AppendInterval(0.05f);
+        }
+    }
+
     public void InitPlateSpawn(bool isShuffle = false)
     {
         for (int i = 0; i < listSpawnNew.Count; i++)
@@ -391,6 +427,23 @@ public class LogicGame : MonoBehaviour
                             previousHolder.logicVisual.PlayNormal(false);
                     }
                 }
+
+                // using Item Hammer
+                if (isUsingHammer)
+                {
+                    if (Physics.Raycast(ray, out var plate, 100f, layerUsingItem))
+                    {
+                        ColorPlate plateSelect = plate.collider.GetComponent<ColorPlate>();
+
+                        if (plateSelect.ListValue.Count == 0 || plateSelect.status == Status.Frozen) return;
+                        plateSelect.InitClear();
+                        SaveGame.Hammer--;
+                        //animation effect hammer here... done ==> ()
+                        // boool
+                        plateSelect.Init(GetColorNew);
+                        homeInGame.ExitUsingItem();
+                    }
+                }
             }
 
             if (Input.GetMouseButtonUp(0) && !isLose && !isWin && !isPauseGame)
@@ -400,6 +453,8 @@ public class LogicGame : MonoBehaviour
                 Vector3 spawnPosition = GetMouseWorldPosition();
                 clickParticlePool.Spawn(spawnPosition, true);
                 OnClick();
+
+
             }
         }
 
@@ -432,12 +487,12 @@ public class LogicGame : MonoBehaviour
 
         //Debug.Log("isHadSpawnSpecial: " + isHadSpawnSpecial);
 
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    isLose = true;
-        //    Debug.Log("You lose");
-        //    StartCoroutine(RaiseEventLose());
-        //}
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            isLose = true;
+            Debug.Log("You lose");
+            StartCoroutine(RaiseEventLose());
+        }
 
         //if (Input.GetKeyDown(KeyCode.E))
         //{
@@ -564,6 +619,8 @@ public class LogicGame : MonoBehaviour
                 if (Physics.Raycast(ray, out var plate, 100f, layerUsingItem))
                 {
                     ColorPlate plateSelect = plate.collider.GetComponent<ColorPlate>();
+
+                    Debug.Log(plateSelect.name);
 
                     if (plateSelect.ListValue.Count == 0) return;
 
@@ -930,7 +987,7 @@ public class LogicGame : MonoBehaviour
 
             if (count >= RULE_COMPLETE)
             {
-                colorPlate.InitClear();
+                colorPlate.InitClear(true);
                 colorPlate.DecreaseCountFrozenNearBy();
                 colorPlate.InitValue();
                 //ManagerEvent.RaiseEvent(EventCMD.EVENT_POINT, count);
@@ -1026,6 +1083,28 @@ public class LogicGame : MonoBehaviour
     void CheckLose()
     {
         bool allPlaced = true;
+        int countZeroListValues = 0;
+
+
+        for (int i = 0; i < ListArrowPlate.Count; i++)
+        {
+            if (ListArrowPlate[i].ListValue.Count == 0)
+            {
+                countZeroListValues++;
+            }
+        }
+
+        if (countZeroListValues > 2)
+        {
+            homeInGame.imgDanger.SetActive(false);
+            //Debug.LogWarning("More than 2 items with ListValue count equal to 0.");
+            
+        }
+        else
+        {
+            homeInGame.imgDanger.SetActive(true);
+            //Debug.LogWarning(" Show Danger");
+        }
 
         for (int i = 0; i < ListArrowPlate.Count; i++)
         {

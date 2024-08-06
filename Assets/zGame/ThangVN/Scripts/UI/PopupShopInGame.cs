@@ -13,6 +13,7 @@ public class PopupShopInGame : Popup
     public Image imgIcon, imgIconBuyUseIcon, imgIconBuyAds;
     public TextMeshProUGUI txtNameBooster;
     public BoosterEnum boosterEnum;
+    public CanvasGroup canvasGroup;
 
     private void Awake()
     {
@@ -25,20 +26,23 @@ public class PopupShopInGame : Popup
         pop.Initialized(index);
     }
 
+
     public void Initialized(int index)
     {
         base.Init();
+        canvasGroup.blocksRaycasts = true;
         boosterEnum = (BoosterEnum)index;
 
         btnBuyUseCoin.OnClick(() =>
         {
             BuyUseCoin(boosterEnum, false);
-            base.Hide();
+            canvasGroup.blocksRaycasts = false;
+            Hide();
         });
         btnBuyAds.OnClick(() =>
         {
             BuyUseCoin(boosterEnum, true);
-            base.Hide();
+            Hide();
         });
 
 
@@ -56,7 +60,10 @@ public class PopupShopInGame : Popup
 
     public override void Hide()
     {
+        canvasGroup.blocksRaycasts = false;
         base.Hide();
+
+        //ManagerPopup.HidePopup<PopupShopInGame>();
     }
 
     public void BuyUseCoin(BoosterEnum boosterEnum, bool useAds)

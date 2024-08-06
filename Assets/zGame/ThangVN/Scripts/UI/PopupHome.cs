@@ -30,6 +30,7 @@ public class PopupHome : MonoBehaviour
     [SerializeField] Animator animBar, animPigment, animChallenges;
     [SerializeField] RectTransform rectTransformTarget, rectTransformChallenges;
     [SerializeField] Transform iconFake, iconTargetPigment, txtFake, txtChallengesObj;
+    public GameObject imgDanger;
 
     private void Awake()
     {
@@ -196,7 +197,8 @@ public class PopupHome : MonoBehaviour
 
     void ShuffleRandomColorSpawn()
     {
-        LogicGame.Instance.InitPlateSpawn(true);
+        //LogicGame.Instance.InitPlateSpawn(true);
+        LogicGame.Instance.ShufflePlateSpawn();
     }
 
     void DestroyColorPlate()
@@ -325,5 +327,14 @@ public class PopupHome : MonoBehaviour
                nChallenges.SetActive(false);
            });
 
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (SaveGame.Heart <= GameConfig.MAX_HEART)
+        {
+            PlayerPrefs.SetString(GameConfig.LAST_HEART_LOSS, DateTime.Now.ToString());
+            PlayerPrefs.Save();
+        }
     }
 }

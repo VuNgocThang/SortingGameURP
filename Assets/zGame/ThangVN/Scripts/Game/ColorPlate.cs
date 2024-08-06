@@ -360,7 +360,7 @@ public class ColorPlate : MonoBehaviour
         throw new InvalidOperationException("Unexpected");
     }
 
-    public void InitClear()
+    public void InitClear(bool plusPoint = false)
     {
         ColorEnum colorEnum = listTypes[listTypes.Count - 1].type;
         int count = listTypes[listTypes.Count - 1].listPlates.Count;
@@ -369,9 +369,8 @@ public class ColorPlate : MonoBehaviour
         listTypes.RemoveAt(listTypes.Count - 1);
 
         IVisualPlate visual = new DefaultFinishPlate();
-        visual.Execute(this, count, colorEnum);
+        visual.Execute(this, count, colorEnum, plusPoint);
 
-        // nếu có băng, thì giảm tầng băng.. script here
     }
 
     public void ClearLastType()

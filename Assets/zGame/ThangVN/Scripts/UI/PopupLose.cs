@@ -89,34 +89,38 @@ public class PopupLose : Popup
 
     private void InitHeart()
     {
-        if (SaveGame.CountDownTimer > 0)
+        //if (SaveGame.CountDownTimer > 0)
+        //{
+        //Debug.Log(SaveGame.CountDownTimer + " countDownTimer");
+
+        if (PlayerPrefs.HasKey(GameConfig.LAST_HEART_LOSS))
         {
-            Debug.Log(SaveGame.CountDownTimer + " countDownTimer");
+            float timeSinceLastLoss = (float)(DateTime.Now - DateTime.Parse(PlayerPrefs.GetString(GameConfig.LAST_HEART_LOSS))).TotalSeconds;
 
-            if (PlayerPrefs.HasKey(GameConfig.LAST_HEART_LOSS))
+            int increaseHeart = (int)(timeSinceLastLoss / GameConfig.TIME_COUNT_DOWN);
+
+            float timeSub = timeSinceLastLoss % GameConfig.TIME_COUNT_DOWN;
+
+            if (GameConfig.MAX_HEART >= SaveGame.Heart)
             {
-                float timeSinceLastLoss = (float)(DateTime.Now - DateTime.Parse(PlayerPrefs.GetString(GameConfig.LAST_HEART_LOSS))).TotalSeconds;
-
-                int increaseHeart = (int)(timeSinceLastLoss / GameConfig.TIME_COUNT_DOWN);
-
-                float timeSub = timeSinceLastLoss % GameConfig.TIME_COUNT_DOWN;
-
-                if (GameConfig.MAX_HEART >= SaveGame.Heart)
-                {
-                    SaveGame.Heart += increaseHeart;
-                    SaveGame.Heart = Mathf.Min(SaveGame.Heart, GameConfig.MAX_HEART);
-                }
-                countdownTimer = SaveGame.CountDownTimer - timeSub;
-                countdownTimer = Mathf.Max(countdownTimer, 0);
-
-                if (SaveGame.Heart >= GameConfig.MAX_HEART)
-                {
-                    countdownTimer = GameConfig.TIME_COUNT_DOWN;
-                }
-
-                Debug.Log(timeSinceLastLoss);
+                SaveGame.Heart += increaseHeart;
+                SaveGame.Heart = Mathf.Min(SaveGame.Heart, GameConfig.MAX_HEART);
             }
+            countdownTimer = SaveGame.CountDownTimer - timeSub;
+            countdownTimer = Mathf.Max(countdownTimer, 0);
+
+            if (SaveGame.Heart >= GameConfig.MAX_HEART)
+            {
+                countdownTimer = GameConfig.TIME_COUNT_DOWN;
+            }
+
+            Debug.Log(timeSinceLastLoss);
         }
+        else
+        {
+            countdownTimer = GameConfig.TIME_COUNT_DOWN;
+        }
+        //}
 
         txtHeart.text = SaveGame.Heart.ToString();
     }
