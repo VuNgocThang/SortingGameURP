@@ -10,7 +10,9 @@ public class ParticlePool : MonoBehaviour
         Eat,
         Move,
         Unlock,
-        Special
+        Special,
+        Charging,
+        ChangeColor
     }
 
     public TypeParticle typeParticle;
@@ -38,6 +40,14 @@ public class ParticlePool : MonoBehaviour
         else if (typeParticle == TypeParticle.Special)
         {
             LogicGame.Instance.specialParticlePool.Release(particle);
+        }
+        else if (typeParticle == TypeParticle.Charging)
+        {
+            LogicGame.Instance.chargingParticlePool.Release(particle);
+        }
+        else if (typeParticle == TypeParticle.ChangeColor)
+        {
+            LogicGame.Instance.changeColorParticlePool.Release(particle);
         }
     }
     void Start()

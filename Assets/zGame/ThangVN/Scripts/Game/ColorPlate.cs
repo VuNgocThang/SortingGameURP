@@ -242,6 +242,7 @@ public class ColorPlate : MonoBehaviour
         }
 
         InitValue(this.transform, true);
+
     }
 
     public AnimationCurve customCurve;

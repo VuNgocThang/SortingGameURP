@@ -47,11 +47,15 @@ public class LogicGame : MonoBehaviour
     [SerializeField] private ParticleSystem eatParticle;
     [SerializeField] private ParticleSystem unlockParticle;
     [SerializeField] private ParticleSystem specialParticle;
+    [SerializeField] private ParticleSystem chargingParticle;
+    [SerializeField] private ParticleSystem changeColorParticle;
 
     public CustomPool<ParticleSystem> clickParticlePool;
     public CustomPool<ParticleSystem> eatParticlePool;
     public CustomPool<ParticleSystem> unlockParticlePool;
     public CustomPool<ParticleSystem> specialParticlePool;
+    public CustomPool<ParticleSystem> chargingParticlePool;
+    public CustomPool<ParticleSystem> changeColorParticlePool;
 
     public bool isMergeing;
     Tweener tweenerMove;
@@ -119,6 +123,9 @@ public class LogicGame : MonoBehaviour
         eatParticlePool = new CustomPool<ParticleSystem>(eatParticle, 5, transform, false);
         unlockParticlePool = new CustomPool<ParticleSystem>(unlockParticle, 5, transform, false);
         specialParticlePool = new CustomPool<ParticleSystem>(specialParticle, 2, transform, false);
+        chargingParticlePool = new CustomPool<ParticleSystem>(chargingParticle, 2, transform, false);
+        changeColorParticlePool = new CustomPool<ParticleSystem>(changeColorParticle, 2, transform, false);
+
         Application.targetFrameRate = 60;
 
         ResetPosSpawn();
@@ -346,6 +353,9 @@ public class LogicGame : MonoBehaviour
     {
         if (countMove > 0)
         {
+            homeInGame.UiEffect.SetActive(false);
+            homeInGame.UiEffect2.SetActive(false);
+
             for (int i = 0; i < ListArrowPlate.Count; i++)
             {
                 if (!ListArrowPlate[i].IsPlayingOnClick())
@@ -356,6 +366,11 @@ public class LogicGame : MonoBehaviour
         }
         else if (countMove == 0)
         {
+            homeInGame.UiEffect.SetActive(true);
+            homeInGame.UiEffect2.SetActive(true);
+
+            //homeInGame.UiEffect.Play();
+
             for (int i = 0; i < ListArrowPlate.Count; i++)
             {
                 //if (!ListArrowPlate[i].IsPlayingOnClick())
@@ -805,9 +820,12 @@ public class LogicGame : MonoBehaviour
                 {
                     FindColorEnum findColorEnum = new FindColorEnum();
                     ColorEnum cEnum = findColorEnum.FindTargetColorEnum(endColorPlate.ListConnect);
+                    chargingParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
+                    changeColorParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
 
                     endColorPlate.Init(GetColorNew);
                     endColorPlate.ChangeSpecialColorPLate(cEnum);
+
                     RecursiveMerge();
                 }
             });
@@ -1098,7 +1116,7 @@ public class LogicGame : MonoBehaviour
         {
             homeInGame.imgDanger.SetActive(false);
             //Debug.LogWarning("More than 2 items with ListValue count equal to 0.");
-            
+
         }
         else
         {

@@ -31,6 +31,9 @@ public class PopupHome : MonoBehaviour
     [SerializeField] RectTransform rectTransformTarget, rectTransformChallenges;
     [SerializeField] Transform iconFake, iconTargetPigment, txtFake, txtChallengesObj;
     public GameObject imgDanger;
+    public GameObject UiEffect;
+    public GameObject UiEffect2;
+
 
     private void Awake()
     {
