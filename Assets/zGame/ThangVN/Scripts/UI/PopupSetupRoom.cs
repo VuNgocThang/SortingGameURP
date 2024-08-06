@@ -39,6 +39,13 @@ public class PopupSetupRoom : Popup
                 //Todo Chua co room thi ad data room moi vao
                 AddNewRoom();
 
+                for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
+                {
+                    if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
+                        LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
+
+                }
+
                 if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
                 {
                     if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;

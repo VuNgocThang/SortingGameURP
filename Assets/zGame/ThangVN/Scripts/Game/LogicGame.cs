@@ -615,10 +615,10 @@ public class LogicGame : MonoBehaviour
 
         sq.AppendInterval(0.3f);
 
-        sq.AppendCallback(() =>
-        {
-            endColorPlate.PlayAnimScale();
-        });
+        //sq.AppendCallback(() =>
+        //{
+        //    endColorPlate.PlayAnimScale();
+        //});
 
 
         if (endColorPlate.listTypes.Count >= 2)

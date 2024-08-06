@@ -50,13 +50,15 @@ public class PopupDecor : Popup
 
     public override void Hide()
     {
-        base.Hide();
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
+        base.Hide();
     }
 
     public void BackHome()
     {
         HomeUI.Instance.animator.Play("Show");
+        ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
+
         base.Hide();
     }
 

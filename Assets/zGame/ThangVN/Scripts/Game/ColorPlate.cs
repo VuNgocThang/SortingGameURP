@@ -427,7 +427,7 @@ public class ColorPlate : MonoBehaviour
     }
 
 
-    public  bool isPlayingOnClick = false;
+    public bool isPlayingOnClick = false;
     public void PlayAnimOnClick()
     {
         //if (anim != null)
@@ -553,7 +553,8 @@ public class ColorPlate : MonoBehaviour
             logicVisual.SetVisualAfterUnlock(status);
             pointToUnLock = 0;
             isLocked = false;
-            //status = Status.None;
+            if (status == Status.LockCoin)
+                status = Status.None;
         }
     }
 

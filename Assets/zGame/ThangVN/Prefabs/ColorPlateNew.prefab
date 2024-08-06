@@ -80,7 +80,7 @@ MonoBehaviour:
   anim: {fileID: 4030379478030376087}
   targetUIPosition: {fileID: 0}
   customRatio: {fileID: 11400000, guid: a5945d64e1665504b8f875ed059d2c6d, type: 2}
-  circleZZZ: {fileID: 0}
+  circleZZZ: {fileID: 453622281261103623}
   txtPointUnlock: {fileID: 6578624358773973659}
   isLocked: 0
   pointToUnLock: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  isPlayingOnClick: 0
 --- !u!95 &4030379478030376087
 Animator:
   serializedVersion: 5
@@ -371,6 +372,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: nLogicVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 7452450664804335011, guid: adc17f55ebefe22479789718ea897f9a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7774357967863891305, guid: adc17f55ebefe22479789718ea897f9a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -391,6 +397,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adc17f55ebefe22479789718ea897f9a, type: 3}
+--- !u!1 &453622281261103623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6829232947172482488, guid: adc17f55ebefe22479789718ea897f9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6380993885318490047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5083360288350528001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2163523455229412798, guid: adc17f55ebefe22479789718ea897f9a,

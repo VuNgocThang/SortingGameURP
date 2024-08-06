@@ -71,6 +71,13 @@ public class HandDrag : MonoBehaviour
         }
     }
 
+    bool CheckCondition(ColorPlate clicked)
+    {
+        if (clicked.ListValue.Count == 0 || clicked.status == Status.Frozen || clicked.status == Status.LockCoin || clicked.status == Status.CannotPlace) return true;
+        else return false;
+    }
+
+
     void HandSelect()
     {
         if (selectingPlate != null) return;
@@ -78,7 +85,8 @@ public class HandDrag : MonoBehaviour
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitPlate, 100f, layerPlate))
         {
             ColorPlate clickedPlate = hitPlate.transform.GetComponent<ColorPlate>();
-            if (clickedPlate.ListValue.Count == 0) return;
+            //if (clickedPlate.ListValue.Count == 0) return;
+            if (CheckCondition(clickedPlate)) return;
             selectingPlate = clickedPlate;
 
         }
@@ -95,7 +103,8 @@ public class HandDrag : MonoBehaviour
             if (hitPlateHolder.collider != null)
             {
                 ColorPlate colorPlate = hitPlateHolder.transform.GetComponent<ColorPlate>();
-                if (colorPlate == selectingPlate)
+
+                if (colorPlate == selectingPlate || colorPlate.status == Status.Frozen)
                 {
                     for (int i = 0; i < selectingPlate.ListColor.Count; i++)
                     {
@@ -109,7 +118,8 @@ public class HandDrag : MonoBehaviour
                     selectingPlate.circleZZZ.SetActive(false);
                     LogicGame.Instance.SetColorUsingSwapItem(selectingPlate, colorPlate);
                     LogicGame.Instance.isUsingHand = false;
-                    //LogicGame.Instance.homeInGame.ExitUsingItem();
+                    SaveGame.Swap--;
+                    LogicGame.Instance.homeInGame.ExitUsingItem();
                 }
 
             }
