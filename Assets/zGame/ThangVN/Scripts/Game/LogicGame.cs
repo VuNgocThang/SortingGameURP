@@ -584,6 +584,12 @@ public class LogicGame : MonoBehaviour
             else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 2) / 10;
             else timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 3) / 10;
         }
+
+        foreach (var c in endColorPlate.ListColor)
+        {
+            c.transform.eulerAngles = Vector3.zero;
+        }
+
         sq.AppendInterval(0.3f);
 
         sq.AppendCallback(() =>
