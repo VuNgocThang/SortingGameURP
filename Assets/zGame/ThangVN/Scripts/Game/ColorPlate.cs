@@ -276,13 +276,14 @@ public class ColorPlate : MonoBehaviour
                 {
                     // Bieu dien o day
 
-                    MoveDirection(index, i);
+                    if (index != -1)
+                        MoveDirection(index, i);
 
                     ListColor[i].transform.DOLocalJump(new Vector3(0, 0.2f + (i + 1) * GameConfig.OFFSET_PLATE, 0), 2, 1, 0.3f);
-                        //.OnComplete(() =>
-                        //{
-                        //    ListColor[i].transform.eulerAngles = Vector3.zero;
-                        //});
+                    //.OnComplete(() =>
+                    //{
+                    //    ListColor[i].transform.eulerAngles = Vector3.zero;
+                    //});
 
                     time = 0.1f * i + 0.5f;
                 }

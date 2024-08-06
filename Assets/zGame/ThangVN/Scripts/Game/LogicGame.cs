@@ -579,16 +579,18 @@ public class LogicGame : MonoBehaviour
             startColorPlate.ListValue.RemoveAt(startColorPlate.ListValue.Count - 1);
             startColorPlate.ListColor.RemoveAt(startColorPlate.ListColor.Count - 1);
 
-            if (endColorPlate.Col == startColorPlate.Col && endColorPlate.Row > startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 0) / 10;
-            else if (endColorPlate.Col < startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 1) / 10;
-            else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 2) / 10;
-            else timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 3) / 10;
+            timerMove = endColorPlate.InitValue(endColorPlate.transform, false, -1) / 10;
+
+            //if (endColorPlate.Col == startColorPlate.Col && endColorPlate.Row > startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 0) / 10;
+            //else if (endColorPlate.Col < startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 1) / 10;
+            //else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 2) / 10;
+            //else timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 3) / 10;
         }
 
-        foreach (var c in endColorPlate.ListColor)
-        {
-            c.transform.eulerAngles = Vector3.zero;
-        }
+        //foreach (var c in endColorPlate.ListColor)
+        //{
+        //    c.transform.eulerAngles = Vector3.zero;
+        //}
 
         sq.AppendInterval(0.3f);
 
