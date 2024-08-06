@@ -52,6 +52,20 @@ public class LogicVisualPlate : MonoBehaviour
         target.SetActive(true);
     }
 
+    public void PlayArrowCannotClick()
+    {
+        arrowCannotClick.SetActive(true);
+        arrowClick.SetActive(false);
+        arrow.SetActive(false);
+    }
+
+    public void PlayArrowCanClick()
+    {
+        Debug.Log("wtf arrow can click?>");
+        arrow.SetActive(true);
+        arrowCannotClick.SetActive(false);
+    }
+
     public void SetDirectionArrow(Status stt, bool isLocked)
     {
         normal.SetActive(false);

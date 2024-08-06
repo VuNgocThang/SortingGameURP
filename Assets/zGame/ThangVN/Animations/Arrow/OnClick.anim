@@ -21,7 +21,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.98, y: 0.98, z: 0.98}
+        value: {x: 0.95, y: 0.95, z: 0.95}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -68,7 +68,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: nLogicVisual/nVisual/mui_ten_khi_an
+    path: nLogicVisual/asset/assets_02/mui_ten_khi_an
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -98,7 +98,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: nLogicVisual/nVisual/nut_mui_ten
+    path: nLogicVisual/asset/assets_02/nut_mui_ten
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -120,7 +120,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3791592594
+      path: 1318125834
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -129,7 +129,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2326437443
+      path: 724003926
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -165,7 +165,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.98
+        value: 0.95
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -195,7 +195,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.98
+        value: 0.95
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -225,7 +225,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.98
+        value: 0.95
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -275,7 +275,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: nLogicVisual/nVisual/mui_ten_khi_an
+    path: nLogicVisual/asset/assets_02/mui_ten_khi_an
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -305,7 +305,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: nLogicVisual/nVisual/nut_mui_ten
+    path: nLogicVisual/asset/assets_02/nut_mui_ten
     classID: 1
     script: {fileID: 0}
     flags: 16

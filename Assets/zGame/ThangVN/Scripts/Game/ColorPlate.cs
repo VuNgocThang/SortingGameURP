@@ -426,9 +426,34 @@ public class ColorPlate : MonoBehaviour
         return count;
     }
 
+
+    public  bool isPlayingOnClick = false;
     public void PlayAnimOnClick()
     {
+        //if (anim != null)
+        //{
+        //    anim.Play("OnClick");
+        //    isPlayingOnClick = true;
+        //}
+
         StartCoroutine(PlayAnim());
+    }
+
+    public bool IsPlayingOnClick()
+    {
+        return isPlayingOnClick;
+    }
+
+    public void PlayAnimNormal()
+    {
+        if (anim != null)
+            anim.Play("Normal");
+    }
+
+    public void PlayAnimCanClick()
+    {
+        if (anim != null)
+            anim.Play("CanClick");
     }
 
     IEnumerator PlayAnim()
@@ -436,15 +461,18 @@ public class ColorPlate : MonoBehaviour
         if (anim != null)
         {
             anim.Play("OnClick");
+            isPlayingOnClick = true;
             yield return new WaitForSeconds(0.3f);
-            anim.Play("Default");
+            anim.Play("Normal");
+            isPlayingOnClick = false;
         }
+
+
     }
 
     public void PlayAnimScale()
     {
         if (anim != null) anim.Play("Scale", -1, 0);
-
     }
 
     public void ClearAll()
@@ -528,5 +556,6 @@ public class ColorPlate : MonoBehaviour
             //status = Status.None;
         }
     }
+
 }
 

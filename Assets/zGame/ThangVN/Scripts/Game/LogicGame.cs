@@ -308,6 +308,27 @@ public class LogicGame : MonoBehaviour
     ColorPlate previousHolder = null;
     void Update()
     {
+        if (countMove > 0)
+        {
+            for (int i = 0; i < ListArrowPlate.Count; i++)
+            {
+                if (!ListArrowPlate[i].IsPlayingOnClick())
+                {
+                    ListArrowPlate[i].PlayAnimNormal();
+                }
+            }
+        }
+        else if (countMove == 0)
+        {
+            for (int i = 0; i < ListArrowPlate.Count; i++)
+            {
+                //if (!ListArrowPlate[i].IsPlayingOnClick())
+                //{
+                ListArrowPlate[i].PlayAnimCanClick();
+                //}
+            }
+        }
+
         if (timeClick >= 0)
         {
             timeClick -= Ez.TimeMod;
