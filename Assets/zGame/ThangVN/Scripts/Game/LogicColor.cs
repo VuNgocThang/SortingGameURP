@@ -5,7 +5,7 @@ using UnityEngine;
 public class LogicColor : MonoBehaviour
 {
     [SerializeField] public List<GameObject> listMeshes;
-    [SerializeField] public GameObject lockNoMove;
+    //[SerializeField] public GameObject lockNoMove;
     [SerializeField] public TrailRenderer trail;
 
     public void Init(int index)
@@ -18,15 +18,15 @@ public class LogicColor : MonoBehaviour
         listMeshes[index].SetActive(true);
     }
 
-    public void InitLockNoMove()
-    {
-        foreach (var mesh in listMeshes)
-        {
-            mesh.SetActive(false);
-        }
+    //public void InitLockNoMove()
+    //{
+    //    foreach (var mesh in listMeshes)
+    //    {
+    //        mesh.SetActive(false);
+    //    }
 
-        lockNoMove.SetActive(true);
-    }
+    //    lockNoMove.SetActive(true);
+    //}
 
     //public void 
 }

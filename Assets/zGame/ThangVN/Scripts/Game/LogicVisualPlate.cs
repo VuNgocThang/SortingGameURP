@@ -13,6 +13,7 @@ public class LogicVisualPlate : MonoBehaviour
     public GameObject normal;
     public GameObject arrow;
     public GameObject arrowClick;
+    public GameObject arrowCannotClick;
     public GameObject lockCoin;
     public GameObject cannotPlace;
     public List<GameObject> listForzen;
@@ -63,21 +64,25 @@ public class LogicVisualPlate : MonoBehaviour
             case Status.Left:
                 arrow.transform.localEulerAngles = new Vector3(0, 90f, 0);
                 arrowClick.transform.localEulerAngles = new Vector3(0, 90f, 0);
+                arrowCannotClick.transform.localEulerAngles = new Vector3(0, 90f, 0);
                 break;
 
             case Status.Right:
                 arrow.transform.localEulerAngles = new Vector3(0, -90f, 0);
                 arrowClick.transform.localEulerAngles = new Vector3(0, -90f, 0);
+                arrowCannotClick.transform.localEulerAngles = new Vector3(0, -90f, 0);
                 break;
 
             case Status.Up:
                 arrow.transform.localEulerAngles = new Vector3(0, 180f, 0);
                 arrowClick.transform.localEulerAngles = new Vector3(0, 180f, 0);
+                arrowCannotClick.transform.localEulerAngles = new Vector3(0, 180f, 0);
                 break;
 
             case Status.Down:
                 arrow.transform.localEulerAngles = new Vector3(0, 0, 0);
                 arrowClick.transform.localEulerAngles = new Vector3(0, 0, 0);
+                arrowCannotClick.transform.localEulerAngles = new Vector3(0, 0, 0);
                 break;
             default:
                 return;
