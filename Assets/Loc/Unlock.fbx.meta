@@ -3,7 +3,12 @@ guid: ff2b54eee664fc54ea3146bea8b7ee3a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_game_sortington
+    second: {fileID: 2100000, guid: e78ea9589b71bdf4c93223bacb8f27bd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

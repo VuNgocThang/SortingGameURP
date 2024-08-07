@@ -9,6 +9,8 @@ public class RoomObject : MonoBehaviour
     [SerializeField] MeshRenderer mesh;
     public List<GameObject> listObjects;
     public bool isPainted;
+    public Animator anim;
+
 
     //private void Awake()
     //{
@@ -17,6 +19,10 @@ public class RoomObject : MonoBehaviour
 
     public void SetUpMaterial(int index)
     {
+        if (!mesh.enabled)
+        {
+
+        }
         mesh.enabled = true;
         foreach (Material mat in mesh.materials)
         {

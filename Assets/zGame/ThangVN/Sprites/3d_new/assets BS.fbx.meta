@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: mat_game_sortington
-    second: {fileID: 2100000, guid: 4e58da086150da743b4dc8c1f047e0b3, type: 2}
+    second: {fileID: 2100000, guid: b0013964c47388a409b2a5a946c8b6c9, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule

@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &12667088
 Transform:
   m_ObjectHideFlags: 0
@@ -553,6 +553,7 @@ MonoBehaviour:
   listObjects:
   - {fileID: 6954878069293284316}
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +899,7 @@ MonoBehaviour:
   mesh: {fileID: 4046934332563389217}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!114 &755460808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,6 +916,7 @@ MonoBehaviour:
   mesh: {fileID: 2937643143566091061}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!114 &755460809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,6 +934,7 @@ MonoBehaviour:
   listObjects:
   - {fileID: 6954878069293284316}
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!65 &755460817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1043,6 +1047,7 @@ MonoBehaviour:
   - {fileID: 1188256223584432605}
   - {fileID: 8613582466533756338}
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!1 &958259319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1161,7 @@ MonoBehaviour:
   listObjects:
   - {fileID: 8753503398986789522}
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!114 &1084662458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,6 +1178,7 @@ MonoBehaviour:
   mesh: {fileID: 6000329305279677431}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!114 &1109169580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1188,6 +1195,7 @@ MonoBehaviour:
   mesh: {fileID: 8096081839312691188}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!1 &1132473036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1312,7 @@ MonoBehaviour:
   mesh: {fileID: 9190668036638256385}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!65 &1291175899
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1341,6 +1350,7 @@ MonoBehaviour:
   mesh: {fileID: 5102885345248197712}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!224 &1412953696 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1074321055091735992, guid: 3011edc843ec15e49874b8707a1709ff,
@@ -1384,6 +1394,7 @@ MonoBehaviour:
   mesh: {fileID: 5929031402390763658}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!65 &1920855812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1421,6 +1432,7 @@ MonoBehaviour:
   mesh: {fileID: 2614989187231781280}
   listObjects: []
   isPainted: 0
+  anim: {fileID: 0}
 --- !u!1 &1932072869
 GameObject:
   m_ObjectHideFlags: 0
