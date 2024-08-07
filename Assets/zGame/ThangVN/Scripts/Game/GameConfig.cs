@@ -44,6 +44,9 @@ public static class GameConfig
 
     public static int ROW_COUNT = 5;
 
+    //public static Vector3 OFFSET_HAMMER = new Vector3(-1.84f, 0, -3.1f);
+    public static Vector3 OFFSET_HAMMER = new Vector3(-1.7f, 0f, -3.3f);
+
     public static bool EnoughCoinBuyHammer
     {
         get

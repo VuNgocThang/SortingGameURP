@@ -104,7 +104,7 @@ public class HandDrag : MonoBehaviour
             {
                 ColorPlate colorPlate = hitPlateHolder.transform.GetComponent<ColorPlate>();
 
-                if (colorPlate == selectingPlate || colorPlate.status == Status.Frozen)
+                if (colorPlate == selectingPlate || colorPlate.status == Status.Frozen || colorPlate.isLocked)
                 {
                     for (int i = 0; i < selectingPlate.ListColor.Count; i++)
                     {

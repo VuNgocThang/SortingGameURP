@@ -82,6 +82,7 @@ public class LogicGame : MonoBehaviour
     public int countDiffMax;
     public bool isUsingHammer;
     public bool isUsingHand;
+    public Hammer hammer;
 
     int countToMove = 0;
     int countSpawnSpecial = 0;
@@ -451,12 +452,14 @@ public class LogicGame : MonoBehaviour
                         ColorPlate plateSelect = plate.collider.GetComponent<ColorPlate>();
 
                         if (plateSelect.ListValue.Count == 0 || plateSelect.status == Status.Frozen) return;
-                        plateSelect.InitClear();
+
+                        hammer.gameObject.SetActive(true);
+                        hammer.transform.position = plateSelect.transform.position + GameConfig.OFFSET_HAMMER;
+                        hammer.hitColorPlate = plateSelect.transform.position;
+                        hammer.colorPlateDestroy = plateSelect;
+
                         SaveGame.Hammer--;
-                        //animation effect hammer here... done ==> ()
-                        // boool
-                        plateSelect.Init(GetColorNew);
-                        homeInGame.ExitUsingItem();
+                        isUsingHammer = false;
                     }
                 }
             }
@@ -468,8 +471,6 @@ public class LogicGame : MonoBehaviour
                 Vector3 spawnPosition = GetMouseWorldPosition();
                 clickParticlePool.Spawn(spawnPosition, true);
                 OnClick();
-
-
             }
         }
 
@@ -513,6 +514,7 @@ public class LogicGame : MonoBehaviour
         //{
         //    PopupEndChallenges.Show();
         //}
+        Debug.Log("savegame.hammer: " + SaveGame.Hammer);
     }
 
 
@@ -523,7 +525,7 @@ public class LogicGame : MonoBehaviour
         return cam.ScreenToWorldPoint(mousePos);
     }
 
-    void RecursiveMerge()
+    public void RecursiveMerge()
     {
         if (listSteps.Count > 0)
         {
@@ -1047,7 +1049,6 @@ public class LogicGame : MonoBehaviour
         }
     }
 
-    public GameObject obj;
     void Merge(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
         timerRun = 0;

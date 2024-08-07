@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ntDev;
 using System;
 using System.Collections;
@@ -11,7 +12,7 @@ public class PopupShopInGame : Popup
     [SerializeField] EasyButton btnPrev, btnNext, btnBuyUseCoin, btnBuyAds;
     [SerializeField] BoosterData boosterData;
     public Image imgIcon, imgIconBuyUseIcon, imgIconBuyAds;
-    public TextMeshProUGUI txtNameBooster;
+    public TextMeshProUGUI txtNameBooster, txtCoinUse;
     public BoosterEnum boosterEnum;
     public CanvasGroup canvasGroup;
 
@@ -30,13 +31,13 @@ public class PopupShopInGame : Popup
     public void Initialized(int index)
     {
         base.Init();
+        LogicGame.Instance.isPauseGame = true;
         canvasGroup.blocksRaycasts = true;
         boosterEnum = (BoosterEnum)index;
 
         btnBuyUseCoin.OnClick(() =>
         {
             BuyUseCoin(boosterEnum, false);
-            canvasGroup.blocksRaycasts = false;
             Hide();
         });
         btnBuyAds.OnClick(() =>
@@ -61,9 +62,14 @@ public class PopupShopInGame : Popup
     public override void Hide()
     {
         canvasGroup.blocksRaycasts = false;
-        base.Hide();
+        transform.localScale = Vector3.one;
 
-        //ManagerPopup.HidePopup<PopupShopInGame>();
+        transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            gameObject.SetActive(false);
+            ManagerEvent.RaiseEvent(EventCMD.EVENT_POPUP_CLOSE, this);
+            LogicGame.Instance.isPauseGame = false;
+        });
     }
 
     public void BuyUseCoin(BoosterEnum boosterEnum, bool useAds)

@@ -477,6 +477,9 @@ public class ColorPlate : MonoBehaviour
 
     public void ClearAll()
     {
+        ListValue.Clear();
+        listTypes.Clear();
+
         Sequence sq = DOTween.Sequence();
         float delay = 0f;
 

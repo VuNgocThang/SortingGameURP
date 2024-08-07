@@ -10,7 +10,7 @@ public class CameraChange : MonoBehaviour
     [SerializeField] Vector3 startPos;
     [SerializeField] Vector3 startRot;
 
-    Vector3 endPos = new Vector3(0f, 23f, -4.4f);
+    Vector3 endPos = new Vector3(0f, 25f, -4.4f);
     Vector3 endRot = new Vector3(80f, 0f, 0f);
     private void Awake()
     {

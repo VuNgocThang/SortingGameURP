@@ -143,7 +143,9 @@ public class PopupHome : MonoBehaviour
 
     void UpdatePoint(object e)
     {
-        animBar.Play("AnimBar", 0, 0);
+        if (animBar != null && nBar.activeSelf)
+            animBar.Play("AnimBar", 0, 0);
+
         LogicGame.Instance.point += (int)e;
 
         if (!SaveGame.Challenges)
@@ -204,18 +206,6 @@ public class PopupHome : MonoBehaviour
         LogicGame.Instance.ShufflePlateSpawn();
     }
 
-    void DestroyColorPlate()
-    {
-        // Change focus camera
-        // Set active false some element UI
-        // 
-
-    }
-    void ActiveUsingItem(bool isHammer)
-    {
-        btnHammer.Init();
-    }
-
     void UsingItemHammer()
     {
         itemObj.SetActive(true);
@@ -248,9 +238,7 @@ public class PopupHome : MonoBehaviour
 
     public void ExitUsingItem()
     {
-        LogicGame.Instance.isUsingHammer = false;
-        LogicGame.Instance.isUsingHand = false;
-        LogicGame.Instance.isPauseGame = false;
+        
         handDrag.selectingPlate = null;
 
         StartCoroutine(Delay());
@@ -260,10 +248,14 @@ public class PopupHome : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         CameraChange.Ins.ExitUsingItemCamera();
+        LogicGame.Instance.isPauseGame = false;
+        LogicGame.Instance.isUsingHammer = false;
+        LogicGame.Instance.isUsingHand = false;
 
         itemObj.SetActive(false);
         top.SetActive(true);
         bot.SetActive(true);
+        LogicGame.Instance.RecursiveMerge();
     }
 
     void SetupImgItem(int index)
@@ -311,7 +303,8 @@ public class PopupHome : MonoBehaviour
     {
         LogicGame.Instance.isPauseGame = true;
         nChallenges.SetActive(true);
-        animChallenges.Play("Show");
+        if (nChallenges.activeSelf)
+            animChallenges.Play("Show");
 
         yield return new WaitForSeconds(1f);
 
