@@ -480,7 +480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4360775128860149718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -550,8 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5d602171ae5534fb9f071f51bee183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 0}
-  normalSprite: {fileID: 0}
+  img: {fileID: 7486621415527220831}
+  normalSprite: {fileID: 21300000, guid: f72f9fd4bbb20204aa7a5f2facd726d4, type: 3}
   pressedSprite: {fileID: 0}
   disableSprite: {fileID: 0}
   txt: {fileID: 0}
@@ -756,6 +756,7 @@ MonoBehaviour:
   imgIconBuyUseIcon: {fileID: 8425073099271762787}
   imgIconBuyAds: {fileID: 7787382073075862470}
   txtNameBooster: {fileID: 5137499722230399327}
+  txtCoinUse: {fileID: 0}
   boosterEnum: 0
   canvasGroup: {fileID: 4540729435284190143}
 --- !u!1 &3354850638691850042
@@ -1217,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5428491522391623475
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1287,8 +1288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5d602171ae5534fb9f071f51bee183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 0}
-  normalSprite: {fileID: 0}
+  img: {fileID: 3625024224489898998}
+  normalSprite: {fileID: 21300000, guid: f72f9fd4bbb20204aa7a5f2facd726d4, type: 3}
   pressedSprite: {fileID: 0}
   disableSprite: {fileID: 0}
   txt: {fileID: 0}
