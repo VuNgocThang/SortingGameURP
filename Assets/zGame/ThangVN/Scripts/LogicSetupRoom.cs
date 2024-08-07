@@ -52,8 +52,8 @@ public class LogicSetupRoom : MonoBehaviour
                             if (listRoomObject[k].id == 4) listGameObject[4].SetActive(true);
 
                             listRoomObject[k].gameObject.SetActive(true);
-                            listRoomObject[k].SetUpMaterial(currentSprite + GameConfig.ROW_COUNT * idObject);
                             listRoomObject[k].isPainted = isPainted;
+                            listRoomObject[k].SetUpMaterial(currentSprite + GameConfig.ROW_COUNT * idObject);
                             listRoomObject[k].gameObject.layer = 11;
                         }
                     }

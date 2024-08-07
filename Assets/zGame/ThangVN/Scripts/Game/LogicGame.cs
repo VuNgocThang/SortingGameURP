@@ -572,7 +572,7 @@ public class LogicGame : MonoBehaviour
                 {
                     ColorPlate arrowPlate = hit.collider.GetComponent<ColorPlate>();
 
-                    if (arrowPlate.isLocked) return;
+                    if (arrowPlate.isLocked || arrowPlate.ListValue.Count > 0) return;
 
                     ICheckStatus checkStatusHolder = new CheckGetHolderStatus();
                     ColorPlate holder = checkStatusHolder.CheckHolder(arrowPlate);

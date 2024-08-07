@@ -19,11 +19,14 @@ public class RoomObject : MonoBehaviour
 
     public void SetUpMaterial(int index)
     {
-        if (!mesh.enabled)
-        {
-
-        }
+        Debug.Log("isPainted: " + isPainted);
         mesh.enabled = true;
+        if (anim != null)
+        {
+            if (!isPainted) anim.Play("Show");
+        }
+
+
         foreach (Material mat in mesh.materials)
         {
             mat.SetFloat("_Index", index + 1);
@@ -34,6 +37,8 @@ public class RoomObject : MonoBehaviour
             for (int i = 0; i < listObjects.Count; i++)
             {
                 listObjects[i].SetActive(true);
+                if (!isPainted)
+                    listObjects[i].GetComponent<Animator>().Play("Show");
             }
         }
     }
