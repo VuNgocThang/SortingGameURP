@@ -8,9 +8,10 @@ public class RoomObject : MonoBehaviour
     //public List<Material> listMaterials;
     [SerializeField] MeshRenderer mesh;
     public List<GameObject> listObjects;
-    public bool isPainted;
+    public bool isPainted, isWatchAds;
     public Animator anim;
-
+    [SerializeField] BoxCollider boxCollider;
+    public Vector3 posEffect;
 
     //private void Awake()
     //{
@@ -19,13 +20,15 @@ public class RoomObject : MonoBehaviour
 
     public void SetUpMaterial(int index)
     {
-        Debug.Log("isPainted: " + isPainted);
         mesh.enabled = true;
-        if (anim != null)
-        {
-            if (!isPainted) anim.Play("Show");
-        }
 
+        Vector3 a = GameConfig.OFFSET_NROOM;
+        Vector3 b = boxCollider.center;
+        posEffect = new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+        //GameConfig.OFFSET_NROOM - boxCollider.center;
+        Debug.Log(boxCollider.center + "___" + posEffect);
+
+        if (anim != null && !isPainted) anim.Play("Show");
 
         foreach (Material mat in mesh.materials)
         {

@@ -12,6 +12,9 @@ public class PopupSetupRoom : Popup
     [SerializeField] int idObjectToAdd;
     [SerializeField] ListRoomData listRoomData;
     [SerializeField] ButtonSelectRoom btnSelectRoom1, btnSelectRoom2, btnSelectRoom3, btnSelectRoom4;
+    [SerializeField] GameObject imgAds;
+    [SerializeField] bool isWatchAds;
+
     public bool HasObjectRoom(int idObjectRoom)
     {
         for (int i = 0; i < SaveGame.ListRoomPainted.listRoomPainted.Count; i++)
@@ -33,17 +36,64 @@ public class PopupSetupRoom : Popup
 
         btnTick.OnClick(() =>
         {
-
             if (!HasObjectRoom(idObjectToAdd))
             {
-                //Todo Chua co room thi ad data room moi vao
-                AddNewRoom();
+                if (currentSprite == 3 && !isWatchAds)
+                {
+                    //To do da xem quang cao
+                    isWatchAds = true;
+                    Debug.Log("watch ads");
+                    imgAds.SetActive(false);
+                    AddRoomWatchedAds();
+                    for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
+                    {
+                        if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
+                        {
+                            LogicSetupRoom.instance.listRoomObject[i].isWatchAds = true;
+                        }
+                    }
+                }
+                else
+                {
+                    //Todo Chua co room thi ad data room moi vao
+                    AddNewRoom();
+
+
+                    for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
+                    {
+                        if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
+                        {
+                            LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
+                            LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
+                        }
+                    }
+
+                    if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
+                    {
+                        if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;
+                        else SaveGame.CurrentObject++;
+
+                        if (LogicSetupRoom.instance.listGameObject.Count < SaveGame.CurrentObject - 1)
+                        {
+                            if (LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject] != null)
+                                LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
+                        }
+                    }
+                    Hide();
+                }
+            }
+            else
+            {
+                //todo lam gi khi da co room
+                UpdateExistedRoom();
 
                 for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
                 {
                     if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
+                    {
+                        LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
                         LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
-
+                    }
                 }
 
                 if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
@@ -57,21 +107,15 @@ public class PopupSetupRoom : Popup
                             LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
                     }
                 }
-
                 Hide();
-            }
-            else
-            {
-                //todo lam gi khi da co room
-                UpdateExistedRoom();
             }
         });
     }
-    public static async void Show(int idRoom, int idObj)
+    public static async void Show(int idRoom, int idObj, bool isRoomWatchAds)
     {
         Debug.Log("SHow");
         PopupSetupRoom pop = await ManagerPopup.ShowPopup<PopupSetupRoom>();
-        pop.Initialized(idRoom, idObj);
+        pop.Initialized(idRoom, idObj, isRoomWatchAds);
     }
 
     public override void Hide()
@@ -82,11 +126,11 @@ public class PopupSetupRoom : Popup
         PopupDecor.Show();
     }
 
-    public void Initialized(int idRoom, int idObj)
+    public void Initialized(int idRoom, int idObj, bool isRoomWatchAds)
     {
         ManagerPopup.HidePopup<PopupDecor>();
         idObjectToAdd = idObj;
-        //ManagerPopup.Instance.nShadow.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        isWatchAds = isRoomWatchAds;
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = false;
 
         btnSelectRoom1.Init(idRoom, idObj, 0);
@@ -94,7 +138,6 @@ public class PopupSetupRoom : Popup
         btnSelectRoom3.Init(idRoom, idObj, 2);
         btnSelectRoom4.Init(idRoom, idObj, 3);
         SaveGame.CanShow = false;
-        //LoadExistedData();
         base.Init();
     }
 
@@ -102,14 +145,18 @@ public class PopupSetupRoom : Popup
     {
         currentSprite = (int)e;
         Debug.Log(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT + 1 + " index");
-        //LogicSetupRoom.instance.listRoomObject[idObjectToAdd].SetUpMaterial(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT);
+
+        if (currentSprite == 3 && !isWatchAds)
+        {
+            imgAds.SetActive(true);
+        }
+        else imgAds.SetActive(false);
 
         List<RoomObject> listRoom = LogicSetupRoom.instance.SelectedRoomObject(idObjectToAdd);
         foreach (RoomObject roomObject in listRoom)
         {
             roomObject.SetUpMaterial(currentSprite + idObjectToAdd * GameConfig.ROW_COUNT);
         }
-        Debug.Log($"show room {e}");
     }
 
     void AddNewRoom()
@@ -130,6 +177,23 @@ public class PopupSetupRoom : Popup
         dataCache.listRoomPainted.Add(listObjectRoom);
         SaveGame.ListRoomPainted = dataCache;
         Debug.Log("Save Data: " + idObjectToAdd);
+    }
+
+    void AddRoomWatchedAds()
+    {
+        ListObjetRoomPainted listObjectRoom = new ListObjetRoomPainted();
+        ObjectRoomPainted objectRoom = new ObjectRoomPainted();
+        List<ObjectRoomPainted> listObjectPaintedCache = new List<ObjectRoomPainted>();
+
+        objectRoom.idObject = idObjectToAdd;
+        objectRoom.isWatchAds = true;
+
+        listObjectPaintedCache.Add(objectRoom);
+        listObjectRoom.listObjectPainted = listObjectPaintedCache;
+        ListRoomPainted dataCache = SaveGame.ListRoomPainted;
+        dataCache.listRoomPainted.Add(listObjectRoom);
+        SaveGame.ListRoomPainted = dataCache;
+        Debug.Log("Save Is Watch Ads: " + idObjectToAdd);
 
     }
 

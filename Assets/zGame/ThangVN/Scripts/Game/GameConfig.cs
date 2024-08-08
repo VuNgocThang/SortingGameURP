@@ -47,6 +47,8 @@ public static class GameConfig
     //public static Vector3 OFFSET_HAMMER = new Vector3(-1.84f, 0, -3.1f);
     public static Vector3 OFFSET_HAMMER = new Vector3(-1.7f, 0f, -3.3f);
 
+    public static Vector3 OFFSET_NROOM = new Vector3(0.07f, -1.22f, 7.59f);
+
     public static bool EnoughCoinBuyHammer
     {
         get

@@ -29,6 +29,7 @@ public class ObjectRoomPainted
     public int idObject;
     public int currentSprite;
     public bool isPainted;
+    public bool isWatchAds;
 }
 
 [Serializable]

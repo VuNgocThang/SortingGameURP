@@ -554,6 +554,8 @@ MonoBehaviour:
   - {fileID: 6954878069293284316}
   isPainted: 0
   anim: {fileID: 8694381072159007600}
+  boxCollider: {fileID: 755460798}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,6 +674,37 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &463561637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 463561638}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &463561638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463561637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.629208, y: -0.2679806, z: 9.75989}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &497948140
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +933,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 0}
+  boxCollider: {fileID: 755460799}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!114 &755460808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +952,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 0}
+  boxCollider: {fileID: 755460817}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!114 &755460809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,6 +972,8 @@ MonoBehaviour:
   - {fileID: 6954878069293284316}
   isPainted: 0
   anim: {fileID: 9122396430361824581}
+  boxCollider: {fileID: 755460797}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!65 &755460817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1048,6 +1087,8 @@ MonoBehaviour:
   - {fileID: 8613582466533756338}
   isPainted: 0
   anim: {fileID: 4417031889421899009}
+  boxCollider: {fileID: 863257909}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!1 &958259319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1203,8 @@ MonoBehaviour:
   - {fileID: 8753503398986789522}
   isPainted: 0
   anim: {fileID: 8204161347606096383}
+  boxCollider: {fileID: 1074995319}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!114 &1084662458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1179,6 +1222,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 8098801500585639900}
+  boxCollider: {fileID: 736507038}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!114 &1109169580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,6 +1241,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 0}
+  boxCollider: {fileID: 755460801}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!1 &1132473036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,6 +1322,8 @@ MonoBehaviour:
   cam: {fileID: 2133238972}
   listRoomPainted: []
   currentEvent: {fileID: 338778965}
+  upgradeSparklesParticle: {fileID: 8624549510480066995, guid: 9ff590c8fa9a24841947ad20a0d81cd7,
+    type: 3}
 --- !u!65 &1173388219
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1313,6 +1362,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 9190668036638256386}
+  boxCollider: {fileID: 1173388219}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!65 &1291175899
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1351,6 +1402,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 6121594210577897870}
+  boxCollider: {fileID: 1291175899}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!224 &1412953696 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1074321055091735992, guid: 3011edc843ec15e49874b8707a1709ff,
@@ -1395,6 +1448,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 5929031402390763659}
+  boxCollider: {fileID: 1783348786}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!65 &1920855812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1433,6 +1488,8 @@ MonoBehaviour:
   listObjects: []
   isPainted: 0
   anim: {fileID: 6313333966301332974}
+  boxCollider: {fileID: 1920855812}
+  posEffect: {x: 0, y: 0, z: 0}
 --- !u!1 &1932072869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,3 +3641,4 @@ SceneRoots:
   - {fileID: 497948144}
   - {fileID: 2079205752}
   - {fileID: 1132473037}
+  - {fileID: 463561638}

@@ -19,11 +19,15 @@ public class LogicSetupRoom : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] List<ListObjetRoomPainted> listRoomPainted;
     [SerializeField] EventSystem currentEvent;
+    [SerializeField] private ParticleSystem upgradeSparklesParticle;
+
+    public CustomPool<ParticleSystem> upgradeSparklesParticleePool;
 
 
     private void Start()
     {
         Application.targetFrameRate = 60;
+        upgradeSparklesParticleePool = new CustomPool<ParticleSystem>(upgradeSparklesParticle, 2, transform, false);
 
         SaveGame.CanShow = false;
         listRoomPainted = SaveGame.ListRoomPainted.listRoomPainted;
@@ -40,6 +44,7 @@ public class LogicSetupRoom : MonoBehaviour
                     int idObject = listRoomPainted[i].listObjectPainted[j].idObject;
                     int currentSprite = listRoomPainted[i].listObjectPainted[j].currentSprite;
                     bool isPainted = listRoomPainted[i].listObjectPainted[j].isPainted;
+                    bool isWatchAds = listRoomPainted[i].listObjectPainted[j].isWatchAds;
 
                     Debug.Log("idObject: " + idObject + "___ " + " currentSprite: " + currentSprite + "___ " + "isPainted: " + isPainted);
 
@@ -53,8 +58,9 @@ public class LogicSetupRoom : MonoBehaviour
 
                             listRoomObject[k].gameObject.SetActive(true);
                             listRoomObject[k].isPainted = isPainted;
+                            listRoomObject[k].isWatchAds = isWatchAds;
                             listRoomObject[k].SetUpMaterial(currentSprite + GameConfig.ROW_COUNT * idObject);
-                            listRoomObject[k].gameObject.layer = 11;
+                            if (listRoomObject[k].isPainted) listRoomObject[k].gameObject.layer = 11;
                         }
                     }
                 }
@@ -72,14 +78,13 @@ public class LogicSetupRoom : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 500f, layerRoom) && SaveGame.CanShow/* && !IsPointerOverUIObject()*/)
         {
             RoomObject objRoom = hit.collider.GetComponent<RoomObject>();
-            if (SaveGame.CurrentObject != objRoom.id) return;
+            Debug.Log(objRoom.name + " __ " + objRoom.isPainted + " __ " + SaveGame.CurrentObject);
+
+            if (SaveGame.CurrentObject != objRoom.id && objRoom.isPainted) return;
 
             Debug.Log(objRoom.name);
 
-            if (!objRoom.isPainted)
-            {
-                PopupSetupRoom.Show(SaveGame.CurrentRoom, objRoom.id);
-            }
+            PopupSetupRoom.Show(SaveGame.CurrentRoom, objRoom.id, objRoom.isWatchAds);
         }
     }
     void OnDrawGizmos()
