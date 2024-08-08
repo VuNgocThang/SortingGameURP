@@ -52,7 +52,11 @@ namespace ThangVN
             {
                 PopupUnlockColor.Show((int)NewColorEnum.ColorOrange);
             }
-
+            else if (indexCurrentLevel == 0)
+            {
+                LogicGame.Instance.isPauseGame = false;
+                LogicGame.Instance.InitTutorial();
+            }
             else
             {
                 LogicGame.Instance.isPauseGame = false;

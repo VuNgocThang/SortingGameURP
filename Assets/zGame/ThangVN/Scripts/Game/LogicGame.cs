@@ -5,10 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using Utilities.Common;
-using static UnityEngine.Rendering.VolumeComponent;
 using Color = UnityEngine.Color;
 public enum GameMode
 {
@@ -83,6 +81,8 @@ public class LogicGame : MonoBehaviour
     public bool isUsingHammer;
     public bool isUsingHand;
     public Hammer hammer;
+    [SerializeField] Canvas canvasTutorial;
+    public Tutorial tutorial;
 
     int countToMove = 0;
     int countSpawnSpecial = 0;
@@ -130,6 +130,13 @@ public class LogicGame : MonoBehaviour
         Application.targetFrameRate = 60;
 
         ResetPosSpawn();
+
+    }
+
+    public void InitTutorial()
+    {
+        canvasTutorial.enabled = true;
+        tutorial.Init(slot_2, cam);
     }
 
     void ResetPosSpawn()
@@ -174,8 +181,6 @@ public class LogicGame : MonoBehaviour
         }
         DataLevel dataLevel = DataLevel.GetData(SaveGame.Level + 1);
         countDiffMax = dataLevel.CountDiff;
-
-        Debug.Log(dataLevel.ID + " Level ");
     }
 
     void LoadLevelChallenges()
@@ -370,6 +375,7 @@ public class LogicGame : MonoBehaviour
             homeInGame.UiEffect.SetActive(true);
             homeInGame.UiEffect2.SetActive(true);
 
+            tutorial.InitHandArrow(ListArrowPlate[11].transform, cam);
             //homeInGame.UiEffect.Play();
 
             for (int i = 0; i < ListArrowPlate.Count; i++)
@@ -583,8 +589,9 @@ public class LogicGame : MonoBehaviour
 
                     if (holder != null)
                     {
-
                         SetColor(arrowPlate, holder);
+
+                        if (!SaveGame.IsDoneTutorial) canvasTutorial.enabled = false;
 
                         if (previousHolder != null)
                         {
@@ -996,7 +1003,7 @@ public class LogicGame : MonoBehaviour
             }
         }
     }
-    void CheckClear()
+    public void CheckClear()
     {
         foreach (ColorPlate colorPlate in ListColorPlate)
         {
@@ -1006,10 +1013,18 @@ public class LogicGame : MonoBehaviour
 
             if (count >= RULE_COMPLETE)
             {
-                colorPlate.InitClear(true);
-                colorPlate.DecreaseCountFrozenNearBy();
-                colorPlate.InitValue();
-                //ManagerEvent.RaiseEvent(EventCMD.EVENT_POINT, count);
+                if (!SaveGame.IsDoneTutorial)
+                {
+                    canvasTutorial.enabled = true;
+                    tutorial.PlayProgressTut(2);
+                    isPauseGame = true;
+                }
+                if (!isPauseGame)
+                {
+                    colorPlate.InitClear(true);
+                    colorPlate.DecreaseCountFrozenNearBy();
+                    colorPlate.InitValue();
+                }
             }
         }
         Debug.Log("point: " + point);

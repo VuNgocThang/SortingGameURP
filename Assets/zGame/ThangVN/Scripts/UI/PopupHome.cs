@@ -185,14 +185,6 @@ public class PopupHome : MonoBehaviour
         PopupEndChallenges.Show();
     }
 
-    IEnumerator OnClickSwitch()
-    {
-        canClick = false;
-        if (animBtnSwitch != null) animBtnSwitch.Play("Click");
-        yield return new WaitForSeconds(0.2f);
-        canClick = true;
-    }
-
     public IEnumerator PlayEffectSpecial()
     {
         imgSpecial.SetActive(true);
