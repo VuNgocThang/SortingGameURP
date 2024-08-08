@@ -5,7 +5,22 @@ using UnityEngine;
 
 public static class SaveGame
 {
-    public static int currentLevel = -1;
+    const string ISDONETUTORIAL = "ISDONETUTORIAL";
+    static int isDoneTutorial = -1;
+
+    public static bool IsDoneTutorial
+    {
+        set
+        {
+            ES3.Save(ISDONETUTORIAL, value ? 1 : 0);
+            isDoneTutorial = value ? 1 : 0;
+        }
+        get
+        {
+            if (isDoneTutorial == -1) isDoneTutorial = ES3.Load(ISDONETUTORIAL, 0);
+            return isDoneTutorial == 1;
+        }
+    }
 
     const string SOUND = "SOUND";
     static int sound = -1;

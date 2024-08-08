@@ -35,6 +35,11 @@ MonoBehaviour:
     - Coffee.UIParticle
     - Coffee.UIParticle.Editor
     - PPv2URPConverters
+    - spine-csharp
+    - spine-unity
+    - spine-unity-editor
+    - spine-unity-examples
+    - spine-unity-examples-editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

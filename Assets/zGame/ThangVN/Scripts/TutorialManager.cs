@@ -58,5 +58,6 @@ namespace ThangVN
                 LogicGame.Instance.isPauseGame = false;
             }
         }
+
     }
 }

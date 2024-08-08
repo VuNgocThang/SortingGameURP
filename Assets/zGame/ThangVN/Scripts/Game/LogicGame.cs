@@ -172,7 +172,7 @@ public class LogicGame : MonoBehaviour
         {
             LoadLevelNormal();
         }
-        DataLevel dataLevel = DataLevel.GetData(SaveGame.currentLevel + 1);
+        DataLevel dataLevel = DataLevel.GetData(SaveGame.Level + 1);
         countDiffMax = dataLevel.CountDiff;
 
         Debug.Log(dataLevel.ID + " Level ");
@@ -514,7 +514,6 @@ public class LogicGame : MonoBehaviour
         //{
         //    PopupEndChallenges.Show();
         //}
-        Debug.Log("savegame.hammer: " + SaveGame.Hammer);
     }
 
 
