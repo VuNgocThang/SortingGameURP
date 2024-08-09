@@ -24,7 +24,7 @@ public class Tutorial : MonoBehaviour
             for (int i = 0; i < listSteps.Count; i++)
             {
                 listSteps[i].SetActive(false);
-            }
+            }   
         });
     }
 

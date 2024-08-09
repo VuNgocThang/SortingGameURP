@@ -14,6 +14,8 @@ public class LogicSetupRoom : MonoBehaviour
     }
     public List<RoomObject> listRoomObject;
     public List<GameObject> listGameObject;
+    public List<Transform> listUpgrades;
+
     [SerializeField] LayerMask layerRoom;
     [SerializeField] LayerMask layerNoRaycast;
     [SerializeField] Camera cam;
@@ -121,5 +123,11 @@ public class LogicSetupRoom : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         currentEvent.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
+    }
+
+    public void PlayParticle(int index)
+    {
+        Debug.Log("Play particle");
+        upgradeSparklesParticleePool.Spawn(listUpgrades[index].position, true);
     }
 }

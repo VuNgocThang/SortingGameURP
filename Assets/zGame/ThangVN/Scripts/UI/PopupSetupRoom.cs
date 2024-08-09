@@ -58,12 +58,15 @@ public class PopupSetupRoom : Popup
                     //Todo Chua co room thi ad data room moi vao
                     AddNewRoom();
 
+                    // todo particle
+                    Debug.Log("wtf");
+                    LogicSetupRoom.instance.PlayParticle(SaveGame.CurrentObject);
 
                     for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
                     {
                         if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
                         {
-                            LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
+                            //LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
                             LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
                         }
                     }
@@ -91,7 +94,7 @@ public class PopupSetupRoom : Popup
                 {
                     if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
                     {
-                        LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
+                        //LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
                         LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
                     }
                 }
