@@ -313,6 +313,8 @@ public class PopupHome : MonoBehaviour
                nScoreChallenges.SetActive(true);
                nChallenges.SetActive(false);
                LogicGame.Instance.isPauseGame = false;
+               ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
+
            });
 
     }

@@ -188,6 +188,14 @@ public class LogicGame : MonoBehaviour
 
     void LoadLevelChallenges()
     {
+        for (int i = 0; i < colorPlateData.listSpecialData.Count; i++)
+        {
+            int index = colorPlateData.listSpecialData[i].Row * cols + colorPlateData.listSpecialData[i].Col;
+
+            ListColorPlate[index].status = (Status)colorPlateData.listSpecialData[i].type;
+            ListColorPlate[index].logicVisual.SetSpecialSquare(ListColorPlate[index].status);
+        }
+
         for (int i = 0; i < colorPlateData.listArrowData.Count; i++)
         {
             int index = colorPlateData.listArrowData[i].Row * cols + colorPlateData.listArrowData[i].Col;
@@ -240,6 +248,7 @@ public class LogicGame : MonoBehaviour
 
             if (ListColorPlate[index].status == Status.Ads)
             {
+                ListColorPlate[index].logicVisual.SetAds();
             }
         }
 
@@ -746,8 +755,10 @@ public class LogicGame : MonoBehaviour
                 isSequenceActive = false; 
             });
         }
+
         //ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
         //StartCoroutine(WaitForInitNextPlateSpawn(startColorPlate));
+
     }
     //IEnumerator WaitForInitNextPlateSpawn(ColorPlate colorPlate)
     //{
