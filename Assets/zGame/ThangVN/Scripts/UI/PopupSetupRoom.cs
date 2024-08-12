@@ -55,18 +55,59 @@ public class PopupSetupRoom : Popup
                 }
                 else
                 {
-                    //Todo Chua co room thi ad data room moi vao
-                    AddNewRoom();
 
-                    // todo particle
-                    Debug.Log("wtf");
-                    LogicSetupRoom.instance.PlayParticle(SaveGame.CurrentObject);
+                    if (!GameConfig.EnoughPigment)
+                    {
+                        PopupGoToLevel.Show();
+                    }
+                    else
+                    {
+                        //Todo Chua co room thi ad data room moi vao
+                        AddNewRoom();
+
+                        // todo particle
+                        Debug.Log("wtf");
+                        LogicSetupRoom.instance.PlayParticle(SaveGame.CurrentObject);
+
+                        for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
+                        {
+                            if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
+                            {
+                                LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
+                            }
+                        }
+
+                        if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
+                        {
+                            if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;
+                            else SaveGame.CurrentObject++;
+
+                            if (LogicSetupRoom.instance.listGameObject.Count < SaveGame.CurrentObject - 1)
+                            {
+                                if (LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject] != null)
+                                    LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
+                            }
+                        }
+                        Hide();
+                    }
+                   
+                }
+            }
+            else
+            {
+                if (!GameConfig.EnoughPigment)
+                {
+                    PopupGoToLevel.Show();
+                }
+                else
+                {
+                    //todo lam gi khi da co room
+                    UpdateExistedRoom();
 
                     for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
                     {
                         if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
                         {
-                            //LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
                             LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
                         }
                     }
@@ -84,33 +125,6 @@ public class PopupSetupRoom : Popup
                     }
                     Hide();
                 }
-            }
-            else
-            {
-                //todo lam gi khi da co room
-                UpdateExistedRoom();
-
-                for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
-                {
-                    if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
-                    {
-                        //LogicSetupRoom.instance.upgradeSparklesParticleePool.Spawn(LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].posEffect, true);
-                        LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
-                    }
-                }
-
-                if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
-                {
-                    if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;
-                    else SaveGame.CurrentObject++;
-
-                    if (LogicSetupRoom.instance.listGameObject.Count < SaveGame.CurrentObject - 1)
-                    {
-                        if (LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject] != null)
-                            LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
-                    }
-                }
-                Hide();
             }
         });
     }

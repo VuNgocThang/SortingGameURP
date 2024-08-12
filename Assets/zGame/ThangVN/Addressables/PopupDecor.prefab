@@ -146,6 +146,7 @@ MonoBehaviour:
   - {fileID: 4327756650570712562}
   - {fileID: 4149758957513372161}
   - {fileID: 2159309131508248905}
+  txtColorPlate: {fileID: 6530764854016589896}
 --- !u!1 &565766425908648852
 GameObject:
   m_ObjectHideFlags: 0

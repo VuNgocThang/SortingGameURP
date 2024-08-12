@@ -17,6 +17,7 @@ public class DataClaimedFreecoin
     public List<DataFreeCoin> listDataFreeCoin;
     //public List<int> listDataFreeCoin;
     public int currentIndex;
+    public bool isClaimed50;
 }
 
 [CreateAssetMenu(fileName = "FreeCoinData", menuName = "ScriptableObjects/FreeCoinData")]

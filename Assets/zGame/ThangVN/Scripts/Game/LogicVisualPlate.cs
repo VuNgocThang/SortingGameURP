@@ -18,6 +18,7 @@ public class LogicVisualPlate : MonoBehaviour
     public GameObject cannotPlace;
     public List<GameObject> listForzen;
     public GameObject existed;
+    public GameObject ads;
 
     //logic visual ingame
     public void PlayNormal(bool isArrow)
@@ -116,6 +117,9 @@ public class LogicVisualPlate : MonoBehaviour
             case Status.LockCoin:
                 SetLockCoin();
                 break;
+            case Status.Ads:
+                SetAds();
+                break;
             default:
                 return;
         }
@@ -187,6 +191,7 @@ public class LogicVisualPlate : MonoBehaviour
         }
 
         cannotPlace.SetActive(false);
+        ads.SetActive(false);
     }
     public void SetExistedPlate()
     {
@@ -240,5 +245,20 @@ public class LogicVisualPlate : MonoBehaviour
         {
             listForzen[i].SetActive(true);
         }
+    }
+
+    public void SetAds()
+    {
+        normal.SetActive(false);
+        arrow.SetActive(false);
+        cannotPlace.SetActive(false);
+        lockCoin.SetActive(false);
+
+        for (int i = 0; i < listForzen.Count; i++)
+        {
+            listForzen[i].SetActive(false);
+        }
+
+        ads.SetActive(true);
     }
 }

@@ -17,6 +17,7 @@ public class SoundData : ScriptableObject
     public AudioClip soundEat1;
     public AudioClip soundEat2;
     public AudioClip soundEat3;
+    public AudioClip soundCannotClick;
 
     public AudioClip musicInGame;
     public AudioClip musicBG;

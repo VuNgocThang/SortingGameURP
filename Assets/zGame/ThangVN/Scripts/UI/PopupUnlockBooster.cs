@@ -41,6 +41,7 @@ namespace ThangVN
         {
             base.Hide();
             LogicGame.Instance.isPauseGame = false;
+            ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
         }
     }
 }

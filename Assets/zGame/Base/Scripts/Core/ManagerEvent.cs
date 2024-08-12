@@ -72,7 +72,8 @@ namespace ntDev
         EVENT_SWITCH,
         EVENT_FREECOIN,
         EVENT_CHALLENGES,
-        EVENT_SELECT_ROOM
+        EVENT_SELECT_ROOM,
+        EVENT_SPAWN_PLATE
     }
 
     public static class ManagerEvent

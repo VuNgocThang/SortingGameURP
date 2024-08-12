@@ -24,5 +24,6 @@ MonoBehaviour:
   soundEat1: {fileID: 8300000, guid: d8f4990be653e3d419e980ca43665142, type: 3}
   soundEat2: {fileID: 8300000, guid: 0b77b5085c76b344b90dc208db47b3df, type: 3}
   soundEat3: {fileID: 8300000, guid: 012977c0deda4204687c45b62d8ab057, type: 3}
+  soundCannotClick: {fileID: 8300000, guid: 93d5a1292d6962945bb541d3eaf50372, type: 3}
   musicInGame: {fileID: 8300000, guid: def0380595ece28468e617bb4fedfbfe, type: 3}
   musicBG: {fileID: 8300000, guid: 60c7509afa8108f42b07c79e75bd2d06, type: 3}

@@ -26,11 +26,13 @@ public class PopupGoToLevel : Popup
 
     public override void Init()
     {
+        SaveGame.CanShow = false;
         base.Init();
     }
 
     public override void Hide()
     {
         base.Hide();
+        SaveGame.CanShow = true;
     }
 }

@@ -42,6 +42,8 @@ public static class GameConfig
 
     public static int COIN_REFRESH = 200;
 
+    public static int PIGMENT_UNLOCK = 200;
+
     public static int ROW_COUNT = 5;
 
     //public static Vector3 OFFSET_HAMMER = new Vector3(-1.84f, 0, -3.1f);
@@ -71,6 +73,14 @@ public static class GameConfig
         get
         {
             return SaveGame.Coin >= COIN_REFRESH;
+        }
+    }
+
+    public static bool EnoughPigment
+    {
+        get
+        {
+            return SaveGame.Pigment >= PIGMENT_UNLOCK;
         }
     }
 

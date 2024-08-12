@@ -18,6 +18,7 @@ public class ToolSelectLevel : MonoBehaviour
         Debug.Log(inputField.text);
         ManagerEvent.ClearEvent();
         SaveGame.Level = int.Parse(inputField.text) - 1;
+        SaveGame.IsDoneTutorial = true;
         SceneManager.LoadScene("SceneGame");
     }
 }

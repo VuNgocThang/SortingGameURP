@@ -1,3 +1,4 @@
+using ntDev;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -52,14 +53,16 @@ namespace ThangVN
             {
                 PopupUnlockColor.Show((int)NewColorEnum.ColorOrange);
             }
-            else if (indexCurrentLevel == 0)
+            else if (indexCurrentLevel == 0 && !SaveGame.IsDoneTutorial)
             {
                 LogicGame.Instance.isPauseGame = false;
+                ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
                 LogicGame.Instance.InitTutorial();
             }
             else
             {
                 LogicGame.Instance.isPauseGame = false;
+                ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
             }
         }
 

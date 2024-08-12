@@ -1222,7 +1222,7 @@ MonoBehaviour:
     gold: 0
     pigment: 0
   listPlates: []
-  level: 18
+  level: 22
   rows: 6
   cols: 6
   colorPlatePrefab: {fileID: 2928662533404572090, guid: fed8118a6cc0b55479823c43919c8d4d,

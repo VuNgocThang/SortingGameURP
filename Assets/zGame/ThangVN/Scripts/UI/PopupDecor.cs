@@ -2,6 +2,7 @@ using ntDev;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class PopupDecor : Popup
     [SerializeField] EasyButton btnBack, btnGallery, btnPlusColorPlate;
     [SerializeField] RectTransform select;
     [SerializeField] List<GameObject> listSelect;
+    [SerializeField] TextMeshProUGUI txtColorPlate;
 
     private void Awake()
     {
@@ -34,6 +36,7 @@ public class PopupDecor : Popup
     {
         base.Init();
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = false;
+        txtColorPlate.text = SaveGame.Pigment.ToString();
 
         for (int i = 0; i < listSelect.Count; i++)
         {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour
 {
     public EasyButton btnContinue;
+    public GameObject imgContinue;
     public GameObject imgCoverTut;
     public List<GameObject> listSteps;
     public int currentIndex;
@@ -16,15 +17,11 @@ public class Tutorial : MonoBehaviour
     {
         btnContinue.OnClick(() =>
         {
-            imgCoverTut.SetActive(false);
-            listSteps.Clear();
+            imgContinue.SetActive(false);
             LogicGame.Instance.isPauseGame = false;
             SaveGame.IsDoneTutorial = true;
             LogicGame.Instance.CheckClear();
-            for (int i = 0; i < listSteps.Count; i++)
-            {
-                listSteps[i].SetActive(false);
-            }   
+            LogicGame.Instance.canvasTutorial.enabled = false;
         });
     }
 
@@ -62,7 +59,7 @@ public class Tutorial : MonoBehaviour
     {
         if (index == 2)
         {
-            imgCoverTut.SetActive(true);
+            imgContinue.SetActive(true);
             btnContinue.enabled = true;
             hand.gameObject.SetActive(false);
         }

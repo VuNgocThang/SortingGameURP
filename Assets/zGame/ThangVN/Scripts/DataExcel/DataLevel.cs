@@ -30,7 +30,7 @@ public class DataLevel
         List<DataLevel> list = GetListData();
         foreach (DataLevel d in list)
         {
-            if (d.ID == id)
+            if (d.ID == id - 1)
                 return d;
         }
         return null;

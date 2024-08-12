@@ -35,7 +35,8 @@ public class SetMapManager : MonoBehaviour
         SelectPlateArrowUp,
         SelectPlateArrowDown,
         ClearPlate,
-        DeletePlate
+        DeletePlate,
+        EditAds
     }
     public EditMode editMode;
     public LayerMask layerMask;
@@ -422,6 +423,53 @@ public class SetMapManager : MonoBehaviour
 
                     c.status = Status.Frozen;
                     c.logicVisual.SetFrozen();
+
+                    special.Row = c.Row;
+                    special.Col = c.Col;
+                    special.type = (int)c.status;
+
+                    for (int i = 0; i < colorPlateData.listSpecialData.Count; i++)
+                    {
+                        if (colorPlateData.listSpecialData[i].Row == c.Row && colorPlateData.listSpecialData[i].Col == c.Col)
+                        {
+                            colorPlateData.listSpecialData.Remove(colorPlateData.listSpecialData[i]);
+                        };
+                    }
+
+                    for (int i = 0; i < colorPlateData.listEmptyData.Count; i++)
+                    {
+                        if (colorPlateData.listEmptyData[i].Row == c.Row && colorPlateData.listEmptyData[i].Col == c.Col)
+                        {
+                            colorPlateData.listEmptyData.Remove(colorPlateData.listEmptyData[i]);
+                        }
+                    }
+
+                    colorPlateData.listSpecialData.Add(special);
+
+                }
+                else
+                {
+                    c.status = Status.None;
+                    c.logicVisual.Refresh();
+
+                    for (int i = colorPlateData.listSpecialData.Count - 1; i >= 0; i--)
+                    {
+                        if (colorPlateData.listSpecialData[i].Row == c.Row && colorPlateData.listSpecialData[i].Col == c.Col)
+                        {
+                            colorPlateData.listSpecialData.RemoveAt(i);
+                        }
+                    }
+                }
+
+                break;
+
+            case EditMode.EditAds:
+                if (c.status != Status.Ads)
+                {
+                    SpecialData special = new SpecialData();
+
+                    c.status = Status.Ads;
+                    c.logicVisual.SetAds();
 
                     special.Row = c.Row;
                     special.Col = c.Col;

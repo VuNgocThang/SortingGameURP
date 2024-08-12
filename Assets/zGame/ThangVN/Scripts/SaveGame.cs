@@ -33,7 +33,7 @@ public static class SaveGame
         }
         get
         {
-            if (sound == -1) sound = ES3.Load(SOUND, 0);
+            if (sound == -1) sound = ES3.Load(SOUND, 1);
             return sound == 1;
         }
     }
@@ -50,7 +50,7 @@ public static class SaveGame
         }
         get
         {
-            if (music == -1) music = ES3.Load(MUSIC, 0);
+            if (music == -1) music = ES3.Load(MUSIC, 1);
             return music == 1;
         }
     }
@@ -102,7 +102,7 @@ public static class SaveGame
         }
         get
         {
-            if (hammer == -1) hammer = ES3.Load(HAMMER, 0);
+            if (hammer == -1) hammer = ES3.Load(HAMMER, 2);
             return hammer;
         }
     }
@@ -120,7 +120,7 @@ public static class SaveGame
         }
         get
         {
-            if (swap == -1) swap = ES3.Load(SWAP, 0);
+            if (swap == -1) swap = ES3.Load(SWAP, 2);
             return swap;
         }
     }
@@ -137,7 +137,7 @@ public static class SaveGame
         }
         get
         {
-            if (refresh == -1) refresh = ES3.Load(REFRESH, 0);
+            if (refresh == -1) refresh = ES3.Load(REFRESH, 2);
             return refresh;
         }
     }

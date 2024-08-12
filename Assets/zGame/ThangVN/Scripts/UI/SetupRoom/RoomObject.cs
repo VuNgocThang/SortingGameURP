@@ -28,7 +28,7 @@ public class RoomObject : MonoBehaviour
         //GameConfig.OFFSET_NROOM - boxCollider.center;
         Debug.Log(boxCollider.center + "___" + posEffect);
 
-        if (anim != null && !isPainted) anim.Play("Show");
+        if (anim != null && !isPainted) anim.Play("Show", -1, 0);
 
         foreach (Material mat in mesh.materials)
         {

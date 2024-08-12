@@ -58,19 +58,22 @@ public class ItemFreeCoin : MonoBehaviour
     {
         if (isClaimed) return;
 
-        // reward ads here
-        if (countCoin > 0)
+        if (index == SaveGame.DataFreeCoin.currentIndex)
         {
-            SaveGame.Coin += countCoin;
-            isClaimed = true;
-            Debug.Log($" claimed {countCoin}");
-            UpdateStateClaim();
-        }
-        else
-        {
-            isClaimed = true;
-            Debug.Log("claimed heart");
-            UpdateStateClaim();
+            // reward ads here
+            if (countCoin > 0)
+            {
+                SaveGame.Coin += countCoin;
+                isClaimed = true;
+                Debug.Log($" claimed {countCoin}");
+                UpdateStateClaim();
+            }
+            else
+            {
+                isClaimed = true;
+                Debug.Log("claimed heart");
+                UpdateStateClaim();
+            }
         }
     }
 

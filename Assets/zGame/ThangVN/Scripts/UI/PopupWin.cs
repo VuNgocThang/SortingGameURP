@@ -11,7 +11,6 @@ public class PopupWin : Popup
 {
     public EasyButton btnContinue, btnClaimX2, btnHome;
     public TextMeshProUGUI txtGoldReward, txtPigmentReward, txtGold, txtPigment;
-    public GameObject vfx;
     public static async void Show()
     {
         PopupWin pop = await ManagerPopup.ShowPopup<PopupWin>();
@@ -63,11 +62,11 @@ public class PopupWin : Popup
         SaveGame.Pigment += LogicGame.Instance.pigment;
     }
 
-    private void Update()
-    {
-        if (vfx != null)
-            vfx.transform.Rotate(new Vector3(0, 0, 1) * -20f * Time.deltaTime);
-    }
+    //private void Update()
+    //{
+    //    if (vfx != null)
+    //        vfx.transform.Rotate(new Vector3(0, 0, 1) * -20f * Time.deltaTime);
+    //}
 
     IEnumerator LoadScene(string sceneName)
     {

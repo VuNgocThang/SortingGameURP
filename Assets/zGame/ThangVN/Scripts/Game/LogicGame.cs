@@ -81,10 +81,9 @@ public class LogicGame : MonoBehaviour
     public bool isUsingHammer;
     public bool isUsingHand;
     public Hammer hammer;
-    [SerializeField] Canvas canvasTutorial;
+    [SerializeField] public Canvas canvasTutorial;
     public Tutorial tutorial;
 
-    int countToMove = 0;
     int countSpawnSpecial = 0;
     [SerializeField] bool isHadSpawnSpecial = false;
     LogicColor GetColorNew()
@@ -95,6 +94,7 @@ public class LogicGame : MonoBehaviour
     {
         Instance = this;
         ManagerEvent.RegEvent(EventCMD.EVENT_SWITCH, SwitchNextPlate);
+        ManagerEvent.RegEvent(EventCMD.EVENT_SPAWN_PLATE, InitPlateSpawn);
 
     }
 
@@ -103,7 +103,7 @@ public class LogicGame : MonoBehaviour
         Debug.Log("Load scene Game: " + SaveGame.Challenges);
         Debug.Log(SaveGame.Heart + " heart");
         Refresh();
-        InitPlateSpawn(false);
+        //InitPlateSpawn(false);
 
         LoadData();
     }
@@ -181,6 +181,9 @@ public class LogicGame : MonoBehaviour
         }
         DataLevel dataLevel = DataLevel.GetData(SaveGame.Level + 1);
         countDiffMax = dataLevel.CountDiff;
+        Debug.Log(SaveGame.Level + 1);
+        Debug.Log(dataLevel.ID);
+        Debug.Log("countDiffMax: " + countDiffMax);
     }
 
     void LoadLevelChallenges()
@@ -233,6 +236,10 @@ public class LogicGame : MonoBehaviour
                 ListColorPlate[index].txtPointUnlock.gameObject.SetActive(true);
                 ListColorPlate[index].pointToUnLock = colorPlateData.listSpecialData[i].pointUnlock;
                 ListColorPlate[index].txtPointUnlock.text = ListColorPlate[index].pointToUnLock.ToString();
+            }
+
+            if (ListColorPlate[index].status == Status.Ads)
+            {
             }
         }
 
@@ -309,15 +316,34 @@ public class LogicGame : MonoBehaviour
             sequence.AppendInterval(0.05f);
         }
     }
+    //foreach (LogicColor c in colorPlate.ListColor)
+    // {
+    //     c.transform.DOLocalJump(c.transform.localPosition, 2, 1, 0.3f);
+    // }
 
-    public void InitPlateSpawn(bool isShuffle = false)
+    public void InitPlateSpawn(object e)
     {
+        Sequence sequenceSpawn = DOTween.Sequence();
+
         for (int i = 0; i < listSpawnNew.Count; i++)
         {
-            if (listSpawnNew[i].ListValue.Count == 0 || isShuffle)
+            int index = i;
+
+            if (listSpawnNew[index].ListValue.Count == 0)
             {
-                listSpawnNew[i].Init(GetColorNew);
-                listSpawnNew[i].InitColor();
+                sequenceSpawn.AppendCallback(() =>
+                {
+                    ManagerAudio.PlaySound(ManagerAudio.Data.soundSwitch);
+                    listSpawnNew[index].Init(GetColorNew);
+                    listSpawnNew[index].InitColor();
+
+                    foreach (LogicColor c in listSpawnNew[index].ListColor)
+                    {
+                        c.transform.DOLocalJump(c.transform.localPosition, 2, 1, 0.3f);
+                    }
+                });
+
+                sequenceSpawn.AppendInterval(0.3f);
             }
         }
     }
@@ -621,6 +647,10 @@ public class LogicGame : MonoBehaviour
                         ManagerEvent.RaiseEvent(EventCMD.EVENT_COUNT, countMove);
                     }
                 }
+                else
+                {
+                    ManagerAudio.PlaySound(ManagerAudio.Data.soundCannotClick);
+                }
             }
 
 
@@ -632,6 +662,7 @@ public class LogicGame : MonoBehaviour
 
                 if (countMove > 0)
                 {
+                    ManagerAudio.PlaySound(ManagerAudio.Data.soundEasyButton);
                     SetColorIntoStartPlate(plateSpawn, listNextPlate[0]);
                 }
             }
@@ -655,6 +686,8 @@ public class LogicGame : MonoBehaviour
             }
         }
     }
+
+    private bool isSequenceActive = false;
 
     void SetColorIntoStartPlate(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
@@ -681,25 +714,9 @@ public class LogicGame : MonoBehaviour
             startColorPlate.ListColor.RemoveAt(startColorPlate.ListColor.Count - 1);
 
             timerMove = endColorPlate.InitValue(endColorPlate.transform, false, -1) / 10;
-
-            //if (endColorPlate.Col == startColorPlate.Col && endColorPlate.Row > startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 0) / 10;
-            //else if (endColorPlate.Col < startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 1) / 10;
-            //else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row) timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 2) / 10;
-            //else timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 3) / 10;
         }
 
-        //foreach (var c in endColorPlate.ListColor)
-        //{
-        //    c.transform.eulerAngles = Vector3.zero;
-        //}
-
         sq.AppendInterval(0.3f);
-
-        //sq.AppendCallback(() =>
-        //{
-        //    endColorPlate.PlayAnimScale();
-        //});
-
 
         if (endColorPlate.listTypes.Count >= 2)
         {
@@ -718,20 +735,32 @@ public class LogicGame : MonoBehaviour
         {
             //Debug.Log("Only 1 type");
         }
-        StartCoroutine(WaitForInitNextPlateSpawn(startColorPlate));
-    }
-    IEnumerator WaitForInitNextPlateSpawn(ColorPlate colorPlate)
-    {
-        yield return new WaitForSeconds(1f);
-        InitPlateSpawn(false);
-        //colorPlate.Init(GetColorNew);
-        //colorPlate.InitColor();
+        if (!isSequenceActive)
+        {
+            isSequenceActive = true; 
 
-        //foreach (LogicColor c in colorPlate.ListColor)
-        //{
-        //    c.transform.DOLocalJump(c.transform.localPosition, 2, 1, 0.3f);
-        //}
+            sq.AppendInterval(0.3f);
+            sq.AppendCallback(() =>
+            {
+                ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
+                isSequenceActive = false; 
+            });
+        }
+        //ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
+        //StartCoroutine(WaitForInitNextPlateSpawn(startColorPlate));
     }
+    //IEnumerator WaitForInitNextPlateSpawn(ColorPlate colorPlate)
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    //InitPlateSpawn(false);
+    //    colorPlate.Init(GetColorNew);
+    //    colorPlate.InitColor();
+
+    //    foreach (LogicColor c in colorPlate.ListColor)
+    //    {
+    //        c.transform.DOLocalJump(c.transform.localPosition, 2, 1, 0.3f);
+    //    }
+    //}
     void SetColor(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
         if (startColorPlate.ListValue.Count == 0)
@@ -1019,8 +1048,11 @@ public class LogicGame : MonoBehaviour
                     tutorial.PlayProgressTut(2);
                     isPauseGame = true;
                 }
+
                 if (!isPauseGame)
                 {
+                    timerRun += count * 0.05f;
+
                     colorPlate.InitClear(true);
                     colorPlate.DecreaseCountFrozenNearBy();
                     colorPlate.InitValue();
@@ -1106,11 +1138,11 @@ public class LogicGame : MonoBehaviour
             });
 
 
-            sequence.AppendInterval(0.08f);
-            timerRun += 0.13f;
+            sequence.AppendInterval(0.1f);
+            timerRun += 0.15f;
         }
-        sequence.Play();
 
+        sequence.Play();
         if (listSteps.Count > 0) listSteps.RemoveAt(listSteps.Count - 1);
     }
     void CheckLose()

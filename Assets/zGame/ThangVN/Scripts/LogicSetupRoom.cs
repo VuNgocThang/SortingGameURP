@@ -1,3 +1,4 @@
+using BaseGame;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -84,6 +85,7 @@ public class LogicSetupRoom : MonoBehaviour
 
             if (SaveGame.CurrentObject != objRoom.id && objRoom.isPainted) return;
 
+            ManagerAudio.PlaySound(ManagerAudio.Data.soundEasyButton);
             Debug.Log(objRoom.name);
 
             PopupSetupRoom.Show(SaveGame.CurrentRoom, objRoom.id, objRoom.isWatchAds);
