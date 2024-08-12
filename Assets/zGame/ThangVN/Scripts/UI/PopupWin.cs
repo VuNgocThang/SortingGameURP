@@ -11,6 +11,7 @@ public class PopupWin : Popup
 {
     public EasyButton btnContinue, btnClaimX2, btnHome;
     public TextMeshProUGUI txtGoldReward, txtPigmentReward, txtGold, txtPigment;
+    public Transform vfx;
     public static async void Show()
     {
         PopupWin pop = await ManagerPopup.ShowPopup<PopupWin>();
@@ -22,14 +23,12 @@ public class PopupWin : Popup
         btnContinue.OnClick(() =>
         {
             ManagerEvent.ClearEvent();
-            //ManagerPopup.HidePopup<PopupWin>();
             StartCoroutine(LoadScene("SceneGame"));
         });
 
         btnHome.OnClick(() =>
         {
             ManagerEvent.ClearEvent();
-            //ManagerPopup.HidePopup<PopupWin>();
             StartCoroutine(LoadScene("SceneHome"));
 
         });
@@ -37,7 +36,6 @@ public class PopupWin : Popup
         btnClaimX2.OnClick(() =>
         {
             ManagerEvent.ClearEvent();
-            //ManagerPopup.HidePopup<PopupWin>();
             StartCoroutine(LoadScene("SceneGame"));
 
         });
@@ -62,15 +60,15 @@ public class PopupWin : Popup
         SaveGame.Pigment += LogicGame.Instance.pigment;
     }
 
-    //private void Update()
-    //{
-    //    if (vfx != null)
-    //        vfx.transform.Rotate(new Vector3(0, 0, 1) * -20f * Time.deltaTime);
-    //}
+    private void Update()
+    {
+        if (vfx != null)
+            vfx.Rotate(new Vector3(0, 0, 1) * -20f * Time.deltaTime);
+    }
 
     IEnumerator LoadScene(string sceneName)
     {
-        base.Hide();
+        //base.Hide();
         yield return null;
         SceneManager.LoadScene(sceneName);
     }

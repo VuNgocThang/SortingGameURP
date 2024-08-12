@@ -11,7 +11,8 @@ using Color = UnityEngine.Color;
 public enum GameMode
 {
     Edit,
-    Play
+    Play,
+    EditGame
 }
 
 public class LogicGame : MonoBehaviour
@@ -555,6 +556,23 @@ public class LogicGame : MonoBehaviour
         //{
         //    PopupEndChallenges.Show();
         //}
+
+        if (gameMode == GameMode.EditGame)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray rayTest = cam.ScreenPointToRay(Input.mousePosition); ;
+                if (Physics.Raycast(rayTest, out var plate, 100f, layerArrow))
+                {
+                    ColorPlate plateSelect = plate.collider.GetComponent<ColorPlate>();
+
+                    plateSelect.Init(GetColorNew);
+                    plateSelect.InitColor();
+
+                    CheckLose();
+                }
+            }
+        }
     }
 
 
@@ -746,13 +764,13 @@ public class LogicGame : MonoBehaviour
         }
         if (!isSequenceActive)
         {
-            isSequenceActive = true; 
+            isSequenceActive = true;
 
             sq.AppendInterval(0.3f);
             sq.AppendCallback(() =>
             {
                 ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
-                isSequenceActive = false; 
+                isSequenceActive = false;
             });
         }
 
@@ -1226,6 +1244,43 @@ public class LogicGame : MonoBehaviour
     public bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
         return ((layerMask.value & (1 << obj.layer)) > 0);
+    }
+
+    public void ReviveGame()
+    {
+        StartCoroutine(ClearSomeArrows());
+    }
+
+    IEnumerator ClearSomeArrows()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (ListArrowPlate.Count >= 4)
+        {
+            List<ColorPlate> newListRevive = new List<ColorPlate>();
+            while (newListRevive.Count < 3)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, ListArrowPlate.Count);
+
+                if (!newListRevive.Contains(ListArrowPlate[randomIndex]))
+                {
+                    Debug.Log("randomIndex: " + randomIndex);
+                    newListRevive.Add(ListArrowPlate[randomIndex]);
+                }
+            }
+
+            for (int i = 0; i < newListRevive.Count; i++)
+            {
+                newListRevive[i].ClearAll();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < ListArrowPlate.Count; i++)
+            {
+                ListArrowPlate[i].ClearAll();
+            }
+        }
     }
 
 }

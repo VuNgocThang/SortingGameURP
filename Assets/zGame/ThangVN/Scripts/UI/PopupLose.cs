@@ -25,7 +25,20 @@ public class PopupLose : Popup
     {
         btnRevive.OnClick(() =>
         {
-            LoadSceneGame();
+            if (SaveGame.Heart > 0)
+            {
+                PlayerPrefs.SetString(GameConfig.LAST_HEART_LOSS, DateTime.Now.ToString());
+                SaveGame.Heart--;
+                LogicGame.Instance.ReviveGame();
+                Hide();
+                LogicGame.Instance.isPauseGame = false;
+                LogicGame.Instance.isLose = false;
+                //LoadScene("SceneGame");
+            }
+            else
+            {
+                LoadScene("SceneHome");
+            }
         });
 
         btnRetry.OnClick(() =>
@@ -75,7 +88,7 @@ public class PopupLose : Popup
         base.Hide();
     }
 
-    void LoadSceneGame()
+    void LoadScene(string strScene)
     {
         transform.localScale = Vector3.one;
 
@@ -83,7 +96,7 @@ public class PopupLose : Popup
         {
             gameObject.SetActive(false);
             ManagerEvent.ClearEvent();
-            SceneManager.LoadScene("SceneGame");
+            SceneManager.LoadScene(strScene);
         });
     }
 

@@ -36,5 +36,7 @@ public class PopupUnlockColor : Popup
     {
         base.Hide();
         LogicGame.Instance.isPauseGame = false;
+        ManagerEvent.RaiseEvent(EventCMD.EVENT_SPAWN_PLATE);
+
     }
 }

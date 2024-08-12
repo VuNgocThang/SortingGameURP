@@ -436,4 +436,21 @@ public static class SaveGame
             return currentObject;
         }
     }
+
+    const string FIRSTDECOR = "FIRSTDECOR";
+    static int firstDecor = -1;
+
+    public static bool FirstDecor
+    {
+        set
+        {
+            ES3.Save(FIRSTDECOR, value ? 1 : 0);
+            firstDecor = value ? 1 : 0;
+        }
+        get
+        {
+            if (firstDecor == -1) firstDecor = ES3.Load(FIRSTDECOR, 1);
+            return firstDecor == 1;
+        }
+    }
 }

@@ -1279,7 +1279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2320100351766596880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2651,7 +2651,7 @@ MonoBehaviour:
   txtPigmentReward: {fileID: 964231934155004772}
   txtGold: {fileID: 3597285103502577732}
   txtPigment: {fileID: 8691068162319679859}
-  vfx: {fileID: 5168868616672214050}
+  vfx: {fileID: 2320100351766596880}
 --- !u!1001 &3242689708124842846
 PrefabInstance:
   m_ObjectHideFlags: 0

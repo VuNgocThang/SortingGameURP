@@ -14,7 +14,7 @@ public class HomeUI : MonoBehaviour
     public TextMeshProUGUI txtCoin, txtHeart, txtCountdownHeart, txtColor;
     [SerializeField] int heart;
     [SerializeField] float countdownTimer;
-    public GameObject nTop, nBot;
+    public GameObject nTop, nBot, iconNotice;
     public Animator animator;
 
     private void Awake()
@@ -51,6 +51,8 @@ public class HomeUI : MonoBehaviour
         else ManagerAudio.PauseMusic();
 
         InitHeart();
+
+        InitFirstDecor();
     }
 
     private void Update()
@@ -136,6 +138,15 @@ public class HomeUI : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(str);
 
+    }
+
+    void InitFirstDecor()
+    {
+        if (SaveGame.Pigment >= 300 && SaveGame.FirstDecor)
+        {
+            iconNotice.SetActive(true);
+            SaveGame.FirstDecor = false;
+        }
     }
 
     private void OnApplicationQuit()
