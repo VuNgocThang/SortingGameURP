@@ -173,7 +173,7 @@ public class SetMapManager : MonoBehaviour
     {
         colorPlate = new ColorPlate[rows, cols];
 
-        var offSetZ = ((float)rows / 2.0f) * cellSize;
+        var offSetZ = (((float)rows + 1) / 2.0f) * cellSize;
         var offsetX = (((float)cols - 1) / 2.0f) * cellSize;
 
         Vector3 startPosition = new Vector3(-offsetX, 0, -offSetZ);

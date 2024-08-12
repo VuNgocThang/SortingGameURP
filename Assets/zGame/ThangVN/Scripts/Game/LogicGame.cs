@@ -894,6 +894,13 @@ public class LogicGame : MonoBehaviour
 
                     RecursiveMerge();
                 }
+
+                if (!SaveGame.IsDoneTutorial)
+                {
+                    canvasTutorial.enabled = true;
+                    tutorial.PlayProgressTut(2);
+                    isPauseGame = true;
+                }
             });
         }
     }
@@ -1071,21 +1078,21 @@ public class LogicGame : MonoBehaviour
 
             if (count >= RULE_COMPLETE)
             {
-                if (!SaveGame.IsDoneTutorial)
-                {
-                    canvasTutorial.enabled = true;
-                    tutorial.PlayProgressTut(2);
-                    isPauseGame = true;
-                }
+                //if (!SaveGame.IsDoneTutorial)
+                //{
+                //    canvasTutorial.enabled = true;
+                //    tutorial.PlayProgressTut(2);
+                //    isPauseGame = true;
+                //}
 
-                if (!isPauseGame)
-                {
-                    timerRun += count * 0.05f;
+                //if (!isPauseGame)
+                //{
+                timerRun += count * 0.05f;
 
-                    colorPlate.InitClear(true);
-                    colorPlate.DecreaseCountFrozenNearBy();
-                    colorPlate.InitValue();
-                }
+                colorPlate.InitClear(true);
+                colorPlate.DecreaseCountFrozenNearBy();
+                colorPlate.InitValue();
+                //}
             }
         }
         Debug.Log("point: " + point);
@@ -1168,9 +1175,9 @@ public class LogicGame : MonoBehaviour
 
 
             sequence.AppendInterval(0.1f);
-            timerRun += 0.15f;
         }
 
+        timerRun += 0.1f * count + 1f;
         sequence.Play();
         if (listSteps.Count > 0) listSteps.RemoveAt(listSteps.Count - 1);
     }
