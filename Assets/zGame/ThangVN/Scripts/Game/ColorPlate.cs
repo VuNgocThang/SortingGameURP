@@ -300,38 +300,38 @@ public class ColorPlate : MonoBehaviour
         if (index == 0)
         {
             // same col, row end > row start
-            ListColor[i].transform.eulerAngles
-                                    = new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f);
+            ListColor[i].transform.localEulerAngles
+                                    = new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f);
 
-            ListColor[i].transform.DORotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f), 0.1f, RotateMode.Fast);
+            ListColor[i].transform.DOLocalRotate
+               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f), 0.1f, RotateMode.Fast);
         }
         else if (index == 1)
         {
             // same row, col end < col start
-            ListColor[i].transform.eulerAngles
-                                   = new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z);
+            ListColor[i].transform.localEulerAngles
+                                   = new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z);
 
-            ListColor[i].transform.DORotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.1f, RotateMode.Fast);
+            ListColor[i].transform.DOLocalRotate
+               (new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.1f, RotateMode.Fast);
         }
         else if (index == 2)
         {
             // same row, col end > col start
-            ListColor[i].transform.eulerAngles
-                                   = new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z);
+            ListColor[i].transform.localEulerAngles
+                                   = new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z);
 
-            ListColor[i].transform.DORotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.1f, RotateMode.Fast);
+            ListColor[i].transform.DOLocalRotate
+               (new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.1f, RotateMode.Fast);
         }
         else
         {
             // same col, row end < row start
-            ListColor[i].transform.eulerAngles
-                                    = new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f);
+            ListColor[i].transform.localEulerAngles
+                                    = new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f);
 
-            ListColor[i].transform.DORotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.eulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f), 0.1f, RotateMode.Fast);
+            ListColor[i].transform.DOLocalRotate
+               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f), 0.1f, RotateMode.Fast);
         }
     }
 
@@ -527,6 +527,8 @@ public class ColorPlate : MonoBehaviour
 
             if (ListConnect[i].countFrozen == 0) continue;
 
+            LogicGame.Instance.frostExplosionPool.Spawn(ListConnect[i].transform.position, true);
+
             ListConnect[i].countFrozen--;
 
             for (int j = 0; j < ListConnect[i].logicVisual.listForzen.Count; j++)
@@ -548,15 +550,38 @@ public class ColorPlate : MonoBehaviour
     {
         if (currenPoint >= pointToUnLock && isLocked)
         {
-            ParticleSystem unlock = LogicGame.Instance.unlockParticlePool.Spawn(this.transform.position, true);
 
-            txtPointUnlock.gameObject.SetActive(false);
-            logicVisual.SetVisualAfterUnlock(status);
-            pointToUnLock = 0;
-            isLocked = false;
-            if (status == Status.LockCoin)
-                status = Status.None;
+            StartCoroutine(UnlockPlate());
+            //ParticleSystem unlock = LogicGame.Instance.unlockParticlePool.Spawn(this.transform.position, true);
+
+            //txtPointUnlock.gameObject.SetActive(false);
+            //logicVisual.SetVisualAfterUnlock(status);
+            //pointToUnLock = 0;
+            //isLocked = false;
+            //if (status == Status.LockCoin)
+            //    status = Status.None;
         }
+    }
+
+    IEnumerator UnlockPlate()
+    {
+        txtPointUnlock.gameObject.SetActive(false);
+        pointToUnLock = 0;
+        isLocked = false;
+        var currentStatus = status;
+
+        if (status == Status.LockCoin)
+            status = Status.None;
+
+        if (logicVisual.animLockCoin != null)
+            logicVisual.animLockCoin.Play("Unlock");
+
+        yield return new WaitForSeconds(0.5f);
+
+        ParticleSystem unlock = LogicGame.Instance.unlockParticlePool.Spawn(this.transform.position, true);
+
+        txtPointUnlock.gameObject.SetActive(false);
+        logicVisual.SetVisualAfterUnlock(currentStatus);
     }
 
 }

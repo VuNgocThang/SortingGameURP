@@ -33,7 +33,12 @@ public class HomeUI : MonoBehaviour
 
         btnChallenges.OnClick(() => PopupEndless.Show());
 
-        btnDecor.OnClick(() => PopupDecor.Show());
+        btnDecor.OnClick(() =>
+        {
+            if (SaveGame.Level >= 3) SaveGame.FirstDecor = false;
+
+            PopupDecor.Show();
+        });
 
         btnPlay.OnClick(() =>
         {
@@ -157,6 +162,14 @@ public class HomeUI : MonoBehaviour
         {
             PlayerPrefs.SetString(GameConfig.LAST_HEART_LOSS, DateTime.Now.ToString());
             PlayerPrefs.Save();
+        }
+    }
+
+    public void DisableObject()
+    {
+        if (!SaveGame.FirstDecor && SaveGame.Level >= 3)
+        {
+            iconNotice.SetActive(false);
         }
     }
 }

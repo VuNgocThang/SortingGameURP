@@ -20,6 +20,10 @@ public class LogicVisualPlate : MonoBehaviour
     public GameObject existed;
     public GameObject ads;
 
+
+    public Animator animLockCoin;
+    public Animator animAds;
+
     //logic visual ingame
     public void PlayNormal(bool isArrow)
     {
@@ -177,6 +181,7 @@ public class LogicVisualPlate : MonoBehaviour
         }
 
         cannotPlace.SetActive(false);
+        ads.SetActive(false);
     }
 
     public void Refresh()
@@ -199,6 +204,8 @@ public class LogicVisualPlate : MonoBehaviour
         existed.SetActive(true);
         cannotPlace.SetActive(false);
         lockCoin.SetActive(false);
+        ads.SetActive(false);
+
         existed.transform.localPosition = new Vector3(0, 0.5f, 0);
     }
     public void SetPlateArrow()
@@ -213,6 +220,8 @@ public class LogicVisualPlate : MonoBehaviour
         arrow.SetActive(false);
         cannotPlace.SetActive(false);
         existed.SetActive(false);
+        ads.SetActive(false);
+
         for (int i = 0; i < listForzen.Count; i++)
         {
             listForzen[i].SetActive(false);
@@ -227,6 +236,8 @@ public class LogicVisualPlate : MonoBehaviour
         arrow.SetActive(false);
         lockCoin.SetActive(false);
         existed.SetActive(false);
+        ads.SetActive(false);
+
         for (int i = 0; i < listForzen.Count; i++)
         {
             listForzen[i].SetActive(false);
@@ -240,6 +251,7 @@ public class LogicVisualPlate : MonoBehaviour
         normal.SetActive(true);
         cannotPlace.SetActive(false);
         lockCoin.SetActive(false);
+        ads.SetActive(false);
 
         for (int i = 0; i < listForzen.Count; i++)
         {

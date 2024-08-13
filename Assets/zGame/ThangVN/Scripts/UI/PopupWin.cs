@@ -46,7 +46,7 @@ public class PopupWin : Popup
             InitPile();
             ReceiveReward();
             ManagerEvent.ClearEvent();
-            //StartCoroutine(LoadScene("SceneGame"));
+            StartCoroutine(LoadScene("SceneGame"));
         });
 
         btnHome.OnClick(() =>
@@ -56,7 +56,7 @@ public class PopupWin : Popup
             ReceiveReward();
 
             ManagerEvent.ClearEvent();
-            //StartCoroutine(LoadScene("SceneHome"));
+            StartCoroutine(LoadScene("SceneHome"));
 
         });
 
@@ -67,7 +67,7 @@ public class PopupWin : Popup
             ReceiveReward();
 
             ManagerEvent.ClearEvent();
-            //StartCoroutine(LoadScene("SceneGame"));
+            StartCoroutine(LoadScene("SceneGame"));
 
         });
     }
@@ -101,8 +101,7 @@ public class PopupWin : Popup
 
     IEnumerator LoadScene(string sceneName)
     {
-        //base.Hide();
-        yield return null;
+        yield return new WaitForSeconds(2.2f);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -160,10 +159,9 @@ public class PopupWin : Popup
                     .SetEase(Ease.InOutCirc);
             }
 
-            pileOfCoins[i].transform
-                .DORotate(Vector3.zero, 0.5f)
-                .SetDelay(delayCoin + 0.2f)
-                .SetEase(Ease.InOutCirc);
+            //pileOfCoins[i].transform
+            //    .SetDelay(delayCoin + 0.2f)
+            //    .SetEase(Ease.InOutCirc);
 
             pileOfCoins[i].transform
                 .DOScale(0f, 0.3f)
@@ -189,10 +187,10 @@ public class PopupWin : Popup
                     .SetEase(Ease.InOutCirc);
             }
 
-            pileOfPigment[i].transform
-                .DORotate(Vector3.zero, 0.5f)
-                .SetDelay(delayPigment + 0.2f)
-                .SetEase(Ease.InOutCirc);
+            //pileOfPigment[i].transform
+            //    .DORotate(Vector3.zero, 0.5f)
+            //    .SetDelay(delayPigment + 0.2f)
+            //    .SetEase(Ease.InOutCirc);
 
             pileOfPigment[i].transform
                 .DOScale(0f, 0.3f)
@@ -202,15 +200,18 @@ public class PopupWin : Popup
             delayPigment += 0.1f;
 
         }
-
-
+        UpdateMoney(SaveGame.Coin);
+        UpdatePigment(SaveGame.Pigment);
     }
-
-
 
     public void UpdateMoney(int targetMoney)
     {
         StartCoroutine(CountMoney(currentCoin, targetMoney, duration));
+    }
+
+    public void UpdatePigment(int targetPigment)
+    {
+        StartCoroutine(CountPigment(currentPigment, targetPigment, duration));
     }
 
     private IEnumerator CountMoney(int start, int end, float duration)
@@ -219,8 +220,9 @@ public class PopupWin : Popup
 
         while (elapsed < duration)
         {
+            Debug.Log(elapsed);
             elapsed += Time.deltaTime;
-            //currentCoin = Mathf.Lerp(start, end, elapsed / duration);
+            currentCoin = (int)Mathf.Lerp(start, end, elapsed / duration);
             txtGold.text = currentCoin.ToString();
             yield return null;
         }
@@ -228,4 +230,24 @@ public class PopupWin : Popup
         currentCoin = end;
         txtGold.text = currentCoin.ToString();
     }
+
+
+    private IEnumerator CountPigment(int start, int end, float duration)
+    {
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            Debug.Log(elapsed);
+            elapsed += Time.deltaTime;
+            currentPigment = (int)Mathf.Lerp(start, end, elapsed / duration);
+            txtPigment.text = currentPigment.ToString();
+            yield return null;
+        }
+
+        currentPigment = end;
+        txtPigment.text = currentPigment.ToString();
+    }
+
+
 }

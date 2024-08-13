@@ -64,6 +64,8 @@ MonoBehaviour:
   - {fileID: 5096938999657368763}
   existed: {fileID: 862975006515057210}
   ads: {fileID: 7685712057973632500}
+  animLockCoin: {fileID: 2112039493048971327}
+  animAds: {fileID: 4066285296345909989}
 --- !u!1 &6829232947172482488
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class PopupHome : MonoBehaviour
     public TextMeshProUGUI txtPoint, txtLevel, txtCount, txtCurrentScore, txtBestScore, txtTargetPigment, txtLevelInTarget;
     public Image imgFill;
     [SerializeField] Animator animBtnSwitch;
-    [SerializeField] GameObject imgSpecial, top, bot;
+    [SerializeField] GameObject imgSpecial, top, bot, nSpawn;
     [SerializeField] GameObject itemObj, nLevel, nBar, nScoreChallenges, nTargetPigment, nChallenges;
 
     [SerializeField] Image iconItem, imgTextName;
@@ -38,8 +38,8 @@ public class PopupHome : MonoBehaviour
     {
         btnSetting.OnClick(() => PopupSetting.Show());
 
-        if (!handDrag.isDrag)
-            btnCloseItem.OnClick(ExitUsingItem);
+
+        btnCloseItem.OnClick(ExitUsingItem);
 
         btnHammer.Init();
         btnSwap.Init();
@@ -203,6 +203,7 @@ public class PopupHome : MonoBehaviour
         itemObj.SetActive(true);
         top.SetActive(false);
         bot.SetActive(false);
+        nSpawn.SetActive(false);
         LogicGame.Instance.isPauseGame = true;
 
         CameraChange.Ins.ChangeCameraUsingItem();
@@ -218,6 +219,7 @@ public class PopupHome : MonoBehaviour
         itemObj.SetActive(true);
         top.SetActive(false);
         bot.SetActive(false);
+        nSpawn.SetActive(false);
         LogicGame.Instance.isPauseGame = true;
 
         CameraChange.Ins.ChangeCameraUsingItem();
@@ -230,8 +232,9 @@ public class PopupHome : MonoBehaviour
 
     public void ExitUsingItem()
     {
-        handDrag.selectingPlate = null;
+        if (handDrag.isDrag) return;
 
+        handDrag.selectingPlate = null;
         StartCoroutine(Delay());
     }
 
@@ -246,6 +249,7 @@ public class PopupHome : MonoBehaviour
         itemObj.SetActive(false);
         top.SetActive(true);
         bot.SetActive(true);
+        nSpawn.SetActive(true);
         LogicGame.Instance.RecursiveMerge();
     }
 

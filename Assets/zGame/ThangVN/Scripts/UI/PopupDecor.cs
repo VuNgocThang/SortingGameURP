@@ -60,6 +60,7 @@ public class PopupDecor : Popup
     public void BackHome()
     {
         HomeUI.Instance.animator.Play("Show");
+        HomeUI.Instance.DisableObject();
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
 
         base.Hide();

@@ -155,7 +155,7 @@ public static class SaveGame
         }
         get
         {
-            if (coin == -1) coin = ES3.Load(COIN, 1000000);
+            if (coin == -1) coin = ES3.Load(COIN, 0);
             return coin;
         }
     }
@@ -173,7 +173,7 @@ public static class SaveGame
         }
         get
         {
-            if (pigment == -1) pigment = ES3.Load(PIGMENT, 555550);
+            if (pigment == -1) pigment = ES3.Load(PIGMENT, 0);
             return pigment;
         }
     }

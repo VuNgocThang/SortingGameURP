@@ -1,21 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TestController : MonoBehaviour
 {
     public EasyController easyController;
     public Transform nX;
-
-    //private void Update()
-    //{
-
-    //    Vector3 dv = easyController.dV;
-    //    if (dv != Vector3.zero)
-    //    {
-    //        nX.localEulerAngles += new Vector3(0, -dv.y, 0) * 10f * Time.deltaTime;
-    //    }
-    //}
+    public Camera cam;
+    public float speed = 50f;
 
     Vector3 initialPosition;
     Vector3 currentPosition;
@@ -59,6 +52,7 @@ public class TestController : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Moved)
             {
+                if (LogicGame.Instance.isUsingHammer || LogicGame.Instance.isUsingHand || LogicGame.Instance.isPauseGame || !SaveGame.IsDoneTutorial) return;
                 currentPosition = touch.position;
 
                 Vector2 initialVector = initialPosition - Camera.main.WorldToScreenPoint(transform.position);
@@ -70,13 +64,16 @@ public class TestController : MonoBehaviour
                 if (angle > 1)
                 {
                     Debug.Log("Clockwise rotation detected.");
-                    nX.localEulerAngles += new Vector3(0, -2f, 0);
+                    nX.localEulerAngles += new Vector3(0, 2f, 0);
+                    //cam.transform.RotateAround(transform.position, Vector3.up, speed * Time.deltaTime);
+                    //cam.transform.LookAt(transform);
                 }
                 else if (angle < -1)
                 {
                     Debug.Log("Counterclockwise rotation detected.");
-                    nX.localEulerAngles += new Vector3(0, +2f, 0);
-
+                    nX.localEulerAngles += new Vector3(0, -2f, 0);
+                    //cam.transform.RotateAround(transform.position, Vector3.down, speed * Time.deltaTime);
+                    //cam.transform.LookAt(transform);
                 }
 
                 initialPosition = currentPosition;

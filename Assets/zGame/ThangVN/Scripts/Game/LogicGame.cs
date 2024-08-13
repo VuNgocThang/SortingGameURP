@@ -39,6 +39,7 @@ public class LogicGame : MonoBehaviour
     [SerializeField] LayerMask layerArrow;
     [SerializeField] LayerMask layerPlateSpawn;
     [SerializeField] LayerMask layerUsingItem;
+    [SerializeField] LayerMask layerPlate;
     [SerializeField] List<LogicColor> listColors;
     [SerializeField] private ColorPlate colorRoot;
 
@@ -48,6 +49,7 @@ public class LogicGame : MonoBehaviour
     [SerializeField] private ParticleSystem specialParticle;
     [SerializeField] private ParticleSystem chargingParticle;
     [SerializeField] private ParticleSystem changeColorParticle;
+    [SerializeField] private ParticleSystem frostExplosion;
 
     public CustomPool<ParticleSystem> clickParticlePool;
     public CustomPool<ParticleSystem> eatParticlePool;
@@ -55,6 +57,7 @@ public class LogicGame : MonoBehaviour
     public CustomPool<ParticleSystem> specialParticlePool;
     public CustomPool<ParticleSystem> chargingParticlePool;
     public CustomPool<ParticleSystem> changeColorParticlePool;
+    public CustomPool<ParticleSystem> frostExplosionPool;
 
     public bool isMergeing;
     Tweener tweenerMove;
@@ -127,6 +130,7 @@ public class LogicGame : MonoBehaviour
         specialParticlePool = new CustomPool<ParticleSystem>(specialParticle, 2, transform, false);
         chargingParticlePool = new CustomPool<ParticleSystem>(chargingParticle, 2, transform, false);
         changeColorParticlePool = new CustomPool<ParticleSystem>(changeColorParticle, 2, transform, false);
+        frostExplosionPool = new CustomPool<ParticleSystem>(frostExplosion, 2, transform, false);
 
         Application.targetFrameRate = 60;
 
@@ -345,7 +349,7 @@ public class LogicGame : MonoBehaviour
             {
                 sequenceSpawn.AppendCallback(() =>
                 {
-                    ManagerAudio.PlaySound(ManagerAudio.Data.soundSwitch);
+                    //ManagerAudio.PlaySound(ManagerAudio.Data.soundSwitch);
                     listSpawnNew[index].Init(GetColorNew);
                     listSpawnNew[index].InitColor();
 
@@ -682,7 +686,6 @@ public class LogicGame : MonoBehaviour
                 }
             }
 
-
             // click from spawn to start
             if (Physics.Raycast(ray, out var hitPlate, 100f, layerPlateSpawn) && !isPauseGame)
             {
@@ -712,6 +715,18 @@ public class LogicGame : MonoBehaviour
                     plateSelect.Init(GetColorNew);
                     //homeInGame.ExitUsingItem();
                 }
+            }
+
+            if (Physics.Raycast(ray, out var hitPlateAds, 100f, layerPlate) && !isPauseGame && !isUsingHammer)
+            {
+                ColorPlate adsPlate = hitPlateAds.collider.GetComponent<ColorPlate>();
+
+                if (adsPlate.status != Status.Ads) return;
+
+                Debug.Log(" Watch Ads to Unlock AdsPlate");
+                adsPlate.status = Status.None;
+                adsPlate.logicVisual.Refresh();
+
             }
         }
     }

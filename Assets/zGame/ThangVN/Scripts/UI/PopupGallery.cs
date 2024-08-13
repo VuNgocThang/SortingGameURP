@@ -28,7 +28,7 @@ public class PopupGallery : Popup
         ManagerPopup.HidePopup<PopupDecor>();
         base.Init();
         btnPlusColorPlate.OnClick(() => PopupGoToLevel.Show());
-        countRoom = 3;
+        countRoom = 1;
         for (int i = 0; i < listRoom.Count; i++)
         {
             listRoom[i].gameObject.SetActive(false);

@@ -13,7 +13,8 @@ public class ParticlePool : MonoBehaviour
         Special,
         Charging,
         ChangeColor,
-        UpgradeSparkles
+        UpgradeSparkles,
+        FrostExplosion
     }
 
     public TypeParticle typeParticle;
@@ -53,6 +54,10 @@ public class ParticlePool : MonoBehaviour
         else if (typeParticle == TypeParticle.UpgradeSparkles)
         {
             LogicSetupRoom.instance.upgradeSparklesParticleePool.Release(particle);
+        }
+        else if (typeParticle == TypeParticle.FrostExplosion)
+        {
+            LogicGame.Instance.frostExplosionPool.Release(particle);
         }
     }
     void Start()
