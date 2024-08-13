@@ -740,7 +740,7 @@ public class LogicGame : MonoBehaviour
             startColorPlate.ListValue.RemoveAt(startColorPlate.ListValue.Count - 1);
             startColorPlate.ListColor.RemoveAt(startColorPlate.ListColor.Count - 1);
 
-            timerMove = endColorPlate.InitValue(endColorPlate.transform, false, -1) / 10;
+            endColorPlate.InitValue(endColorPlate.transform, false, -1);
         }
 
         sq.AppendInterval(0.3f);
@@ -1164,12 +1164,12 @@ public class LogicGame : MonoBehaviour
                     startColorPlate.ListColor.RemoveAt(startColorPlate.ListColor.Count - 1);
 
                     if (endColorPlate.Col == startColorPlate.Col && endColorPlate.Row > startColorPlate.Row)
-                        timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 0) / 10;
+                        endColorPlate.InitValue(endColorPlate.transform, false, 0);
                     else if (endColorPlate.Col < startColorPlate.Col && endColorPlate.Row == startColorPlate.Row)
-                        timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 1) / 10;
+                        endColorPlate.InitValue(endColorPlate.transform, false, 1);
                     else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row)
-                        timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 2) / 10;
-                    else timerMove = endColorPlate.InitValue(endColorPlate.transform, false, 3) / 10;
+                        endColorPlate.InitValue(endColorPlate.transform, false, 2);
+                    else endColorPlate.InitValue(endColorPlate.transform, false, 3);
                 }
             });
 

@@ -13,6 +13,7 @@ public class HandDrag : MonoBehaviour
     [SerializeField] LayerMask layerPlate;
     [SerializeField] LayerMask layerMove;
     [SerializeField] EventSystem currentEvent;
+    public bool isDrag;
 
     private void Update()
     {
@@ -87,6 +88,7 @@ public class HandDrag : MonoBehaviour
             ColorPlate clickedPlate = hitPlate.transform.GetComponent<ColorPlate>();
             //if (clickedPlate.ListValue.Count == 0) return;
             if (CheckCondition(clickedPlate)) return;
+            isDrag = true;
             selectingPlate = clickedPlate;
 
         }
@@ -104,7 +106,7 @@ public class HandDrag : MonoBehaviour
             {
                 ColorPlate colorPlate = hitPlateHolder.transform.GetComponent<ColorPlate>();
 
-                if (colorPlate == selectingPlate || colorPlate.status == Status.Frozen || colorPlate.isLocked)
+                if (colorPlate == selectingPlate || colorPlate.status == Status.Frozen || colorPlate.isLocked || colorPlate.status == Status.Ads)
                 {
                     for (int i = 0; i < selectingPlate.ListColor.Count; i++)
                     {
@@ -119,6 +121,7 @@ public class HandDrag : MonoBehaviour
                     LogicGame.Instance.SetColorUsingSwapItem(selectingPlate, colorPlate);
                     LogicGame.Instance.isUsingHand = false;
                     SaveGame.Swap--;
+                    isDrag = false;
                     LogicGame.Instance.homeInGame.ExitUsingItem();
                 }
 
@@ -146,6 +149,7 @@ public class HandDrag : MonoBehaviour
             }
         }
 
+        isDrag = false;
         selectingPlate = null;
     }
 

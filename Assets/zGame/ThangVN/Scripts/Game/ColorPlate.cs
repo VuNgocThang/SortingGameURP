@@ -247,9 +247,8 @@ public class ColorPlate : MonoBehaviour
 
     public AnimationCurve customCurve;
 
-    public float InitValue(Transform transform = null, bool isFirst = false, int index = -1)
+    public void InitValue(Transform transform = null, bool isFirst = false, int index = -1)
     {
-        float time = 0;
         for (int i = 0; i < ListValue.Count; ++i)
         {
             if (i >= ListColor.Count)
@@ -286,7 +285,7 @@ public class ColorPlate : MonoBehaviour
                     //    ListColor[i].transform.eulerAngles = Vector3.zero;
                     //});
 
-                    time = 0.1f * i + 0.5f;
+
                 }
                 else
                 {
@@ -294,7 +293,6 @@ public class ColorPlate : MonoBehaviour
                 }
             }
         }
-        return time;
     }
 
     private void MoveDirection(int index, int i)

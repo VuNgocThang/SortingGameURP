@@ -229,7 +229,6 @@ public class PopupHome : MonoBehaviour
 
     public void ExitUsingItem()
     {
-        
         handDrag.selectingPlate = null;
 
         StartCoroutine(Delay());
