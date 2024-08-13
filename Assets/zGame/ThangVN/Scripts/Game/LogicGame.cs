@@ -284,6 +284,8 @@ public class LogicGame : MonoBehaviour
         for (int i = 0; i < colorPlateData.listEmptyData.Count; i++)
         {
             int index = colorPlateData.listEmptyData[i].Row * cols + colorPlateData.listEmptyData[i].Col;
+
+            ListColorPlate[index].status = (Status)colorPlateData.listEmptyData[i].type;
             ListColorPlate[index].logicVisual.DeletePlate();
         }
 
@@ -1177,7 +1179,7 @@ public class LogicGame : MonoBehaviour
             sequence.AppendInterval(0.1f);
         }
 
-        timerRun += 0.1f * count + 1f;
+        timerRun += 0.1f * count + 0.5f;
         sequence.Play();
         if (listSteps.Count > 0) listSteps.RemoveAt(listSteps.Count - 1);
     }

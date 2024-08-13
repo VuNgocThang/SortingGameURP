@@ -38,8 +38,9 @@ public class PopupHome : MonoBehaviour
     {
         btnSetting.OnClick(() => PopupSetting.Show());
 
+        if (!handDrag.isDrag)
+            btnCloseItem.OnClick(ExitUsingItem);
 
-        btnCloseItem.OnClick(ExitUsingItem);
         btnHammer.Init();
         btnSwap.Init();
         btnRefresh.Init();

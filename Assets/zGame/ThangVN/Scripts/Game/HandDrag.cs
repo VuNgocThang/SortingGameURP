@@ -72,10 +72,10 @@ public class HandDrag : MonoBehaviour
         }
     }
 
-    bool CheckCondition(ColorPlate clicked)
+    bool CheckConditionToSelect(ColorPlate clicked)
     {
-        if (clicked.ListValue.Count == 0 || clicked.status == Status.Frozen || clicked.status == Status.LockCoin || clicked.status == Status.CannotPlace) return true;
-        else return false;
+        if (clicked.ListValue.Count == 0 || clicked.status == Status.Frozen || clicked.status == Status.LockCoin || clicked.status == Status.CannotPlace) return false;
+        else return true;
     }
 
 
@@ -87,11 +87,17 @@ public class HandDrag : MonoBehaviour
         {
             ColorPlate clickedPlate = hitPlate.transform.GetComponent<ColorPlate>();
             //if (clickedPlate.ListValue.Count == 0) return;
-            if (CheckCondition(clickedPlate)) return;
+            if (!CheckConditionToSelect(clickedPlate)) return;
             isDrag = true;
             selectingPlate = clickedPlate;
 
         }
+    }
+
+    bool CheckConditionToPut(ColorPlate targetPlate)
+    {
+        if (targetPlate.status == Status.Frozen || targetPlate.isLocked || targetPlate.status == Status.Ads || targetPlate.status == Status.CannotPlace || targetPlate.status == Status.Empty) return false;
+        else return true;
     }
 
     void PutDownPlate()
@@ -106,15 +112,17 @@ public class HandDrag : MonoBehaviour
             {
                 ColorPlate colorPlate = hitPlateHolder.transform.GetComponent<ColorPlate>();
 
-                if (colorPlate == selectingPlate || colorPlate.status == Status.Frozen || colorPlate.isLocked || colorPlate.status == Status.Ads)
+                if (colorPlate == selectingPlate || !CheckConditionToPut(colorPlate))
                 {
                     for (int i = 0; i < selectingPlate.ListColor.Count; i++)
                     {
                         LogicColor c = selectingPlate.ListColor[i];
                         c.transform.DOLocalMove(new Vector3(0, 0.2f + (i + 1) * GameConfig.OFFSET_PLATE, 0), 0.3f);
                     }
+
+                    selectingPlate.circleZZZ.SetActive(false);
                 }
-                else if (colorPlate.status != Status.CannotPlace)
+                else /*if (colorPlate.status != Status.CannotPlace)*/
                 {
                     //Move to new Plate
                     selectingPlate.circleZZZ.SetActive(false);
