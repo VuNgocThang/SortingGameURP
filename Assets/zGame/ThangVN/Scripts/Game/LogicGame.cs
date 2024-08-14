@@ -1325,6 +1325,8 @@ public class LogicGame : MonoBehaviour
             {
                 newListRevive[i].ClearAll();
             }
+
+            homeInGame.imgDanger.SetActive(false);
         }
         else
         {
@@ -1332,6 +1334,8 @@ public class LogicGame : MonoBehaviour
             {
                 ListArrowPlate[i].ClearAll();
             }
+
+            homeInGame.imgDanger.SetActive(false);
         }
     }
 

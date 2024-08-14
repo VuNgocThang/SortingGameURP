@@ -62,11 +62,14 @@ public class PopupSetupRoom : Popup
                     }
                     else
                     {
+                        if (SaveGame.Pigment >= 300)
+                            SaveGame.Pigment -= 300;
+                        
                         //Todo Chua co room thi ad data room moi vao
                         AddNewRoom();
 
                         // todo particle
-                        Debug.Log("wtf");
+
                         LogicSetupRoom.instance.PlayParticle(SaveGame.CurrentObject);
 
                         for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
@@ -88,9 +91,11 @@ public class PopupSetupRoom : Popup
                                     LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
                             }
                         }
+
+                        ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
                         Hide();
                     }
-                   
+
                 }
             }
             else
@@ -102,6 +107,8 @@ public class PopupSetupRoom : Popup
                 else
                 {
                     //todo lam gi khi da co room
+                    if (SaveGame.Pigment >= 300)
+                        SaveGame.Pigment -= 300;
                     UpdateExistedRoom();
 
                     for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
@@ -123,6 +130,7 @@ public class PopupSetupRoom : Popup
                                 LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
                         }
                     }
+                    ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
                     Hide();
                 }
             }

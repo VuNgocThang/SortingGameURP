@@ -62,8 +62,8 @@ public class PopupWin : Popup
 
         btnClaimX2.OnClick(() =>
         {
+            SaveGame.Coin += LogicGame.Instance.gold;
             InitPile();
-
             ReceiveReward();
 
             ManagerEvent.ClearEvent();
@@ -104,9 +104,6 @@ public class PopupWin : Popup
         yield return new WaitForSeconds(2.2f);
         SceneManager.LoadScene(sceneName);
     }
-
-
-
 
     void InitPile()
     {
@@ -230,8 +227,6 @@ public class PopupWin : Popup
         currentCoin = end;
         txtGold.text = currentCoin.ToString();
     }
-
-
     private IEnumerator CountPigment(int start, int end, float duration)
     {
         float elapsed = 0.0f;

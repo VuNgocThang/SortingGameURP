@@ -909,6 +909,7 @@ MonoBehaviour:
   iconHeart: {fileID: 2564080410548229042}
   imgActive: {fileID: 4905807692884027172}
   imgInActive: {fileID: 2340532509138707335}
+  iconAds: {fileID: 6430261237380009963}
   txtCountCoin: {fileID: 3437578194693301155}
   btnClaim: {fileID: 953423958508352257}
   isClaimed: 0

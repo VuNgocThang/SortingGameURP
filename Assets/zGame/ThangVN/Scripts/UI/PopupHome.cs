@@ -12,7 +12,7 @@ using System;
 public class PopupHome : MonoBehaviour
 {
     [SerializeField] Camera cam;
-    public EasyButton btnSetting, btnCloseItem;
+    public EasyButton btnSetting, btnCloseItem, btnOpenTool;
     public TextMeshProUGUI txtPoint, txtLevel, txtCount, txtCurrentScore, txtBestScore, txtTargetPigment, txtLevelInTarget;
     public Image imgFill;
     [SerializeField] Animator animBtnSwitch;
@@ -32,14 +32,14 @@ public class PopupHome : MonoBehaviour
     public GameObject imgDanger;
     public GameObject UiEffect;
     public GameObject UiEffect2;
+    public GameObject tool;
 
 
     private void Awake()
     {
         btnSetting.OnClick(() => PopupSetting.Show());
-
-
         btnCloseItem.OnClick(ExitUsingItem);
+        btnOpenTool.OnClick(() => tool.SetActive(true));
 
         btnHammer.Init();
         btnSwap.Init();

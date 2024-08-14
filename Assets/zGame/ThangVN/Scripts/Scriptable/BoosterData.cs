@@ -19,6 +19,7 @@ public class Booster
     public Sprite spriteText;
     public BoosterEnum boosterEnum;
     public string textExplain;
+    public int cost;
 }
 
 [CreateAssetMenu(fileName = "BoosterData", menuName = "ScriptableObjects/BoosterData")]

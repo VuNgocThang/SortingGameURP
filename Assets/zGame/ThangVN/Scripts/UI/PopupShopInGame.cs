@@ -55,6 +55,7 @@ public class PopupShopInGame : Popup
                 imgIconBuyUseIcon.sprite = boosterData.listBooster[i].spriteIcon;
                 imgIconBuyAds.sprite = boosterData.listBooster[i].spriteIcon;
                 txtNameBooster.text = boosterData.listBooster[i].nameBooster;
+                txtCoinUse.text = boosterData.listBooster[i].cost.ToString();
             }
         }
     }

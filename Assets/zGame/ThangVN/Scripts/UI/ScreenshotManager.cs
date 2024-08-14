@@ -6,35 +6,37 @@ using UnityEngine.UI;
 
 public class ScreenshotManager : MonoBehaviour
 {
+    public static ScreenshotManager Instance;
     public Image targetImage;
     private string screenshotFilePath;
-    public Camera screenshotCamera; 
-    public int screenshotWidth = 1920;
-    public int screenshotHeight = 1080;
-
-    void Start()
+    public Camera screenshotCamera;
+    int screenshotWidth;
+    int screenshotHeight;
+    private void Awake()
     {
-        // Đường dẫn để lưu ảnh chụp màn hình
-        screenshotFilePath = Path.Combine(Application.dataPath, $"Resources/Image/room{SaveGame.CurrentRoom}.png");
+        Instance = this;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            CaptureScreenshot();
-        }
-    }
 
     // Hàm chụp ảnh màn hình
     public void CaptureScreenshot()
     {
+        screenshotFilePath = Path.Combine(Application.dataPath, $"Resources/Image/room{SaveGame.CurrentRoom}.png");
+        screenshotWidth = Screen.width;
+        screenshotHeight = Screen.height;
+
         ScreenCapture.CaptureScreenshot(screenshotFilePath);
-        StartCoroutine(LoadScreenshot());
+    }
+
+    public void LoadScreenshot(Image img, int idRoom)
+    {
+        screenshotFilePath = Path.Combine(Application.dataPath, $"Resources/Image/room{idRoom}.png");
+        StartCoroutine(LoadScreenshot(img));
+
     }
 
     // Coroutine để load ảnh từ file và gán vào image element
-    IEnumerator LoadScreenshot()
+    IEnumerator LoadScreenshot(Image img)
     {
         // Đợi cho đến khi ảnh được lưu xong
         while (!File.Exists(screenshotFilePath))
@@ -58,13 +60,18 @@ public class ScreenshotManager : MonoBehaviour
 
                 // Tạo sprite từ texture và gán vào image element
                 Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                targetImage.sprite = sprite;
+                img.sprite = sprite;
             }
         }
     }
 
     public void CaptureScreenshotWithoutUI()
     {
+        screenshotFilePath = Path.Combine(Application.dataPath, $"Resources/Image/room{SaveGame.CurrentRoom}.png");
+        screenshotWidth = Screen.width;
+        screenshotHeight = Screen.height;
+        Debug.Log(screenshotWidth + " __ " + screenshotHeight);
+
         StartCoroutine(CaptureScreenshotCoroutine());
     }
 

@@ -756,7 +756,7 @@ MonoBehaviour:
   imgIconBuyUseIcon: {fileID: 8425073099271762787}
   imgIconBuyAds: {fileID: 7787382073075862470}
   txtNameBooster: {fileID: 5137499722230399327}
-  txtCoinUse: {fileID: 0}
+  txtCoinUse: {fileID: 7015526347963946485}
   boosterEnum: 0
   canvasGroup: {fileID: 4540729435284190143}
 --- !u!1 &3354850638691850042

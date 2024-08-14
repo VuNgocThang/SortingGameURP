@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ItemFreeCoin : MonoBehaviour
 {
-    public GameObject iconCoin, iconHeart, imgActive, imgInActive;
+    public GameObject iconCoin, iconHeart, imgActive, imgInActive, iconAds;
     public TextMeshProUGUI txtCountCoin;
     public EasyButton btnClaim;
     public bool isClaimed;
@@ -52,6 +52,9 @@ public class ItemFreeCoin : MonoBehaviour
             imgActive.SetActive(false);
             imgInActive.SetActive(true);
         }
+
+        if (isClaimed) iconAds.SetActive(false);
+        else iconAds.SetActive(true);
     }
 
     void ClaimRewardAds()
@@ -81,6 +84,7 @@ public class ItemFreeCoin : MonoBehaviour
     {
         imgActive.SetActive(false);
         imgInActive.SetActive(true);
+        iconAds.SetActive(false);
         Debug.Log("Save");
         SaveGame.DataFreeCoin.listDataFreeCoin.Add(new DataFreeCoin
         {
