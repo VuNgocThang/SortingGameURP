@@ -12,7 +12,7 @@ public class PopupSetupRoom : Popup
     [SerializeField] int idObjectToAdd;
     [SerializeField] ListRoomData listRoomData;
     [SerializeField] ButtonSelectRoom btnSelectRoom1, btnSelectRoom2, btnSelectRoom3, btnSelectRoom4;
-    [SerializeField] GameObject imgAds;
+    [SerializeField] GameObject imgAds, nUsePigment;
     [SerializeField] bool isWatchAds;
 
     public bool HasObjectRoom(int idObjectRoom)
@@ -63,8 +63,12 @@ public class PopupSetupRoom : Popup
                     else
                     {
                         if (SaveGame.Pigment >= 300)
+                        {
+                            start = SaveGame.Pigment;
+
                             SaveGame.Pigment -= 300;
-                        
+                        }
+
                         //Todo Chua co room thi ad data room moi vao
                         AddNewRoom();
 
@@ -93,7 +97,8 @@ public class PopupSetupRoom : Popup
                         }
 
                         ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
-                        Hide();
+                        //Hide();
+                        HideWithAnim(start, SaveGame.Pigment, 0.75f);
                     }
 
                 }
@@ -108,7 +113,10 @@ public class PopupSetupRoom : Popup
                 {
                     //todo lam gi khi da co room
                     if (SaveGame.Pigment >= 300)
+                    {
+                        start = SaveGame.Pigment;
                         SaveGame.Pigment -= 300;
+                    }
                     UpdateExistedRoom();
 
                     for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
@@ -131,11 +139,15 @@ public class PopupSetupRoom : Popup
                         }
                     }
                     ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
-                    Hide();
+                    //Hide();
+                    HideWithAnim(start, SaveGame.Pigment, 0.75f);
                 }
             }
         });
     }
+
+    int start;
+
     public static async void Show(int idRoom, int idObj, bool isRoomWatchAds)
     {
         Debug.Log("SHow");
@@ -149,6 +161,25 @@ public class PopupSetupRoom : Popup
         SaveGame.CanShow = true;
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
         PopupDecor.Show();
+
+        List<RoomObject> listRoom = LogicSetupRoom.instance.SelectedRoomObject(idObjectToAdd);
+        for (int i = 0; i < listRoom.Count; i++)
+        {
+            if (listRoom[i].id == idObjectToAdd)
+            {
+                listRoom[i].Refresh();
+            }
+        }
+
+    }
+
+    public void HideWithAnim(int start, int end, float duration)
+    {
+        base.Hide();
+
+        SaveGame.CanShow = true;
+        ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
+        PopupDecor.ShowWithAnim(start, end, duration);
     }
 
     public void Initialized(int idRoom, int idObj, bool isRoomWatchAds)
@@ -162,7 +193,6 @@ public class PopupSetupRoom : Popup
         btnSelectRoom2.Init(idRoom, idObj, 1);
         btnSelectRoom3.Init(idRoom, idObj, 2);
         btnSelectRoom4.Init(idRoom, idObj, 3);
-        SaveGame.CanShow = false;
         base.Init();
     }
 

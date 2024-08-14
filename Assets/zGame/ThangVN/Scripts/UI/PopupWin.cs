@@ -46,7 +46,8 @@ public class PopupWin : Popup
             InitPile();
             ReceiveReward();
             ManagerEvent.ClearEvent();
-            StartCoroutine(LoadScene("SceneGame"));
+            if (SaveGame.Level == 3) StartCoroutine(LoadScene("SceneHome"));
+            else StartCoroutine(LoadScene("SceneGame"));
         });
 
         btnHome.OnClick(() =>
@@ -63,11 +64,13 @@ public class PopupWin : Popup
         btnClaimX2.OnClick(() =>
         {
             SaveGame.Coin += LogicGame.Instance.gold;
+            SaveGame.Pigment += LogicGame.Instance.pigment;
             InitPile();
             ReceiveReward();
 
             ManagerEvent.ClearEvent();
-            StartCoroutine(LoadScene("SceneGame"));
+            if (SaveGame.Level == 3) StartCoroutine(LoadScene("SceneHome"));
+            else StartCoroutine(LoadScene("SceneGame"));
 
         });
     }
@@ -101,7 +104,7 @@ public class PopupWin : Popup
 
     IEnumerator LoadScene(string sceneName)
     {
-        yield return new WaitForSeconds(2.2f);
+        yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -156,10 +159,6 @@ public class PopupWin : Popup
                     .SetEase(Ease.InOutCirc);
             }
 
-            //pileOfCoins[i].transform
-            //    .SetDelay(delayCoin + 0.2f)
-            //    .SetEase(Ease.InOutCirc);
-
             pileOfCoins[i].transform
                 .DOScale(0f, 0.3f)
                 .SetDelay(delayCoin + 1f)
@@ -183,11 +182,6 @@ public class PopupWin : Popup
                     .SetDelay(delayPigment + 0.2f)
                     .SetEase(Ease.InOutCirc);
             }
-
-            //pileOfPigment[i].transform
-            //    .DORotate(Vector3.zero, 0.5f)
-            //    .SetDelay(delayPigment + 0.2f)
-            //    .SetEase(Ease.InOutCirc);
 
             pileOfPigment[i].transform
                 .DOScale(0f, 0.3f)

@@ -40,6 +40,10 @@ MonoBehaviour:
     - spine-unity-editor
     - spine-unity-examples
     - spine-unity-examples-editor
+    - StompyRobot.SRDebugger
+    - StompyRobot.SRDebugger.Editor
+    - StompyRobot.SRF
+    - StompyRobot.SRF.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

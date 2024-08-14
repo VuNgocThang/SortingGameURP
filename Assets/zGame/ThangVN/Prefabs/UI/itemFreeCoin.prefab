@@ -911,6 +911,7 @@ MonoBehaviour:
   imgInActive: {fileID: 2340532509138707335}
   iconAds: {fileID: 6430261237380009963}
   txtCountCoin: {fileID: 3437578194693301155}
+  txtInactive: {fileID: 8513792463330188191}
   btnClaim: {fileID: 953423958508352257}
   isClaimed: 0
   countCoin: 0

@@ -16,6 +16,7 @@ public class HomeUI : MonoBehaviour
     [SerializeField] float countdownTimer;
     public GameObject nTop, nBot, iconNotice;
     public Animator animator;
+    public Animator animUsePigment;
 
     private void Awake()
     {

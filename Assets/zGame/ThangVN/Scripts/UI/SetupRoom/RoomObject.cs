@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoomObject : MonoBehaviour
 {
     public int id;
+    public int startIndex;
     //public List<Material> listMaterials;
     [SerializeField] MeshRenderer mesh;
     public List<GameObject> listObjects;
@@ -13,10 +14,6 @@ public class RoomObject : MonoBehaviour
     [SerializeField] BoxCollider boxCollider;
     public Vector3 posEffect;
 
-    //private void Awake()
-    //{
-    //    mesh = GetComponent<MeshRenderer>();
-    //}
 
     public void SetUpMaterial(int index)
     {
@@ -42,6 +39,29 @@ public class RoomObject : MonoBehaviour
                 listObjects[i].SetActive(true);
                 if (!isPainted)
                     listObjects[i].GetComponent<Animator>().Play("Show");
+            }
+        }
+    }
+
+    public void Refresh()
+    {
+        if (id <= 2)
+        {
+            foreach (Material mat in mesh.materials)
+            {
+                mat.SetFloat("_Index", startIndex);
+            }
+        }
+        else
+        {
+            mesh.enabled = false;
+
+            if (listObjects != null)
+            {
+                for (int i = 0; i < listObjects.Count; i++)
+                {
+                    listObjects[i].SetActive(false);
+                }
             }
         }
     }

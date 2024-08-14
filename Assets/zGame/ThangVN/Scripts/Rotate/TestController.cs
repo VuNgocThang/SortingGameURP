@@ -61,14 +61,14 @@ public class TestController : MonoBehaviour
                 float angle = Vector2.SignedAngle(initialVector, currentVector);
                 //Debug.Log("angle: " + angle);
 
-                if (angle > 1)
+                if (angle > 3)
                 {
                     //Debug.Log("Clockwise rotation detected.");
                     nX.localEulerAngles += new Vector3(0, 2f, 0);
                     //cam.transform.RotateAround(transform.position, Vector3.up, speed * Time.deltaTime);
                     //cam.transform.LookAt(transform);
                 }
-                else if (angle < -1)
+                else if (angle < -3)
                 {
                     //Debug.Log("Counterclockwise rotation detected.");
                     nX.localEulerAngles += new Vector3(0, -2f, 0);

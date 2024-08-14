@@ -62,7 +62,6 @@ namespace EasyUI.Toast
 
         public static void Show(string text, float duration)
         {
-            Debug.Log(text);
             Prepare();
             toastUI.Init(text, duration, ToastColor.Black, ToastPosition.MiddleCenter);
         }

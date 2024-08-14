@@ -20,7 +20,7 @@ MonoBehaviour:
     countCoin: 200
     isClaimed: 0
   - index: 2
-    countCoin: 0
+    countCoin: 300
     isClaimed: 0
   - index: 3
     countCoin: 350

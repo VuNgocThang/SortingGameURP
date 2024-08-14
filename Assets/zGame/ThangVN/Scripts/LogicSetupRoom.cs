@@ -83,7 +83,8 @@ public class LogicSetupRoom : MonoBehaviour
             RoomObject objRoom = hit.collider.GetComponent<RoomObject>();
             Debug.Log(objRoom.name + " __ " + objRoom.isPainted + " __ " + SaveGame.CurrentObject);
 
-            if (SaveGame.CurrentObject != objRoom.id && objRoom.isPainted) return;
+            if (SaveGame.CurrentObject != objRoom.id || objRoom.isPainted) return;
+            SaveGame.CanShow = false;
 
             ManagerAudio.PlaySound(ManagerAudio.Data.soundEasyButton);
             Debug.Log(objRoom.name);
