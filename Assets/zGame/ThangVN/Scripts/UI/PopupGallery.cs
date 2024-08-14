@@ -39,6 +39,19 @@ public class PopupGallery : Popup
         {
             Room room = Instantiate(roomPrefab, nContent);
             room.index = i;
+
+            string spritePath = $"Image/room{i}";
+            Sprite roomSprite = Resources.Load<Sprite>(spritePath);
+
+            if (roomSprite != null)
+            {
+                room.img.sprite = roomSprite;
+            }
+            else
+            {
+                Debug.LogWarning($"Sprite not found at path: {spritePath}");
+            }
+
             listRoom.Add(room);
         }
 

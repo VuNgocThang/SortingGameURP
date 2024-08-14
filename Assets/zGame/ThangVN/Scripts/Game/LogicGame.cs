@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine;
 using Utilities.Common;
 using Color = UnityEngine.Color;
+
 public enum GameMode
 {
     Edit,
@@ -558,6 +559,7 @@ public class LogicGame : MonoBehaviour
             StartCoroutine(RaiseEventLose());
         }
 
+
         //if (Input.GetKeyDown(KeyCode.E))
         //{
         //    PopupEndChallenges.Show();
@@ -683,6 +685,8 @@ public class LogicGame : MonoBehaviour
                 else
                 {
                     ManagerAudio.PlaySound(ManagerAudio.Data.soundCannotClick);
+                    Debug.Log("nnottt");
+                    EasyUI.Toast.Toast.Show("Not enough quantity", 1f);
                 }
             }
 
@@ -696,6 +700,7 @@ public class LogicGame : MonoBehaviour
                 {
                     ManagerAudio.PlaySound(ManagerAudio.Data.soundEasyButton);
                     SetColorIntoStartPlate(plateSpawn, listNextPlate[0]);
+
                 }
             }
 
@@ -903,11 +908,33 @@ public class LogicGame : MonoBehaviour
                 {
                     FindColorEnum findColorEnum = new FindColorEnum();
                     ColorEnum cEnum = findColorEnum.FindTargetColorEnum(endColorPlate.ListConnect);
-                    chargingParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
-                    changeColorParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
 
-                    endColorPlate.Init(GetColorNew);
-                    endColorPlate.ChangeSpecialColorPLate(cEnum);
+                    Sequence sequenceSpecial = DOTween.Sequence();
+
+                    sequenceSpecial.AppendCallback(() =>
+                        chargingParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true)
+                    );
+
+                    sequenceSpecial.AppendInterval(0.5f);
+
+                    sequenceSpecial.AppendCallback(() =>
+                        {
+                            endColorPlate.Init(GetColorNew);
+                            endColorPlate.ChangeSpecialColorPLate(cEnum);
+                        }
+                    );
+
+                    sequenceSpecial.AppendInterval(0.1f);
+
+                    sequenceSpecial.AppendCallback(() =>
+                        changeColorParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true)
+                    );
+
+                    //chargingParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
+                    //changeColorParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
+
+                    //endColorPlate.Init(GetColorNew);
+                    //endColorPlate.ChangeSpecialColorPLate(cEnum);
 
                     RecursiveMerge();
                 }
@@ -921,6 +948,7 @@ public class LogicGame : MonoBehaviour
             });
         }
     }
+
 
     public void SetColorUsingSwapItem(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
