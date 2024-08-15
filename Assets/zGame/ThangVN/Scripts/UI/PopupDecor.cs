@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -110,6 +109,7 @@ public class PopupDecor : Popup
 
     public void BackHome()
     {
+        Debug.Log("BACKHOME");
         HomeUI.Instance.animator.Play("Show");
         HomeUI.Instance.DisableObject();
         ManagerPopup.Instance.nShadow.GetComponent<Image>().enabled = true;
