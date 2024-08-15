@@ -36,88 +36,51 @@ public class PopupSetupRoom : Popup
 
         btnTick.OnClick(() =>
         {
-            if (!HasObjectRoom(idObjectToAdd))
+            ExecuteTickOnClick();
+        });
+    }
+
+    private void ExecuteTickOnClick()
+    {
+        if (!HasObjectRoom(idObjectToAdd))
+        {
+            if (currentSprite == 3 && !isWatchAds)
             {
-                if (currentSprite == 3 && !isWatchAds)
+                //To do da xem quang cao
+                isWatchAds = true;
+                Debug.Log("watch ads");
+                imgAds.SetActive(false);
+                AddRoomWatchedAds();
+                for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
                 {
-                    //To do da xem quang cao
-                    isWatchAds = true;
-                    Debug.Log("watch ads");
-                    imgAds.SetActive(false);
-                    AddRoomWatchedAds();
-                    for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
+                    if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
                     {
-                        if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
-                        {
-                            LogicSetupRoom.instance.listRoomObject[i].isWatchAds = true;
-                        }
+                        LogicSetupRoom.instance.listRoomObject[i].isWatchAds = true;
                     }
-                }
-                else
-                {
-
-                    if (!GameConfig.EnoughPigment)
-                    {
-                        PopupGoToLevel.Show();
-                    }
-                    else
-                    {
-                        if (SaveGame.Pigment >= 300)
-                        {
-                            start = SaveGame.Pigment;
-
-                            SaveGame.Pigment -= 300;
-                        }
-
-                        //Todo Chua co room thi ad data room moi vao
-                        AddNewRoom();
-
-                        // todo particle
-
-                        LogicSetupRoom.instance.PlayParticle(SaveGame.CurrentObject);
-
-                        for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
-                        {
-                            if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
-                            {
-                                LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
-                            }
-                        }
-
-                        if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
-                        {
-                            if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;
-                            else SaveGame.CurrentObject++;
-
-                            if (LogicSetupRoom.instance.listGameObject.Count < SaveGame.CurrentObject - 1)
-                            {
-                                if (LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject] != null)
-                                    LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
-                            }
-                        }
-
-                        ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
-                        //Hide();
-                        HideWithAnim(start, SaveGame.Pigment, 0.75f);
-                    }
-
                 }
             }
             else
             {
+
                 if (!GameConfig.EnoughPigment)
                 {
                     PopupGoToLevel.Show();
                 }
                 else
                 {
-                    //todo lam gi khi da co room
                     if (SaveGame.Pigment >= 300)
                     {
                         start = SaveGame.Pigment;
+
                         SaveGame.Pigment -= 300;
                     }
-                    UpdateExistedRoom();
+
+                    //Todo Chua co room thi ad data room moi vao
+                    AddNewRoom();
+
+                    // todo particle
+
+                    LogicSetupRoom.instance.PlayParticle(SaveGame.CurrentObject);
 
                     for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
                     {
@@ -138,12 +101,54 @@ public class PopupSetupRoom : Popup
                                 LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
                         }
                     }
+
                     ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
                     //Hide();
                     HideWithAnim(start, SaveGame.Pigment, 0.75f);
                 }
+
             }
-        });
+        }
+        else
+        {
+            if (!GameConfig.EnoughPigment)
+            {
+                PopupGoToLevel.Show();
+            }
+            else
+            {
+                //todo lam gi khi da co room
+                if (SaveGame.Pigment >= 300)
+                {
+                    start = SaveGame.Pigment;
+                    SaveGame.Pigment -= 300;
+                }
+                UpdateExistedRoom();
+
+                for (int i = 0; i < LogicSetupRoom.instance.listRoomObject.Count; i++)
+                {
+                    if (LogicSetupRoom.instance.listRoomObject[i].id == SaveGame.CurrentObject)
+                    {
+                        LogicSetupRoom.instance.listRoomObject[SaveGame.CurrentObject].gameObject.layer = 11;
+                    }
+                }
+
+                if (SaveGame.CurrentObject < LogicSetupRoom.instance.listGameObject.Count)
+                {
+                    if (SaveGame.CurrentObject == 5) SaveGame.CurrentObject += 2;
+                    else SaveGame.CurrentObject++;
+
+                    if (LogicSetupRoom.instance.listGameObject.Count < SaveGame.CurrentObject - 1)
+                    {
+                        if (LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject] != null)
+                            LogicSetupRoom.instance.listGameObject[SaveGame.CurrentObject].SetActive(true);
+                    }
+                }
+                ScreenshotManager.Instance.CaptureScreenshotWithoutUI();
+                //Hide();
+                HideWithAnim(start, SaveGame.Pigment, 0.75f);
+            }
+        }
     }
 
     int start;

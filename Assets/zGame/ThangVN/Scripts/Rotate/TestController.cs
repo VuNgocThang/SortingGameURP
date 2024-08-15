@@ -52,7 +52,7 @@ public class TestController : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Moved)
             {
-                if (LogicGame.Instance.isUsingHammer || LogicGame.Instance.isUsingHand || LogicGame.Instance.isPauseGame || !SaveGame.IsDoneTutorial) return;
+                if (LogicGame.Instance.isUsingHammer || LogicGame.Instance.isUsingHand || LogicGame.Instance.isPauseGame || !SaveGame.IsDoneTutorial || LogicGame.Instance.isWin || LogicGame.Instance.isLose) return;
                 currentPosition = touch.position;
 
                 Vector2 initialVector = initialPosition - Camera.main.WorldToScreenPoint(transform.position);

@@ -81,7 +81,7 @@ public class SetMapManager : MonoBehaviour
         string filePath = "";
         if (!SaveGame.Challenges)
         {
-            Debug.Log("Level: " + SaveGame.Level);
+            //Debug.Log("Level: " + SaveGame.Level);
             filePath = Resources.Load<TextAsset>($"LevelData/Level_{SaveGame.Level}").ToString();
         }
         else

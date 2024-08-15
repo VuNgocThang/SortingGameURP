@@ -105,8 +105,8 @@ public class LogicGame : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Load scene Game: " + SaveGame.Challenges);
-        Debug.Log(SaveGame.Heart + " heart");
+        //Debug.Log("Load scene Game: " + SaveGame.Challenges);
+        //Debug.Log(SaveGame.Heart + " heart");
         Refresh();
         //InitPlateSpawn(false);
 
@@ -185,9 +185,9 @@ public class LogicGame : MonoBehaviour
         }
         DataLevel dataLevel = DataLevel.GetData(SaveGame.Level + 1);
         countDiffMax = dataLevel.CountDiff;
-        Debug.Log(SaveGame.Level + 1);
-        Debug.Log(dataLevel.ID);
-        Debug.Log("countDiffMax: " + countDiffMax);
+        //Debug.Log(SaveGame.Level + 1);
+        //Debug.Log(dataLevel.ID);
+        //Debug.Log("countDiffMax: " + countDiffMax);
     }
     void LoadLevelChallenges()
     {
@@ -320,7 +320,7 @@ public class LogicGame : MonoBehaviour
 
                 foreach (LogicColor c in listSpawnNew[index].ListColor)
                 {
-                    c.transform.DOLocalMoveX(0, 0.5f);
+                    c.transform.DOLocalMoveX(0, 0.3f);
                 }
             });
             sequence.AppendInterval(0.2f);
@@ -350,11 +350,11 @@ public class LogicGame : MonoBehaviour
 
                     foreach (LogicColor c in listSpawnNew[index].ListColor)
                     {
-                        c.transform.DOLocalMoveX(0, 0.5f);
+                        c.transform.DOLocalMoveX(0, 0.3f);
                     }
                 });
 
-                sequenceSpawn.AppendInterval(0.3f);
+                sequenceSpawn.AppendInterval(0.2f);
             }
         }
     }
@@ -447,6 +447,7 @@ public class LogicGame : MonoBehaviour
 
             if (gameMode == GameMode.Play)
             {
+                if (isLose || isWin) return;
                 // click from start to grid
                 if (Physics.Raycast(ray, out var hit, 100f, layerArrow) && !isPauseGame)
                 {
@@ -535,7 +536,6 @@ public class LogicGame : MonoBehaviour
                     Debug.Log(" Watch Ads to Unlock AdsPlate");
                     adsPlate.status = Status.None;
                     adsPlate.logicVisual.Refresh();
-
                 }
             }
         }
@@ -830,7 +830,11 @@ public class LogicGame : MonoBehaviour
                     sequenceSpecial.AppendInterval(0.1f);
 
                     sequenceSpecial.AppendCallback(() =>
-                        changeColorParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true)
+                        {
+                            changeColorParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
+                            RecursiveMerge();
+
+                        }
                     );
 
                     //chargingParticlePool.Spawn(endColorPlate.transform.position + new Vector3(0, 1.2f, 0), true);
@@ -839,7 +843,6 @@ public class LogicGame : MonoBehaviour
                     //endColorPlate.Init(GetColorNew);
                     //endColorPlate.ChangeSpecialColorPLate(cEnum);
 
-                    RecursiveMerge();
                 }
 
                 if (!SaveGame.IsDoneTutorial)
@@ -1183,7 +1186,8 @@ public class LogicGame : MonoBehaviour
         isWin = true;
         Debug.Log(point + " __ " + gold + " __ " + pigment);
         Debug.Log("check win");
-        SaveGame.Level++;
+        if (SaveGame.Level < 19)
+            SaveGame.Level++;
         foreach (ColorPlate c in ListColorPlate)
         {
             if (c.ListValue.Count == 0 || c.status == Status.Empty) continue;

@@ -168,7 +168,7 @@ public class HomeUI : MonoBehaviour
 
     public void DisableObject()
     {
-        if (!SaveGame.FirstDecor && SaveGame.Level >= )
+        if (!SaveGame.FirstDecor && SaveGame.Level >= 2)
         {
             iconNotice.SetActive(false);
         }

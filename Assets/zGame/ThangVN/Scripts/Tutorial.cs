@@ -29,7 +29,7 @@ public class Tutorial : MonoBehaviour
     {
         if (SaveGame.Level == 0 && !SaveGame.IsDoneTutorial)
         {
-            Debug.Log("Init");
+            //Debug.Log("Init");
 
             imgCoverTut.SetActive(true);
 

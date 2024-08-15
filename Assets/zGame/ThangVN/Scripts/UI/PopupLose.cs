@@ -25,20 +25,20 @@ public class PopupLose : Popup
     {
         btnRevive.OnClick(() =>
         {
-            if (SaveGame.Heart > 0)
-            {
-                PlayerPrefs.SetString(GameConfig.LAST_HEART_LOSS, DateTime.Now.ToString());
-                SaveGame.Heart--;
-                LogicGame.Instance.ReviveGame();
-                Hide();
-                LogicGame.Instance.isPauseGame = false;
-                LogicGame.Instance.isLose = false;
-                //LoadScene("SceneGame");
-            }
-            else
-            {
-                LoadScene("SceneHome");
-            }
+            //if (SaveGame.Heart > 0)
+            //{
+            //    PlayerPrefs.SetString(GameConfig.LAST_HEART_LOSS, DateTime.Now.ToString());
+            //    SaveGame.Heart--;
+            LogicGame.Instance.ReviveGame();
+            Hide();
+            LogicGame.Instance.isPauseGame = false;
+            LogicGame.Instance.isLose = false;
+            //LoadScene("SceneGame");
+            //}
+            //else
+            //{
+            //    LoadScene("SceneHome");
+            //}
         });
 
         btnRetry.OnClick(() =>
