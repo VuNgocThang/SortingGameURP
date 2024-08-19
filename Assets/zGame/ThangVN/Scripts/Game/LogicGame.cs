@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utilities.Common;
+using static SaveCurrentDataGame;
 using Color = UnityEngine.Color;
 
 public enum GameMode
@@ -110,6 +111,7 @@ public class LogicGame : MonoBehaviour
         Refresh();
         //InitPlateSpawn(false);
 
+        LoadSaveData();
         LoadData();
     }
 
@@ -177,11 +179,17 @@ public class LogicGame : MonoBehaviour
 
         if (SaveGame.Challenges)
         {
-            LoadLevelChallenges();
+            if (saveGameChallenges == null) LoadLevelChallenges();
+            else LoadSaveChallenges();
         }
         else
         {
-            LoadLevelNormal();
+            maxPoint = colorPlateData.goalScore;
+            gold = colorPlateData.gold;
+            pigment = colorPlateData.pigment;
+
+            if (saveGameNormal == null) LoadLevelNormal();
+            else LoadSaveNormalData();
         }
         DataLevel dataLevel = DataLevel.GetData(SaveGame.Level + 1);
         countDiffMax = dataLevel.CountDiff;
@@ -289,9 +297,7 @@ public class LogicGame : MonoBehaviour
             ListColorPlate[index].logicVisual.DeletePlate();
         }
 
-        maxPoint = colorPlateData.goalScore;
-        gold = colorPlateData.gold;
-        pigment = colorPlateData.pigment;
+
     }
 
     #region InitNextPlate
@@ -854,8 +860,6 @@ public class LogicGame : MonoBehaviour
             });
         }
     }
-
-
     public void SetColorUsingSwapItem(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
         if (endColorPlate.ListValue.Count == 0)
@@ -932,7 +936,6 @@ public class LogicGame : MonoBehaviour
             endColorPlate.listTypes.AddRange(listTypes);
         }
     }
-
     void ProcessRemainingPlates()
     {
         colorRoot = null;
@@ -955,7 +958,6 @@ public class LogicGame : MonoBehaviour
             break;
         }
     }
-
     public List<Step> listSteps = new List<Step>();
     public void AddStepRecursively(ColorPlate colorRoot, List<ColorPlate> listDataConnect, HashSet<ColorPlate> processedNearBy)
     {
@@ -994,7 +996,6 @@ public class LogicGame : MonoBehaviour
             AddStepRecursivelyOtherRoot(p, listDataConnect, processedRoot, processedNearBy);
         }
     }
-
     public List<ColorPlate> listNearByCanConnect = new List<ColorPlate>();
     public void CheckNearByRecursive(List<ColorPlate> listDataConnect, ColorPlate colorPlate)
     {
@@ -1049,7 +1050,6 @@ public class LogicGame : MonoBehaviour
         Debug.Log("point: " + point);
         //IncreaseCountDiff();
     }
-
     public void IncreaseCountDiff()
     {
         if (point >= 20) countDiff = 3;
@@ -1060,7 +1060,6 @@ public class LogicGame : MonoBehaviour
 
         if (countDiff > countDiffMax) countDiff = countDiffMax;
     }
-
     public void SpawnSpecialColor()
     {
         if (SaveGame.Level < 12) return;
@@ -1072,7 +1071,6 @@ public class LogicGame : MonoBehaviour
             pointSpawnSpecial += 50;
         }
     }
-
     public void ExecuteLockCoin(int point)
     {
         foreach (ColorPlate c in ListColorPlate)
@@ -1081,7 +1079,6 @@ public class LogicGame : MonoBehaviour
             c.UnlockedLockCoin(point);
         }
     }
-
     void Merge(ColorPlate startColorPlate, ColorPlate endColorPlate)
     {
         timerRun = 0;
@@ -1204,12 +1201,10 @@ public class LogicGame : MonoBehaviour
     {
         return ((layerMask.value & (1 << obj.layer)) > 0);
     }
-
     public void ReviveGame()
     {
         StartCoroutine(ClearSomeArrows());
     }
-
     IEnumerator ClearSomeArrows()
     {
         yield return new WaitForSeconds(0.5f);
@@ -1246,4 +1241,190 @@ public class LogicGame : MonoBehaviour
         }
     }
 
+    public SaveCurrentDataGame saveGameNormal = new SaveCurrentDataGame();
+    public SaveCurrentChallenges saveGameChallenges = new SaveCurrentChallenges();
+
+    private void OnApplicationQuit()
+    {
+        SaveDataGame();
+    }
+
+    void SaveDataGame()
+    {
+        if (!SaveGame.Challenges)
+        {
+            SaveGameNormal();
+        }
+        else
+        {
+            SaveGameChallenges();
+        }
+    }
+
+    private void SaveGameNormal()
+    {
+        SaveCurrentDataGame currentData = new SaveCurrentDataGame();
+
+        currentData.currentPoint = point;
+
+        List<ColorPlateInTable> colorPlateInTable = new List<ColorPlateInTable>();
+
+
+        for (int i = 0; i < ListColorPlate.Count; i++)
+        {
+            List<CurrentEnum> listCurrentEnum = new List<CurrentEnum>();
+            for (int j = 0; j < ListColorPlate[i].listTypes.Count; j++)
+            {
+                CurrentEnum currentEnum = new CurrentEnum();
+
+                currentEnum.indexEnum = (int)ListColorPlate[i].listTypes[j].type;
+                currentEnum.countEnum = ListColorPlate[i].listTypes[j].listPlates.Count;
+                listCurrentEnum.Add(currentEnum);
+            }
+
+            ColorPlateInTable colorPlate = new ColorPlateInTable()
+            {
+                typeColorPLate = (int)ListColorPlate[i].status,
+                countFrozen = ListColorPlate[i].countFrozen,
+                pointToUnlock = ListColorPlate[i].pointToUnLock,
+                listEnum = listCurrentEnum,
+            };
+
+            colorPlateInTable.Add(colorPlate);
+        }
+
+        currentData.ListColorPLate = colorPlateInTable;
+
+        saveGameNormal = currentData;
+        string gameSaveData = JsonUtility.ToJson(saveGameNormal);
+
+        PlayerPrefs.SetString("GameSaveNormal", gameSaveData);
+        PlayerPrefs.Save();
+    }
+
+    void SaveGameChallenges()
+    {
+        SaveCurrentChallenges currentData = new SaveCurrentChallenges();
+
+        currentData.currentPoint = point;
+
+        List<ColorPlateInTable> colorPlateInTable = new List<ColorPlateInTable>();
+
+
+        for (int i = 0; i < ListColorPlate.Count; i++)
+        {
+            List<CurrentEnum> listCurrentEnum = new List<CurrentEnum>();
+            for (int j = 0; j < ListColorPlate[i].listTypes.Count; j++)
+            {
+                CurrentEnum currentEnum = new CurrentEnum();
+
+                currentEnum.indexEnum = (int)ListColorPlate[i].listTypes[j].type;
+                currentEnum.countEnum = ListColorPlate[i].listTypes[j].listPlates.Count;
+                listCurrentEnum.Add(currentEnum);
+            }
+
+            ColorPlateInTable colorPlate = new ColorPlateInTable()
+            {
+                typeColorPLate = (int)ListColorPlate[i].status,
+                listEnum = listCurrentEnum,
+            };
+
+            colorPlateInTable.Add(colorPlate);
+        }
+
+        currentData.ListColorPLate = colorPlateInTable;
+
+        saveGameChallenges = currentData;
+        string gameSaveData = JsonUtility.ToJson(saveGameChallenges);
+
+        PlayerPrefs.SetString("GameSaveChallenges", gameSaveData);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadSaveData()
+    {
+        if (!SaveGame.Challenges)
+        {
+            string gameSaveData = PlayerPrefs.GetString("GameSaveNormal", "");
+            if (string.IsNullOrEmpty(gameSaveData))
+            {
+                Debug.Log("nullll");
+                saveGameNormal = null;
+                return;
+            }
+
+            saveGameNormal = JsonUtility.FromJson<SaveCurrentDataGame>(gameSaveData);
+        }
+        else
+        {
+            string gameSaveData = PlayerPrefs.GetString("GameSaveChallenges", "");
+            if (string.IsNullOrEmpty(gameSaveData))
+            {
+                Debug.Log("nullll chall");
+                saveGameChallenges = null;
+                return;
+            }
+
+            saveGameChallenges = JsonUtility.FromJson<SaveCurrentChallenges>(gameSaveData);
+        }
+
+    }
+
+    public void LoadSaveNormalData()
+    {
+        for (int i = 0; i < saveGameNormal.ListColorPLate.Count; i++)
+        {
+            Debug.Log(saveGameNormal.ListColorPLate[i].typeColorPLate + " ___ " + saveGameNormal.ListColorPLate[i].listEnum.Count);
+
+            ListColorPlate[i].status = (Status)saveGameNormal.ListColorPLate[i].typeColorPLate;
+
+            ListColorPlate[i].logicVisual.SetSpecialSquare(ListColorPlate[i].status);
+
+            if (ListColorPlate[i].status == Status.Right || ListColorPlate[i].status == Status.Left
+                || ListColorPlate[i].status == Status.Up || ListColorPlate[i].status == Status.Down)
+            {
+                ListColorPlate[i].logicVisual.SetDirectionArrow(ListColorPlate[i].status, false);
+                ListColorPlate[i].gameObject.layer = 6;
+                ListArrowPlate.Add(ListColorPlate[i]);
+            }
+
+            if (ListColorPlate[i].status == Status.Empty)
+            {
+                ListColorPlate[i].logicVisual.DeletePlate();
+            }
+
+            if (ListColorPlate[i].status == Status.None)
+            {
+                ListColorPlate[i].logicVisual.Refresh();
+            }
+
+
+
+
+            //for (int j = 0; j < saveGameNormal.ListColorPLate[i].listEnum.Count; j++)
+            //{
+            //    Debug.Log(saveGameNormal.ListColorPLate[i].listEnum[j].indexEnum + " ___ " + saveGameNormal.ListColorPLate[i].listEnum[j].countEnum);
+            //}
+
+            //Debug.Log("_________________");
+        }
+    }
+
+    public void LoadSaveChallenges()
+    {
+        for (int i = 0; i < saveGameChallenges.ListColorPLate.Count; i++)
+        {
+            Debug.Log(saveGameChallenges.ListColorPLate[i].typeColorPLate);
+
+            for (int j = 0; j < saveGameChallenges.ListColorPLate[i].listEnum.Count; j++)
+            {
+                Debug.Log(saveGameChallenges.ListColorPLate[i].listEnum[j].indexEnum + " ___ " + saveGameChallenges.ListColorPLate[i].listEnum[j].countEnum);
+            }
+
+            Debug.Log("_________________");
+        }
+    }
 }
+
+
+
