@@ -74,8 +74,6 @@ public class SetMapManager : MonoBehaviour
         string data = JsonUtility.ToJson(colorPlateData);
         File.WriteAllText($"Assets/Resources/LevelData/Level_{level}.json", data);
     }
-
-
     public void LoadData()
     {
         string filePath = "";
@@ -90,7 +88,6 @@ public class SetMapManager : MonoBehaviour
         }
         colorPlateData = JsonUtility.FromJson<ColorPlateData>(filePath);
     }
-
     void LoadDataSetMap(int level)
     {
         string filePath = $"LevelData/Level_{level}";
@@ -657,8 +654,6 @@ public class SetMapManager : MonoBehaviour
 
         }
     }
-
-
 
     //void Generate()
     //{
