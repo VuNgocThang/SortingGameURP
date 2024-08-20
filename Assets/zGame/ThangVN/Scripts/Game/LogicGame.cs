@@ -634,11 +634,6 @@ public class LogicGame : MonoBehaviour
         }
     }
 
-    void OnClick()
-    {
-
-    }
-
     private bool isSequenceActive = false;
 
     void SetColorIntoStartPlate(ColorPlate startColorPlate, ColorPlate endColorPlate)
@@ -1046,19 +1041,19 @@ public class LogicGame : MonoBehaviour
                 //}
             }
         }
-        Debug.Log("point: " + point);
+        //Debug.Log("point: " + point);
         //IncreaseCountDiff();
     }
 
     public void IncreaseCountDiff()
     {
-        if (point >= 20) countDiff = 3;
-        if (point >= 50) countDiff = 4;
-        if (point >= 100) countDiff = 5;
-        if (point >= 150) countDiff = 6;
-        if (point >= 180) countDiff = 7;
+        //if (point >= 20) countDiff = 3;
+        //if (point >= 50) countDiff = 4;
+        //if (point >= 100) countDiff = 5;
+        //if (point >= 150) countDiff = 6;
+        //if (point >= 180) countDiff = 7;
 
-        if (countDiff > countDiffMax) countDiff = countDiffMax;
+        //if (countDiff > countDiffMax) countDiff = countDiffMax;
     }
 
     public void SpawnSpecialColor()
@@ -1095,7 +1090,8 @@ public class LogicGame : MonoBehaviour
 
         for (int i = count - 1; i >= 0; i--)
         {
-            sequence.AppendCallback(() =>
+            float delay = 0.06f * (count - 1 - i);
+            DOVirtual.DelayedCall(delay, () =>
             {
                 if (startColorPlate.TopValue == endColorPlate.TopValue)
                 {
@@ -1123,11 +1119,7 @@ public class LogicGame : MonoBehaviour
                     else endColorPlate.InitValue(endColorPlate.transform, false, 3);
                 }
             });
-
-
-            sequence.AppendInterval(0.1f);
         }
-
         timerRun += 0.1f * count + 0.5f;
         sequence.Play();
         if (listSteps.Count > 0) listSteps.RemoveAt(listSteps.Count - 1);

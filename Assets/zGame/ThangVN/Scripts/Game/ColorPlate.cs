@@ -304,7 +304,7 @@ public class ColorPlate : MonoBehaviour
                                     = new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f);
 
             ListColor[i].transform.DOLocalRotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f), 0.1f, RotateMode.Fast);
+               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f), 0.3f, RotateMode.Fast);
         }
         else if (index == 1)
         {
@@ -313,7 +313,7 @@ public class ColorPlate : MonoBehaviour
                                    = new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z);
 
             ListColor[i].transform.DOLocalRotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.1f, RotateMode.Fast);
+               (new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.3f, RotateMode.Fast);
         }
         else if (index == 2)
         {
@@ -322,7 +322,7 @@ public class ColorPlate : MonoBehaviour
                                    = new Vector3(ListColor[i].transform.localEulerAngles.x + 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z);
 
             ListColor[i].transform.DOLocalRotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.1f, RotateMode.Fast);
+               (new Vector3(ListColor[i].transform.localEulerAngles.x - 180f, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z), 0.3f, RotateMode.Fast);
         }
         else
         {
@@ -331,7 +331,7 @@ public class ColorPlate : MonoBehaviour
                                     = new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z + 180f);
 
             ListColor[i].transform.DOLocalRotate
-               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f), 0.1f, RotateMode.Fast);
+               (new Vector3(ListColor[i].transform.localEulerAngles.x, ListColor[i].transform.localEulerAngles.y, ListColor[i].transform.localEulerAngles.z - 180f), 0.3f, RotateMode.Fast);
         }
     }
 
