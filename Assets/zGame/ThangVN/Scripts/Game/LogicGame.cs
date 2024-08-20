@@ -1100,7 +1100,7 @@ public class LogicGame : MonoBehaviour
                 if (startColorPlate.TopValue == endColorPlate.TopValue)
                 {
                     startColorPlate.TopColor.transform.SetParent(endColorPlate.transform);
-
+                    startColorPlate.TopColor.transform.DOLocalMove(startColorPlate.TopColor.transform.position, 0.3f).SetEase(Ease.OutBounce);
                     ManagerAudio.PlaySound(ManagerAudio.Data.soundMerge);
 
                     endColorPlate.listTypes[endColorPlate.listTypes.Count - 1].listPlates.Add(startColorPlate.TopValue);
@@ -1114,13 +1114,13 @@ public class LogicGame : MonoBehaviour
                     startColorPlate.ListValue.RemoveAt(startColorPlate.ListValue.Count - 1);
                     startColorPlate.ListColor.RemoveAt(startColorPlate.ListColor.Count - 1);
 
-                    if (endColorPlate.Col == startColorPlate.Col && endColorPlate.Row > startColorPlate.Row)
-                        endColorPlate.InitValue(endColorPlate.transform, false, 0);
-                    else if (endColorPlate.Col < startColorPlate.Col && endColorPlate.Row == startColorPlate.Row)
-                        endColorPlate.InitValue(endColorPlate.transform, false, 1);
-                    else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row)
-                        endColorPlate.InitValue(endColorPlate.transform, false, 2);
-                    else endColorPlate.InitValue(endColorPlate.transform, false, 3);
+                    //if (endColorPlate.Col == startColorPlate.Col && endColorPlate.Row > startColorPlate.Row)
+                    //    endColorPlate.InitValue(endColorPlate.transform, false, 0);
+                    //else if (endColorPlate.Col < startColorPlate.Col && endColorPlate.Row == startColorPlate.Row)
+                    //    endColorPlate.InitValue(endColorPlate.transform, false, 1);
+                    //else if (endColorPlate.Col > startColorPlate.Col && endColorPlate.Row == startColorPlate.Row)
+                    //    endColorPlate.InitValue(endColorPlate.transform, false, 2);
+                    //else endColorPlate.InitValue(endColorPlate.transform, false, 3);
                 }
             });
 
