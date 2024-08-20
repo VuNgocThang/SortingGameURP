@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlateData
+public class QueueData
 {
-    public List<Pieces> listPieces = new List<Pieces>()
-    {
-        new Pieces()
-    };
+    public int level;
+    public List<WaveData> data;
 }

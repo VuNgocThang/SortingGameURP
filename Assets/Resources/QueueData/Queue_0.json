@@ -1,0 +1,37 @@
+{
+  "level": 0,
+  "data": [
+    {
+      "listPlateData": [
+        {
+          "listPieces": [
+            {
+              "type": 0,
+              "countPiece": 4
+            },
+            {
+              "type": 2,
+              "countPiece": 5
+            }
+          ]
+        },
+        {
+          "listPieces": [
+            {
+              "type": 0,
+              "countPiece": 1
+            }
+          ]
+        },
+        {
+          "listPieces": [
+            {
+              "type": 0,
+              "countPiece": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
