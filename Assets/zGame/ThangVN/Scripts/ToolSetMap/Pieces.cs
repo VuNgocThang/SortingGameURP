@@ -7,5 +7,10 @@ using UnityEngine;
 public class Pieces
 {
     public int type;
-    public int countPiece = 1;
+    public int countPiece;
+
+    public bool NoCount()
+    {
+        return countPiece == 0;
+    }
 }

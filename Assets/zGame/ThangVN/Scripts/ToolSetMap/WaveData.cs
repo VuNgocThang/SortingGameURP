@@ -6,6 +6,10 @@ using UnityEngine;
 [Serializable]
 public class WaveData
 {
+    public int indexLevel;
+
+    public int indexWave;
+
     public List<PlateData> listPlateData = new List<PlateData>()
     {
         new PlateData(),

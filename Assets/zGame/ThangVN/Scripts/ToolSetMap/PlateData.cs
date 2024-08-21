@@ -10,4 +10,9 @@ public class PlateData
     {
         new Pieces()
     };
+
+    public bool NoPieces()
+    {
+        return listPieces.Count == 0;
+    }
 }
