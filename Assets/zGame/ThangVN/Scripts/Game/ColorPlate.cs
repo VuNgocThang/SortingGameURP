@@ -263,7 +263,7 @@ public class ColorPlate : MonoBehaviour
 
                 color.transform.localScale = Vector3.one;
 
-                color.transform.localPosition = new Vector3(0, 0.2f + (i + 1) * GameConfig.OFFSET_PLATE, 0);
+                color.transform.localPosition = new Vector3(0, 0.2f + (i + 1) * GameConfig.OFFSET_PLATE, -0.2f + (i + 1) * GameConfig.OFFSET_PLATE);
                 ListColor.Add(color);
             }
             else
@@ -289,7 +289,8 @@ public class ColorPlate : MonoBehaviour
                 }
                 else
                 {
-                    ListColor[i].transform.LposY(0.2f + (i + 1) * GameConfig.OFFSET_PLATE);
+                    //ListColor[i].transform.LposY(0.2f + (i + 1) * GameConfig.OFFSET_PLATE);
+                    ListColor[i].transform.localPosition = new Vector3(0, 0.2f + (i + 1) * GameConfig.OFFSET_PLATE, -0.2f + (i + 1) * GameConfig.OFFSET_PLATE);
                 }
             }
         }

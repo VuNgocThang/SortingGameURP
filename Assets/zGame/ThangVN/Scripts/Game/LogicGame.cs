@@ -724,7 +724,7 @@ public class LogicGame : MonoBehaviour
             foreach (LogicColor renderer in listNextPlate[0].ListColor)
             {
                 renderer.transform.SetParent(startColorPlate.transform);
-                renderer.transform.localPosition = new Vector3(0, renderer.transform.localPosition.y, 0);
+                renderer.transform.localPosition = new Vector3(0, renderer.transform.localPosition.y, renderer.transform.localPosition.z);
                 renderer.transform.localRotation = Quaternion.identity;
                 renderer.transform.localScale = Vector3.one;
             }
