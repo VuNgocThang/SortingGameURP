@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1218,13 +1218,13 @@ MonoBehaviour:
     listEmptyData: []
     rows: 6
     cols: 4
-    goalScore: 0
-    gold: 0
-    pigment: 0
+    goalScore: 200
+    gold: 80
+    pigment: 200
   listPlates: []
-  level: 1000
-  rows: 5
-  cols: 6
+  level: 5
+  rows: 3
+  cols: 4
   colorPlatePrefab: {fileID: 2928662533404572090, guid: fed8118a6cc0b55479823c43919c8d4d,
     type: 3}
   arrowPlatePrefab: {fileID: 6017555640819631709, guid: 6e96cc7f6e1f45b459756652d7b76ce2,
