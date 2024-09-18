@@ -30,11 +30,11 @@ public class SetMapManager : MonoBehaviour
         EditFrozenSquare,
         EditCannotPlace,
         SelectExistedPlate,
-        SelectPlateArrowLeft,
-        SelectPlateArrowRight,
-        SelectPlateArrowUp,
-        SelectPlateArrowDown,
-        ClearPlate,
+        //SelectPlateArrowLeft,
+        //SelectPlateArrowRight,
+        //SelectPlateArrowUp,
+        //SelectPlateArrowDown,
+        //ClearPlate,
         DeletePlate,
         EditAds
     }
@@ -57,10 +57,10 @@ public class SetMapManager : MonoBehaviour
             if (Physics.Raycast(ray, out var hit, 100f, layerMask))
             {
                 ColorPlate c = hit.collider.GetComponent<ColorPlate>();
-                SelectPlateNormal(c);
+                //SelectPlateNormal(c);
                 SelectPlateSpecial(c);
                 SelectExistedPlate(c);
-                ClearPlate(c);
+                //ClearPlate(c);
                 DeletePlate(c);
             }
         }
@@ -139,25 +139,29 @@ public class SetMapManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < colorPlateData.listArrowData.Count; i++)
-        {
-            int index = colorPlateData.listArrowData[i].Row * cols + colorPlateData.listArrowData[i].Col;
-            bool isLocked = false;
-            if (ListColorPlate[index].status == Status.LockCoin) isLocked = true;
+        //for (int i = 0; i < colorPlateData.listArrowData.Count; i++)
+        //{
+        //    int index = colorPlateData.listArrowData[i].Row * cols + colorPlateData.listArrowData[i].Col;
+        //    bool isLocked = false;
+        //    if (ListColorPlate[index].status == Status.LockCoin) isLocked = true;
 
-            ListColorPlate[index].status = (Status)colorPlateData.listArrowData[i].type;
-            ListColorPlate[index].logicVisual.SetDirectionArrow(ListColorPlate[index].status, isLocked);
-        }
+        //    ListColorPlate[index].status = (Status)colorPlateData.listArrowData[i].type;
+        //    ListColorPlate[index].logicVisual.SetDirectionArrow(ListColorPlate[index].status, isLocked);
+        //}
 
         for (int i = 0; i < colorPlateData.listExistedData.Count; i++)
         {
             int index = colorPlateData.listExistedData[i].Row * cols + colorPlateData.listExistedData[i].Col;
+
+            ListColorPlate[index].status = Status.Existed;
             ListColorPlate[index].logicVisual.SetExistedPlate();
         }
 
         for (int i = 0; i < colorPlateData.listEmptyData.Count; i++)
         {
             int index = colorPlateData.listEmptyData[i].Row * cols + colorPlateData.listEmptyData[i].Col;
+            ListColorPlate[index].status = Status.Empty;
+
             ListColorPlate[index].logicVisual.DeletePlate();
         }
 
@@ -222,30 +226,30 @@ public class SetMapManager : MonoBehaviour
             }
         }
     }
-    void SelectPlateNormal(ColorPlate c)
-    {
-        switch (editMode)
-        {
-            case EditMode.SelectPlateArrowLeft:
-                SetStateArrow(c, Status.Left, 90f);
-                break;
+    //void SelectPlateNormal(ColorPlate c)
+    //{
+    //    switch (editMode)
+    //    {
+    //        case EditMode.SelectPlateArrowLeft:
+    //            SetStateArrow(c, Status.Left, 90f);
+    //            break;
 
-            case EditMode.SelectPlateArrowRight:
-                SetStateArrow(c, Status.Right, -90f);
-                break;
+    //        case EditMode.SelectPlateArrowRight:
+    //            SetStateArrow(c, Status.Right, -90f);
+    //            break;
 
-            case EditMode.SelectPlateArrowUp:
-                SetStateArrow(c, Status.Up, 180f);
-                break;
+    //        case EditMode.SelectPlateArrowUp:
+    //            SetStateArrow(c, Status.Up, 180f);
+    //            break;
 
-            case EditMode.SelectPlateArrowDown:
-                SetStateArrow(c, Status.Down, 0f);
-                break;
+    //        case EditMode.SelectPlateArrowDown:
+    //            SetStateArrow(c, Status.Down, 0f);
+    //            break;
 
-            default:
-                return;
-        }
-    }
+    //        default:
+    //            return;
+    //    }
+    //}
     void SetStateArrow(ColorPlate c, Status status, float yAxis)
     {
         if (c.status != status)
@@ -567,39 +571,39 @@ public class SetMapManager : MonoBehaviour
             }
         }
     }
-    void ClearPlate(ColorPlate c)
-    {
-        if (editMode == EditMode.ClearPlate)
-        {
-            c.status = Status.None;
-            c.logicVisual.Refresh();
-            c.txtPointUnlock.text = "";
+    //void ClearPlate(ColorPlate c)
+    //{
+    //    if (editMode == EditMode.ClearPlate)
+    //    {
+    //        c.status = Status.None;
+    //        c.logicVisual.Refresh();
+    //        c.txtPointUnlock.text = "";
 
-            for (int i = 0; i < colorPlateData.listSpecialData.Count; i++)
-            {
-                if (colorPlateData.listSpecialData[i].Row == c.Row && colorPlateData.listSpecialData[i].Col == c.Col)
-                {
-                    colorPlateData.listSpecialData.Remove(colorPlateData.listSpecialData[i]);
-                }
-            }
+    //        for (int i = 0; i < colorPlateData.listSpecialData.Count; i++)
+    //        {
+    //            if (colorPlateData.listSpecialData[i].Row == c.Row && colorPlateData.listSpecialData[i].Col == c.Col)
+    //            {
+    //                colorPlateData.listSpecialData.Remove(colorPlateData.listSpecialData[i]);
+    //            }
+    //        }
 
-            for (int i = 0; i < colorPlateData.listArrowData.Count; i++)
-            {
-                if (colorPlateData.listArrowData[i].Row == c.Row && colorPlateData.listArrowData[i].Col == c.Col)
-                {
-                    colorPlateData.listArrowData.Remove(colorPlateData.listArrowData[i]);
-                }
-            }
+    //        for (int i = 0; i < colorPlateData.listArrowData.Count; i++)
+    //        {
+    //            if (colorPlateData.listArrowData[i].Row == c.Row && colorPlateData.listArrowData[i].Col == c.Col)
+    //            {
+    //                colorPlateData.listArrowData.Remove(colorPlateData.listArrowData[i]);
+    //            }
+    //        }
 
-            for (int i = 0; i < colorPlateData.listExistedData.Count; i++)
-            {
-                if (colorPlateData.listExistedData[i].Row == c.Row && colorPlateData.listExistedData[i].Col == c.Col)
-                {
-                    colorPlateData.listExistedData.Remove(colorPlateData.listExistedData[i]);
-                }
-            }
-        }
-    }
+    //        for (int i = 0; i < colorPlateData.listExistedData.Count; i++)
+    //        {
+    //            if (colorPlateData.listExistedData[i].Row == c.Row && colorPlateData.listExistedData[i].Col == c.Col)
+    //            {
+    //                colorPlateData.listExistedData.Remove(colorPlateData.listExistedData[i]);
+    //            }
+    //        }
+    //    }
+    //}
     void DeletePlate(ColorPlate c)
     {
         if (editMode == EditMode.DeletePlate)
