@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1222,7 +1222,7 @@ MonoBehaviour:
     gold: 50
     pigment: 170
   listPlates: []
-  level: 7
+  level: 0
   rows: 5
   cols: 4
   colorPlatePrefab: {fileID: 2928662533404572090, guid: fed8118a6cc0b55479823c43919c8d4d,

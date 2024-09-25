@@ -68,6 +68,7 @@ public class SetMapManager : MonoBehaviour
 
     public void SaveData()
     {
+        Debug.Log(goals + " ___ " + gold + " ___ " + pigment);
         colorPlateData.goalScore = goals;
         colorPlateData.gold = gold;
         colorPlateData.pigment = pigment;
